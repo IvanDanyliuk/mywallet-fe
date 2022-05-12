@@ -4,7 +4,7 @@ import { IChart } from '../../types/types';
 
 const DynamicChart: React.FC<IChart> = ({ data, dataKey, nameKey }) => {
   return (
-    <ResponsiveContainer width={'50%'} height={200}>
+    <ResponsiveContainer width={'90%'} height={200}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray={'3 3'} />
         <XAxis dataKey={dataKey} />

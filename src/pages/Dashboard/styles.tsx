@@ -2,19 +2,19 @@ import { Box, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const MainContainer = styled(Box)`
-
-`;
-
-export const ChartGroup = styled(Box)`
   position: relative;
   width: 100%;
   display: flex;
-  justify-content: center;
 `;
 
-export const Dynamic = styled(Box)`
-  padding-top: 30px;
-  display: flex;
+export const Section = styled(Box)`
+  position: relative;
+  width: 50%;
+`;
+
+export const SectionTitle = styled(Typography)`
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export const ResultData = styled(Box)`
@@ -24,8 +24,7 @@ export const ResultData = styled(Box)`
 `;
 
 export const Result = styled(Typography)`
-  width: 50%;
+  padding: 20px;
   font-size: 24px;
-  text-align: center;
   color: #24384a;
 `;

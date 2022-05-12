@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const NavWrapper = styled(Box)`
   padding: 20px;
-  width: 100%;
+  width: 200px;
   height: 100vh;
   display: flex;
   justify-content: space-between;

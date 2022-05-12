@@ -2,24 +2,24 @@ import React from 'react';
 import DynamicChart from '../../components/Charts/DynamicChart';
 import StructureChart from '../../components/Charts/StructureChart';
 import { data } from '../../helpers/data';
-import { ChartGroup, Dynamic, MainContainer, Result, ResultData } from './styles';
+import { MainContainer, Result, Section, SectionTitle } from './styles';
 
 const Dashboard: React.FC = () => {
 
   return (
     <MainContainer>
-      <ChartGroup>
+      <Section>
+        <SectionTitle variant='inherit'>Incomes</SectionTitle>
         <StructureChart data={data.incomes} dataKey='amount' nameKey='category' />
-        <StructureChart data={data.expenses} dataKey='amount' nameKey='merchant' />
-      </ChartGroup>
-      <Dynamic>
         <DynamicChart data={data.incomes} dataKey='categories' nameKey='amount' />
-        <DynamicChart data={data.expenses} dataKey='merchant' nameKey='amount' />
-      </Dynamic>
-      <ResultData>
         <Result variant='inherit'>Total Income: ${data.totalIncome}</Result>
+      </Section>
+      <Section>
+        <SectionTitle variant='inherit'>Expenses</SectionTitle>
+        <StructureChart data={data.expenses} dataKey='amount' nameKey='merchant' />
+        <DynamicChart data={data.expenses} dataKey='merchant' nameKey='amount' />
         <Result variant='inherit'>Total Expenses: ${data.totalExpenses}</Result>
-      </ResultData>
+      </Section>  
     </MainContainer>
   );
 };
