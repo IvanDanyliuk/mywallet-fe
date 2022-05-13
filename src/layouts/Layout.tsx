@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navigation from '../components/Navigation/Navigation';
-import { getPageTitleFromUrl } from '../helpers/helpers';
 import { Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppContent, AppHeader, Greeting, MainContainer, MenuButton } from './styles';
+import { ILayout } from '../types/types';
 
-
-interface Props {
-  children: React.ReactNode
-}
-
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();
-  const title = getPageTitleFromUrl(pathname);
 
   const [menuOpen, setMenuOpen] = useState(false);
 

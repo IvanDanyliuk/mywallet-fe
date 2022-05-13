@@ -1,20 +1,25 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import styled from 'styled-components';
 
-export const MainContainer = styled(Box)`
+export const MainContainer = styled(Grid)`
   position: relative;
   width: 100%;
   display: flex;
+  justify-content: space-between;
 `;
 
-export const Section = styled(Box)`
+export const Section = styled(Grid)`
   position: relative;
-  width: 50%;
+  width: 49%;
 `;
 
 export const SectionTitle = styled(Typography)`
   font-size: 20px;
   font-weight: 600;
+`;
+
+export const SectionPaper = styled(Paper)`
+  padding: 20px;
 `;
 
 export const ResultData = styled(Box)`
@@ -24,7 +29,7 @@ export const ResultData = styled(Box)`
 `;
 
 export const Result = styled(Typography)`
-  padding: 20px;
+  
   font-size: 24px;
   color: #24384a;
 `;

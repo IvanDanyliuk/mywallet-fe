@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, Grid } from '@mui/material';
+import { AppBar, Box, Button, Container, Grid, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const MainContainer = styled(Box)`
@@ -41,4 +41,10 @@ export const AppContent = styled(Box)`
   min-height: 90vh;
   background: #ffffff;
   box-sizing: border-box;
+`;
+
+export const PageTitle = styled(Typography)`
+  padding-bottom: 20px;
+  font-size: 24px;
+  font-weight: 500;
 `;

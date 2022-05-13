@@ -1,3 +1,7 @@
+export interface ILayout {
+  children: React.ReactNode
+};
+
 export interface IChart {
   data: {
     date: string;
