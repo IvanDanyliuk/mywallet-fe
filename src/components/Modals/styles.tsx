@@ -14,10 +14,12 @@ export const ModalContent = styled(DialogContent)`
 `;
 
 export const FormContainer = styled.form`
-  height: 300px;
+  padding: 5px 0;
+  height: 310px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 `;
 
 

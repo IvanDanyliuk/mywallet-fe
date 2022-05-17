@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DynamicChart from '../../components/Charts/DynamicChart';
 import StructureChart from '../../components/Charts/StructureChart';
 import { data } from '../../helpers/data';
 import { PageTitle } from '../../layouts/styles';
+import { getIncomes } from '../../redux/incomes/asyncActions';
 import { MainContainer, Result, Section, SectionPaper, SectionTitle } from './styles';
 
 const Dashboard: React.FC = () => {
+  const dispatch = useDispatch();
+  const incomes = useSelector((state: any) => state.incomes.incomes);
+
+  useEffect(() => {
+    //@ts-ignore
+    dispatch(getIncomes());
+  }, []);
 
   return (
     <>
@@ -14,7 +23,7 @@ const Dashboard: React.FC = () => {
         <Section item>
           <SectionPaper>
             <SectionTitle variant='inherit'>Incomes</SectionTitle>
-            <StructureChart data={data.incomes} dataKey='amount' nameKey='category' />
+            <StructureChart data={incomes} dataKey='amount' nameKey='category' />
             <DynamicChart data={data.incomes} dataKey='categories' nameKey='amount' />
             <Result variant='inherit'>Total Income: ${data.totalIncome}</Result>
           </SectionPaper>

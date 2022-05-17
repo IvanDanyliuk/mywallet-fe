@@ -1,32 +1,36 @@
-import React, { FormEvent, useState } from 'react'
-import { data } from '../../helpers/data';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
 import CreateBtn from '../../components/CreateButton/CreateButton';
 import { Heading, MainContainer } from './styles';
 import { PageTitle } from '../../layouts/styles';
 import CreateIncomeFormModal from '../../components/Modals/CreateIncomeFormModal';
+import { getIncomes } from '../../redux/incomes/asyncActions';
+import { AppDispatchType } from '../../redux/store';
+import { IState } from '../../types/types';
 
 const Incomes: React.FC = () => {
+  const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const incomes = data.incomes;
-
+  const incomes = useSelector((state: IState) => state.incomes.incomes);
+  
   const columns = [
     {
-      field: 'date',
+      field: 'createdAt',
       headerName: 'Date',
       width: 100
     },
     {
       field: 'source',
       headerName: 'Source',
-      width: 400,
+      width: 300,
       editable: true,
     },
     {
       field: 'amount',
       headerName: 'Amount',
-      width: 300,
+      width: 150,
       type: 'number',
       editable: true,
     },
@@ -44,22 +48,20 @@ const Incomes: React.FC = () => {
       sortable: false,
     },
   ];
-  const rows = data.incomes;
+
+  const rows = incomes.map((income: any) => ({ ...income, id: income._id }));
 
   const openCreateIncomeHandler = () => {
     setIsModalOpen(!isModalOpen);
-    console.log('Modal is open now.')
   };
 
-  const handleSubmitForm = (e: FormEvent) => {
-    e.preventDefault();
-    console.log('Form has been submitted');
-    setIsModalOpen(false);
-  }
+  useEffect(() => {
+    dispatch(getIncomes());
+  }, [dispatch]);
 
   return (
     <>
-      <CreateIncomeFormModal open={isModalOpen} onClose={openCreateIncomeHandler} onSubmit={handleSubmitForm} />
+      <CreateIncomeFormModal open={isModalOpen} onClose={openCreateIncomeHandler} />
       <Heading>
         <PageTitle variant='inherit'>Incomes</PageTitle>
         <CreateBtn title='New income' clickHandler={openCreateIncomeHandler} />

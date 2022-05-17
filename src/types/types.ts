@@ -1,3 +1,11 @@
+import { IIncomesState } from "../redux/incomes/types";
+
+export interface IState {
+  incomes: IIncomesState;
+  expenses: [];
+  profile: {};
+};
+
 export interface ILayout {
   children: React.ReactNode
 };
