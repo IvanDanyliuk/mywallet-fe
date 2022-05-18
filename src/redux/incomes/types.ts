@@ -11,6 +11,8 @@ export interface IIncomes {
   amount: number;
   category: string;
   description: string;
+  createdAt: string;
+  _id: string;
 };
 
 export interface IIncomeData {

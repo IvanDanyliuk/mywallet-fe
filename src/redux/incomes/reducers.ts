@@ -12,7 +12,20 @@ const initialState: IIncomesState = {
 const incomesSlice = createSlice({
   name: 'incomes',
   initialState,
-  reducers: {},
+  reducers: {
+    sortIncomes: (state, action) => {
+      const { key, order } = action.payload
+      if(key === 'amount') {
+        state.incomes = state.incomes.sort((a: any, b: any) => order === 'asc' ? a[key] - b[key] : b[key] - a[key]);
+      }
+      state.incomes = state.incomes.sort((a: any, b: any) => {
+        if(order === 'asc') {
+          return a[key] > b[key] ? -1 : 1;
+        }
+        return a[key] < b[key] ? -1 : 1;
+      })
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getIncomes.pending, (state, action) => {
@@ -40,6 +53,6 @@ const incomesSlice = createSlice({
   }
 });
 
-// export const { createIncomeItem } = incomesSlice.actions;
+export const { sortIncomes } = incomesSlice.actions;
 
 export default incomesSlice.reducer;
