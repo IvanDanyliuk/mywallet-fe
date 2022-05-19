@@ -21,3 +21,14 @@ export const createIncomeItem = createAsyncThunk(
     return data;
   }
 );
+
+export const deleteIncomeItem = createAsyncThunk(
+  'incomes/deleteIncomeItem',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      await api.deleteIncomeItem(id);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

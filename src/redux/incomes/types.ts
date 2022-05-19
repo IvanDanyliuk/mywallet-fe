@@ -21,4 +21,5 @@ export interface IIncomeData {
   category: string;
   badgeColor: string;
   description: string;
-}
+};
+
