@@ -17,7 +17,7 @@ export const getIncomes = createAsyncThunk(
 export const createIncomeItem = createAsyncThunk(
   'incomes/createIncomeItem',
   async (incomeData: IIncomeData) => {
-    const response = await api.createIncomeItem(incomeData);
-    return response.data;
+    const { data}  = await api.createIncomeItem(incomeData);
+    return data;
   }
 );

@@ -5,6 +5,7 @@ import { data } from '../../helpers/data';
 import { FormContainer, FormOption, FormSelect, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
 import { createIncomeItem } from '../../redux/incomes/asyncActions';
 import { AppDispatchType } from '../../redux/store';
+import { generateColor } from '../../helpers/helpers';
 
 interface ICreateIncomeFormModal {
   open: boolean;
@@ -37,7 +38,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, onClose
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(createIncomeItem(incomeData));
+    dispatch(createIncomeItem({ ...incomeData, badgeColor: generateColor()}));
     clear();
   }
 
