@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createIncomeItem, deleteIncomeItem, getIncomes } from './asyncActions';
+import { createIncomeItem, deleteIncomeItem, getIncomes, updateIncomeItem } from './asyncActions';
 import { IIncomesState } from './types';
 
 const initialState: IIncomesState = {
@@ -47,6 +47,17 @@ const incomesSlice = createSlice({
         state.incomes.push(action.payload);
       })
       .addCase(createIncomeItem.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = 'error';
+      })
+      .addCase(updateIncomeItem.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(updateIncomeItem.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.incomes = state.incomes.map(item => item._id === action.meta.arg.id ? { ...action.meta.arg.updatedIncome, createdAt: item.createdAt, _id: item._id} : item);
+      })
+      .addCase(updateIncomeItem.rejected, (state, action) => {
         state.status = 'failed';
         state.error = 'error';
       })

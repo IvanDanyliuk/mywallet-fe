@@ -1,6 +1,6 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from 'recharts';
-import { IChart } from '../../types/types';
+import { IChart } from '../../types/general';
 
 const StructureChart: React.FC<IChart> = ({data, dataKey, nameKey}) => {
   return (

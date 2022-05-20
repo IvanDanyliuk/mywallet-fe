@@ -1,19 +1,24 @@
-import React, { MouseEventHandler, SyntheticEvent, useState } from 'react';
+import React, { MouseEventHandler, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { data } from '../../helpers/data';
 import { FormContainer, FormOption, FormSelect, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
-import { createIncomeItem } from '../../redux/incomes/asyncActions';
+import { createIncomeItem, updateIncomeItem } from '../../redux/incomes/asyncActions';
 import { AppDispatchType } from '../../redux/store';
 import { generateColor } from '../../helpers/helpers';
+import { useSelector } from 'react-redux';
+import { IState } from '../../types/general';
 
 interface ICreateIncomeFormModal {
   open: boolean;
+  id?: string;
   onClose: MouseEventHandler;
-}
+};
 
-const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, onClose }) => {
+const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, id, onClose }) => {
   const categories = data.profile.categories.incomes;
+  const incomes = useSelector((state: IState) => state.incomes.incomes);
+  
   const dispatch = useDispatch<AppDispatchType>();
 
   const [incomeData, setIncomeData] = useState({
@@ -29,7 +34,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, onClose
       amount: '',
       category: 'Regular',
       description: ''
-    })
+    });
   };
 
   const handleChange = (e: any) => {
@@ -38,9 +43,25 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, onClose
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(createIncomeItem({ ...incomeData, badgeColor: generateColor()}));
+    if(!id) {
+      dispatch(createIncomeItem({ ...incomeData, badgeColor: generateColor()}));
+    } else {
+      dispatch(updateIncomeItem({ id, updatedIncome: {...incomeData, badgeColor: generateColor()} }))
+    }
     clear();
   }
+
+  useEffect(() => {
+    if(id !== '') {
+      const incomeToUpdate = incomes.find(item => id === item._id) || incomeData;
+      setIncomeData({
+        source: incomeToUpdate.source,
+        amount: incomeToUpdate.amount,
+        category: incomeToUpdate.category,
+        description: incomeToUpdate.description
+      });
+    }
+  }, [id]);
 
   return (
     <ModalBody open={open} onClose={onClose}>
@@ -89,7 +110,9 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, onClose
             fullWidth 
             onChange={handleChange} 
           />
-          <SubmitButton color='primary' variant='contained' type='submit'>Create</SubmitButton>
+          <SubmitButton color='primary' variant='contained' type='submit'>
+            {id ? 'Update' : 'Create'}
+          </SubmitButton>
         </FormContainer>
       </ModalContent>
     </ModalBody>

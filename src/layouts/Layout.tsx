@@ -4,7 +4,7 @@ import Navigation from '../components/Navigation/Navigation';
 import { Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppContent, AppHeader, Greeting, MainContainer, MenuButton } from './styles';
-import { ILayout } from '../types/types';
+import { ILayout } from '../types/general';
 
 const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();

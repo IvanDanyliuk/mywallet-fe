@@ -8,7 +8,7 @@ export interface IIncomesState {
 
 export interface IIncomes {
   source: string;
-  amount: number;
+  amount: string;
   category: string;
   description: string;
   createdAt: string;
@@ -22,4 +22,9 @@ export interface IIncomeData {
   badgeColor: string;
   description: string;
 };
+
+export interface IIncomeToUpdate {
+  id: string | undefined;
+  updatedIncome: IIncomeData;
+}
 

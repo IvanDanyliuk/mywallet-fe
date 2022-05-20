@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from '../../api/api';
-import { IIncomeData } from './types';
+import { IIncomeData, IIncomeToUpdate } from './types';
 
 export const getIncomes = createAsyncThunk(
   'incomes/getIncomes',
@@ -19,6 +19,18 @@ export const createIncomeItem = createAsyncThunk(
   async (incomeData: IIncomeData) => {
     const { data}  = await api.createIncomeItem(incomeData);
     return data;
+  }
+);
+
+export const updateIncomeItem = createAsyncThunk(
+  'incomes/updateIncomeItem',
+  async (itemToUpdate: IIncomeToUpdate, { rejectWithValue }) => {
+    try {
+      const { data } = await api.updateIncomeItem(itemToUpdate.id, itemToUpdate.updatedIncome);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
