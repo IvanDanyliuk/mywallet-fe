@@ -3,43 +3,14 @@ import HeaderCell from './HeaderCell/HeaderCell';
 import { HeaderContainer, HeaderRow } from './styles';
 
 interface IContentTableHeader {
-  type: string;
-  columns?: {
+  columns: {
     sortKey: string;
     label: string;
     isSortable: boolean;
   }[]
 };
 
-const ContentTableHeader: React.FC<IContentTableHeader> = ({ type }) => {
-  const columns = [
-    {
-      sortKey: 'createdAt',
-      label: 'Date',
-      isSortable: true,
-    },
-    {
-      sortKey: 'source',
-      label: 'Source',
-      isSortable: true,
-    },
-    {
-      sortKey: 'amount',
-      label: 'Amount',
-      isSortable: true,
-    },
-    {
-      sortKey: 'category',
-      label: 'Category',
-      isSortable: false,
-    },
-    {
-      sortKey: 'description',
-      label: 'Description',
-      isSortable: false,
-    },
-  ];
-
+const ContentTableHeader: React.FC<IContentTableHeader> = ({ columns }) => {
   return (
     <HeaderContainer>
       <HeaderRow>

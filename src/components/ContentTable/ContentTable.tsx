@@ -1,13 +1,17 @@
-import { TablePagination } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { TablePagination } from '@mui/material';
 import { IState } from '../../types/general';
-import ContentTableBody from './ContentTableBody/ContentTableBody'
-import ContentTableHeader from './ContentTableHeader/ContentTableHeader'
-import { ContentTableContainer, PaperContainer } from './styles'
+import ContentTableBody from './ContentTableBody/ContentTableBody';
+import ContentTableHeader from './ContentTableHeader/ContentTableHeader';
+import { ContentTableContainer, PaperContainer } from './styles';
 
-const ContentTable = () => {
-  const incomes = useSelector((state: IState) => state.incomes.incomes);
+interface IContentTable {
+  type: string;
+};
+
+const ContentTable: React.FC<IContentTable> = ({ type }) => {
+  const data = useSelector((state: IState) => type === 'incomes' ? state.incomes.incomes : state.expenses);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -20,12 +24,40 @@ const ContentTable = () => {
     setPage(0);
   };
 
+  const columns = [
+    {
+      sortKey: 'createdAt',
+      label: 'Date',
+      isSortable: true,
+    },
+    {
+      sortKey: 'source',
+      label: 'Source',
+      isSortable: true,
+    },
+    {
+      sortKey: 'amount',
+      label: 'Amount',
+      isSortable: true,
+    },
+    {
+      sortKey: 'category',
+      label: 'Category',
+      isSortable: false,
+    },
+    {
+      sortKey: 'description',
+      label: 'Description',
+      isSortable: false,
+    },
+  ];
+
   return (
     <PaperContainer>
       <ContentTableContainer>
-        <ContentTableHeader type='incomes' />
+        <ContentTableHeader columns={columns} />
         <ContentTableBody 
-          dataToRender={incomes} 
+          dataToRender={data} 
           page={page} 
           rowsPerPage={rowsPerPage} 
         />
@@ -34,7 +66,7 @@ const ContentTable = () => {
         rowsPerPageOptions={[5, 10, 20]}
         rowsPerPage={rowsPerPage}
         component='div'
-        count={incomes.length}
+        count={data.length}
         page={page}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}

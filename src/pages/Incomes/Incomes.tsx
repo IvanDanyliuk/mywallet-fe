@@ -8,6 +8,11 @@ import { getIncomes } from '../../redux/incomes/asyncActions';
 import { AppDispatchType } from '../../redux/store';
 import ContentTable from '../../components/ContentTable/ContentTable';
 
+export enum TableType {
+  Incomes = 'incomes',
+  Expenses = 'expenses'
+}
+
 const Incomes: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +33,7 @@ const Incomes: React.FC = () => {
         <CreateBtn title='New income' clickHandler={openCreateIncomeHandler} />
       </Heading>
       <MainContainer>
-        <ContentTable />
+        <ContentTable type={TableType.Incomes} />
       </MainContainer>
     </>
   );
