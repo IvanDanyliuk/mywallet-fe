@@ -1,8 +1,6 @@
-import { TableSortLabel } from '@mui/material';
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react';
 import HeaderCell from './HeaderCell/HeaderCell';
-import { HeaderContainer, HeaderRow } from './styles'
+import { HeaderContainer, HeaderRow } from './styles';
 
 interface IContentTableHeader {
   type: string;

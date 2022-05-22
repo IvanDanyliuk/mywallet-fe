@@ -45,14 +45,14 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, id, onC
     e.preventDefault();
     if(!id) {
       dispatch(createIncomeItem({ ...incomeData, badgeColor: generateColor()}));
+      clear();
     } else {
-      dispatch(updateIncomeItem({ id, updatedIncome: {...incomeData, badgeColor: generateColor()} }))
+      dispatch(updateIncomeItem({ id, updatedIncome: {...incomeData, badgeColor: generateColor()} }));
     }
-    clear();
-  }
+  };
 
   useEffect(() => {
-    if(id !== '') {
+    if(id) {
       const incomeToUpdate = incomes.find(item => id === item._id) || incomeData;
       setIncomeData({
         source: incomeToUpdate.source,
@@ -116,7 +116,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, id, onC
         </FormContainer>
       </ModalContent>
     </ModalBody>
-  )
-}
+  );
+};
 
-export default CreateIncomeFormModal
+export default CreateIncomeFormModal;

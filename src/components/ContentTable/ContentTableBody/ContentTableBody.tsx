@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncActions';
@@ -18,7 +17,6 @@ interface ITableData {
 
 const ContentTableBody: React.FC<ITableData> = ({ dataToRender, page, rowsPerPage }) => {
   const dispatch = useDispatch<AppDispatchType>();
-  // const incomes = useSelector((state: IState) => state.incomes.incomes);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateIncomeId, setUpdateIncomeId] = useState('');
 
