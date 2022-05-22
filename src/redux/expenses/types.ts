@@ -1,12 +1,12 @@
 
 
-export interface IIncomesState {
-  incomes: IIncomes[];
+export interface IExpensesState {
+  expenses: IExpenses[];
   status: string;
   error: null | string;
 };
 
-export interface IIncomes {
+export interface IExpenses {
   title: string;
   amount: string;
   category: string;
@@ -15,7 +15,7 @@ export interface IIncomes {
   _id: string;
 };
 
-export interface IIncomeData {
+export interface IExpenseData {
   title: string;
   amount: string;
   category: string;
@@ -23,8 +23,8 @@ export interface IIncomeData {
   description: string;
 };
 
-export interface IIncomeToUpdate {
+export interface IExpenseToUpdate {
   id: string | undefined;
-  updatedIncome: IIncomeData;
+  updatedExpense: IExpenseData;
 }
 

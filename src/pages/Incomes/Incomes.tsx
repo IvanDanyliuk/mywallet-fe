@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import CreateBtn from '../../components/CreateButton/CreateButton';
+import CreateButton from '../../components/CreateButton/CreateButton';
 import { Heading, MainContainer } from './styles';
 import { PageTitle } from '../../layouts/styles';
-import CreateIncomeFormModal from '../../components/Modals/CreateIncomeFormModal';
+import CreateFormModal from '../../components/Modals/CreateFormModal';
 import { getIncomes } from '../../redux/incomes/asyncActions';
 import { AppDispatchType } from '../../redux/store';
 import ContentTable from '../../components/ContentTable/ContentTable';
@@ -11,7 +11,12 @@ import ContentTable from '../../components/ContentTable/ContentTable';
 export enum TableType {
   Incomes = 'incomes',
   Expenses = 'expenses'
-}
+};
+
+export enum FormModalType {
+  Incomes = 'incomes',
+  Expenses = 'expenses'
+};
 
 const Incomes: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
@@ -27,10 +32,10 @@ const Incomes: React.FC = () => {
 
   return (
     <>
-      <CreateIncomeFormModal open={isModalOpen} onClose={openCreateIncomeHandler} />
+      <CreateFormModal type={FormModalType.Incomes} open={isModalOpen} onClose={openCreateIncomeHandler} />
       <Heading>
         <PageTitle variant='inherit'>Incomes</PageTitle>
-        <CreateBtn title='New income' clickHandler={openCreateIncomeHandler} />
+        <CreateButton title='New income' clickHandler={openCreateIncomeHandler} />
       </Heading>
       <MainContainer>
         <ContentTable type={TableType.Incomes} />

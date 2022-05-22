@@ -11,7 +11,7 @@ interface IContentTable {
 };
 
 const ContentTable: React.FC<IContentTable> = ({ type }) => {
-  const data = useSelector((state: IState) => type === 'incomes' ? state.incomes.incomes : state.expenses);
+  const data = useSelector((state: IState) => type === 'incomes' ? state.incomes.incomes : state.expenses.expenses);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -58,6 +58,7 @@ const ContentTable: React.FC<IContentTable> = ({ type }) => {
         <ContentTableHeader columns={columns} />
         <ContentTableBody 
           dataToRender={data} 
+          type={type}
           page={page} 
           rowsPerPage={rowsPerPage} 
         />

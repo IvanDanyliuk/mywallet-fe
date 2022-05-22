@@ -15,7 +15,7 @@ export const ModalContent = styled(DialogContent)`
 
 export const FormContainer = styled.form`
   padding: 5px 0;
-  height: 310px;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

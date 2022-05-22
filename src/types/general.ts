@@ -1,8 +1,9 @@
+import { IExpensesState } from "../redux/expenses/types";
 import { IIncomesState } from "../redux/incomes/types";
 
 export interface IState {
   incomes: IIncomesState;
-  expenses: [];
+  expenses: IExpensesState;
   profile: {};
 };
 

@@ -6,48 +6,55 @@ import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncAction
 import { AppDispatchType } from '../../../redux/store';
 import { ContentBody, ContentCell, ContentRow } from './styles';
 import OptionsMenu from './RowMenu/OptionsMenu';
-import CreateIncomeFormModal from '../../Modals/CreateIncomeFormModal';
+import CreateIncomeFormModal from '../../Modals/CreateFormModal';
 import { IIncomes } from '../../../redux/incomes/types';
+import { IExpenses } from '../../../redux/expenses/types';
+import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
 
 interface ITableData {
-  dataToRender: IIncomes[];
+  type: string;
+  dataToRender: IIncomes[] | IExpenses[];
   page: number;
   rowsPerPage: number;
 }
 
-const ContentTableBody: React.FC<ITableData> = ({ dataToRender, page, rowsPerPage }) => {
+const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rowsPerPage }) => {
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [updateIncomeId, setUpdateIncomeId] = useState('');
+  const [updateItemId, setUpdateItemId] = useState('');
 
-  const editIncomeHandler = (id: any) => {
+  const editItemHandler = (id: any) => {
     setIsModalOpen(true);
-    setUpdateIncomeId(id);
+    setUpdateItemId(id);
   };
 
-  const deleteIncomeHandler = (id: string) => {
-    dispatch(deleteIncomeItem(id));
+  const deleteItemHandler = (id: string) => {
+    type === 'incomes' ? 
+      dispatch(deleteIncomeItem(id)) : 
+      dispatch(deleteExpenseItem(id));
   };
 
   const emptyRows = page > 0 ? Math.max(0, (page + 1)) * rowsPerPage - dataToRender.length : 0;
 
   useEffect(() => {
-    getIncomes();
+    type === 'incomes' ? 
+      getIncomes() : 
+      getExpenses();
   }, [dispatch, isModalOpen]);
 
   return (
     <>
-      <CreateIncomeFormModal open={isModalOpen} id={updateIncomeId} onClose={() => setIsModalOpen(false)} />
+      <CreateIncomeFormModal open={isModalOpen} type={type} id={updateItemId} onClose={() => setIsModalOpen(false)} />
       <ContentBody>
         {
-          dataToRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(income => (
+          dataToRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
             <ContentRow key={uuid()}>
-              <ContentCell>{moment(income.createdAt).format('MMM DD, YYYY')}</ContentCell>
-              <ContentCell>{income.source}</ContentCell>
-              <ContentCell>{income.amount}</ContentCell>
-              <ContentCell>{income.category}</ContentCell>
-              <ContentCell>{income.description}</ContentCell>
-              <OptionsMenu id={income._id} onEdit={() => editIncomeHandler(income._id)} onDelete={() => deleteIncomeHandler(income._id)} />
+              <ContentCell>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
+              <ContentCell>{item.title}</ContentCell>
+              <ContentCell>{item.amount}</ContentCell>
+              <ContentCell>{item.category}</ContentCell>
+              <ContentCell>{item.description}</ContentCell>
+              <OptionsMenu id={item._id} onEdit={() => editItemHandler(item._id)} onDelete={() => deleteItemHandler(item._id)} />
             </ContentRow>
           ))
         }
