@@ -47,4 +47,5 @@ export const PageTitle = styled(Typography)`
   padding-bottom: 20px;
   font-size: 24px;
   font-weight: 500;
+  box-sizing: border-box;
 `;

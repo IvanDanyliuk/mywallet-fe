@@ -6,7 +6,7 @@ import { SettingsContainer, SettingSection } from './styles';
 
 const Settings: React.FC = () => {
   return (
-    <SettingsContainer container wrap='nowrap' spacing={1} direction='column'>
+    <SettingsContainer container wrap='nowrap' spacing={2} direction='column'>
       <SettingSection item>
         <Profile />
       </SettingSection>
