@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Layout from './layouts/Layout';
 import Authentication from './pages/Authentication/Authentication';
@@ -10,18 +11,27 @@ import Reports from './pages/Reports/Reports';
 import Settings from './pages/Settings/Settings';
 
 function App() {
+  const navigate = useNavigate();
+  //@ts-ignore
+  const user = useSelector((state: IUserState) => state.user.user);
+  useEffect(() => {
+    if(user) {
+      navigate('/');
+    }
+  }, [user])
+
   return (
     <Layout>
       <Routes>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/incomes' element={<Incomes />} />
-        <Route path='/expenses' element={<Expenses />} />
-        <Route path='/reports' element={<Reports />} />
-        <Route path='/settings' element={<Settings />} />
+        <Route path='/' element={user ? <Dashboard /> : <Navigate to='/auth' />} />
+        <Route path='/incomes' element={user ? <Incomes /> : <Navigate to='/auth' />} />
+        <Route path='/expenses' element={user ? <Expenses /> : <Navigate to='/auth' />} />
+        <Route path='/reports' element={user ? <Reports /> : <Navigate to='/auth' />} />
+        <Route path='/settings' element={user ? <Settings /> : <Navigate to='/auth' />} />
         <Route path='/auth' element={<Authentication />} />
       </Routes>
     </Layout>
   );
-}
+};
 
 export default App;

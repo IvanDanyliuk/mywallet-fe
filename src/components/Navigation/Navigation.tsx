@@ -1,9 +1,19 @@
 import React from 'react';
-import { UserImage, NavWrapper, Logo, Navbar, NavItem, ProfileData, UserName, MainContainer } from './styles';
+import { UserImage, NavWrapper, Logo, Navbar, NavItem, ProfileData, UserName, MainContainer, LogoutButton } from './styles';
 import avatar from '../../assets/images/avatar.jpg';
-
+import { useDispatch } from 'react-redux';
+import { AppDispatchType } from '../../redux/store';
+import { logout } from '../../redux/user/reducers';
+import { useSelector } from 'react-redux';
 
 const Navigation: React.FC = () => {
+  const dispatch = useDispatch<AppDispatchType>();
+  //@ts-ignore
+  const user = useSelector((state: IUserState) => state.user.user);
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
   return (
     <NavWrapper>
       <MainContainer>
@@ -18,6 +28,12 @@ const Navigation: React.FC = () => {
           <NavItem to='/reports'>Reports</NavItem>
           <NavItem to='/settings'>Settings</NavItem>
         </Navbar>
+        {user && (
+          <LogoutButton 
+            variant='outlined' 
+            onClick={logoutHandler}
+          >Logout</LogoutButton>
+        )}
       </MainContainer>
       <Logo>MyWallet</Logo>
     </NavWrapper>

@@ -1,5 +1,9 @@
 import { Grid } from '@mui/material';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AppDispatchType } from '../../redux/store';
+import { signup, signin } from '../../redux/user/asyncAction';
 import AuthInput from './AuthInput/AuthInput';
 import { AuthContainer, AuthForm, AuthTitle, AuthWrapper, FormContainer, SubmitButton } from './styles';
 
@@ -12,16 +16,20 @@ const initialState = {
 };
 
 const Authentification: React.FC = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch<AppDispatchType>();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if(isSignUp) {
-      console.log('Signed Up', formData);
+      dispatch(signup(formData));
+      // navigate('/', { replace: false });
     } else {
-      console.log('Signed In', formData);
+      dispatch(signin(formData));
+      // navigate('/', { replace: false });
     }
   };
 
@@ -31,6 +39,11 @@ const Authentification: React.FC = () => {
 
   const handleShowPassword = (e: any) => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const switchMode = () => {
+    setIsSignUp((prevIsSignUp) => !prevIsSignUp);
+    setShowPassword(false);
   };
 
   return (
@@ -93,6 +106,7 @@ const Authentification: React.FC = () => {
             <SubmitButton 
               variant='contained' 
               color='info'
+              onClick={switchMode}
             >
               {isSignUp ? 'Already have an account? Sign In' : 'Don\'t have an account? Sign Up'}
             </SubmitButton>

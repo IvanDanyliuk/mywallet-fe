@@ -2,7 +2,11 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import rootReducer, { RootStateType } from './rootReducer';
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });
 
 export type AppThunkType = ThunkAction<

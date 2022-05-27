@@ -1,4 +1,4 @@
-import { Box, Avatar, Typography } from '@mui/material';
+import { Box, Avatar, Typography, Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ export const NavWrapper = styled(Box)`
   height: 100vh;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: column;
   background: #172841;
   box-sizing: border-box;
@@ -48,6 +49,8 @@ export const NavItem = styled(NavLink)`
     color: #ffffff;
   }
 `;
+
+export const LogoutButton = styled(Button)``;
 
 export const Logo = styled.h1`
   font-family: 'Caveat', cursive;

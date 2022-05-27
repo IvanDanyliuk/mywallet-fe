@@ -5,14 +5,14 @@ import StructureChart from '../../components/Charts/StructureChart';
 import { data } from '../../helpers/data';
 import { PageTitle } from '../../layouts/styles';
 import { getIncomes } from '../../redux/incomes/asyncActions';
+import { AppDispatchType } from '../../redux/store';
 import { MainContainer, Result, Section, SectionPaper, SectionTitle } from './styles';
 
 const Dashboard: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatchType>();
   const incomes = useSelector((state: any) => state.incomes.incomes);
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(getIncomes());
   }, []);
 

@@ -5,9 +5,13 @@ import { Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppContent, AppHeader, Greeting, MainContainer, MenuButton } from './styles';
 import { ILayout } from '../types/general';
+import { IUserState } from '../redux/user/types';
+import { useSelector } from 'react-redux';
 
 const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();
+  //@ts-ignore
+  const user = useSelector((state: IUserState) => state.user.user);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,12 +25,14 @@ const Layout: React.FC<ILayout> = ({ children }) => {
 
   return (
     <MainContainer>
-      <AppHeader component='header'>
-        <MenuButton onClick={handleMenuToggle}>
-          <MenuIcon />
-        </MenuButton>
-        <Greeting>Good Afternoon, John!</Greeting>
-      </AppHeader>
+      {user && (
+        <AppHeader component='header'>
+          <MenuButton onClick={handleMenuToggle}>
+            <MenuIcon />
+          </MenuButton>
+          <Greeting>Good Afternoon, {user.firstName}!</Greeting>
+        </AppHeader>
+      )}
       <AppContent>
         <Drawer open={menuOpen} onClose={handleMenuToggle}>
           <Navigation />
