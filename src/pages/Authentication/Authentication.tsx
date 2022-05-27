@@ -1,11 +1,17 @@
-import { Grid } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Grid } from '@mui/material';
 import { AppDispatchType } from '../../redux/store';
 import { signup, signin } from '../../redux/user/asyncAction';
 import AuthInput from './AuthInput/AuthInput';
-import { AuthContainer, AuthForm, AuthTitle, AuthWrapper, FormContainer, SubmitButton } from './styles';
+import { 
+  AuthContainer, 
+  AuthForm, 
+  AuthTitle, 
+  AuthWrapper, 
+  FormContainer, 
+  SubmitButton 
+} from './styles';
 
 const initialState = {
   firstName: '',
@@ -20,16 +26,13 @@ const Authentification: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch<AppDispatchType>();
-  const navigate = useNavigate();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if(isSignUp) {
       dispatch(signup(formData));
-      // navigate('/', { replace: false });
     } else {
       dispatch(signin(formData));
-      // navigate('/', { replace: false });
     }
   };
 

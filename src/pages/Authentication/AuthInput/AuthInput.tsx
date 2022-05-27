@@ -1,6 +1,11 @@
+import React from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import React from 'react'
-import { FieldAdornment, FormInput, InputButton, InputContainer } from './styles';
+import { 
+  FieldAdornment, 
+  FormInput, 
+  InputButton, 
+  InputContainer 
+} from './styles';
 
 interface IAuthInput {
   name: string;
@@ -10,7 +15,13 @@ interface IAuthInput {
   handleChange: (e: any) => void;
 };
 
-const AuthInput: React.FC<IAuthInput> = ({ name, label, type, handleShowPassword, handleChange }) => {
+const AuthInput: React.FC<IAuthInput> = ({ 
+  name, 
+  label, 
+  type, 
+  handleShowPassword, 
+  handleChange 
+}) => {
   return (
     <InputContainer item xs={12}>
       <FormInput 
@@ -30,7 +41,7 @@ const AuthInput: React.FC<IAuthInput> = ({ name, label, type, handleShowPassword
           }}
         />
     </InputContainer>
-  )
-}
+  );
+};
 
 export default AuthInput;

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Section, LanguageItem, LanguageSelect, SectionTitle } from './styles';
+import { 
+  Section, 
+  LanguageItem, 
+  LanguageSelect, 
+  SectionTitle 
+} from './styles';
 
-const Language = () => {
+const Language: React.FC = () => {
   const [currentLanguage, setCurrentLanguage] = useState('en');
 
   const handleLanguageChange = (e: any) => {
     setCurrentLanguage(e.target.value);
-    console.log(currentLanguage);
   };
 
   return (

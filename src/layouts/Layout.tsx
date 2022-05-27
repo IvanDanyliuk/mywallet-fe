@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import Navigation from '../components/Navigation/Navigation';
 import { Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppContent, AppHeader, Greeting, MainContainer, MenuButton } from './styles';
+import Navigation from '../components/Navigation/Navigation';
 import { ILayout } from '../types/general';
 import { IUserState } from '../redux/user/types';
-import { useSelector } from 'react-redux';
+import { 
+  AppContent, 
+  AppHeader, 
+  Greeting, 
+  MainContainer, 
+  MenuButton 
+} from './styles';
 
 const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();

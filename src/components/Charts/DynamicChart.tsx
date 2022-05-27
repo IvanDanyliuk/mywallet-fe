@@ -1,5 +1,13 @@
 import React from 'react';
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { 
+  CartesianGrid, 
+  Line, 
+  LineChart, 
+  ResponsiveContainer, 
+  Tooltip, 
+  XAxis, 
+  YAxis 
+} from 'recharts';
 import { IChart } from '../../types/general';
 
 const DynamicChart: React.FC<IChart> = ({ data, dataKey, nameKey }) => {

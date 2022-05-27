@@ -4,9 +4,9 @@ import ContentTable from '../../components/ContentTable/ContentTable';
 import CreateButton from '../../components/CreateButton/CreateButton';
 import CreateFormModal from '../../components/Modals/CreateFormModal';
 import { MainContainer } from '../../components/Navigation/styles';
-import { PageTitle } from '../../layouts/styles';
 import { getExpenses } from '../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../redux/store';
+import { PageTitle } from '../../layouts/styles';
 import { Heading } from './styles';
 
 const Expenses: React.FC = () => {
@@ -21,13 +21,19 @@ const Expenses: React.FC = () => {
     dispatch(getExpenses());
   }, [dispatch]);
 
-
   return (
     <>
-      <CreateFormModal type={'expenses'} open={isModalOpen} onClose={openCreateExpenseHandler} />
+      <CreateFormModal 
+        type={'expenses'} 
+        open={isModalOpen} 
+        onClose={openCreateExpenseHandler} 
+      />
       <Heading>
         <PageTitle variant='inherit'>Expenses</PageTitle>
-        <CreateButton title='New Expense' clickHandler={openCreateExpenseHandler}></CreateButton>
+        <CreateButton 
+          title='New Expense' 
+          clickHandler={openCreateExpenseHandler} 
+        />
       </Heading>
       <MainContainer>
         <ContentTable type={'expenses'} />

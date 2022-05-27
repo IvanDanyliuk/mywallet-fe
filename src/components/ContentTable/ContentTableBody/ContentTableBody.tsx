@@ -3,20 +3,20 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncActions';
+import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
-import { ContentBody, ContentCell, ContentRow } from './styles';
 import OptionsMenu from './RowMenu/OptionsMenu';
 import CreateIncomeFormModal from '../../Modals/CreateFormModal';
 import { IIncomes } from '../../../redux/incomes/types';
 import { IExpenses } from '../../../redux/expenses/types';
-import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
+import { ContentBody, ContentCell, ContentRow } from './styles';
 
 interface ITableData {
   type: string;
   dataToRender: IIncomes[] | IExpenses[];
   page: number;
   rowsPerPage: number;
-}
+};
 
 const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rowsPerPage }) => {
   const dispatch = useDispatch<AppDispatchType>();
@@ -34,7 +34,8 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
       dispatch(deleteExpenseItem(id));
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (page + 1)) * rowsPerPage - dataToRender.length : 0;
+  const emptyRows = page > 0 
+    ? Math.max(0, (page + 1)) * rowsPerPage - dataToRender.length : 0;
 
   useEffect(() => {
     type === 'incomes' ? 
@@ -44,7 +45,12 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
 
   return (
     <>
-      <CreateIncomeFormModal open={isModalOpen} type={type} id={updateItemId} onClose={() => setIsModalOpen(false)} />
+      <CreateIncomeFormModal 
+        open={isModalOpen} 
+        type={type} 
+        id={updateItemId} 
+        onClose={() => setIsModalOpen(false)} 
+      />
       <ContentBody>
         {
           dataToRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
@@ -54,7 +60,11 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
               <ContentCell>{item.amount}</ContentCell>
               <ContentCell>{item.category}</ContentCell>
               <ContentCell>{item.description}</ContentCell>
-              <OptionsMenu id={item._id} onEdit={() => editItemHandler(item._id)} onDelete={() => deleteItemHandler(item._id)} />
+              <OptionsMenu 
+                id={item._id} 
+                onEdit={() => editItemHandler(item._id)} 
+                onDelete={() => deleteItemHandler(item._id)} 
+              />
             </ContentRow>
           ))
         }
@@ -65,7 +75,7 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
         )}
       </ContentBody>
     </>
-  )
-}
+  );
+};
 
 export default ContentTableBody;

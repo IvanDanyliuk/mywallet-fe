@@ -1,14 +1,27 @@
-import React, { MouseEventHandler, SyntheticEvent, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { 
+  MouseEventHandler, 
+  SyntheticEvent, 
+  useEffect, 
+  useState 
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { data } from '../../helpers/data';
-import { FormContainer, FormOption, FormSelect, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
 import { createIncomeItem, updateIncomeItem } from '../../redux/incomes/asyncActions';
+import { createExpenseItem, updateExpenseItem } from '../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../redux/store';
 import { generateColor } from '../../helpers/helpers';
-import { useSelector } from 'react-redux';
 import { IState } from '../../types/general';
-import { createExpenseItem, updateExpenseItem } from '../../redux/expenses/asyncActions';
+import { 
+  FormContainer, 
+  FormOption, 
+  FormSelect, 
+  Input, 
+  ModalBody, 
+  ModalContent, 
+  ModalFormTitle, 
+  SubmitButton 
+} from './styles';
 
 interface ICreateIncomeFormModal {
   open: boolean;
@@ -18,8 +31,14 @@ interface ICreateIncomeFormModal {
 };
 
 const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, id, onClose }) => {
-  const categories = type === 'incomes' ? data.profile.categories.incomes : data.profile.categories.expenses;
-  const stateData = useSelector((state: IState) => type === 'incomes' ? state.incomes.incomes : state.expenses.expenses);
+  const categories = type === 'incomes' 
+    ? data.profile.categories.incomes : 
+    data.profile.categories.expenses;
+
+  const stateData = useSelector((state: IState) => type === 'incomes' 
+    ? state.incomes.incomes : 
+    state.expenses.expenses);
+    
   const defaultCategoryValue = type === 'incomes' ? 'Regular' : 'All';
 
   const dispatch = useDispatch<AppDispatchType>();

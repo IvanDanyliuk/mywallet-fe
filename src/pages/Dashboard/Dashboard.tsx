@@ -6,7 +6,13 @@ import { data } from '../../helpers/data';
 import { PageTitle } from '../../layouts/styles';
 import { getIncomes } from '../../redux/incomes/asyncActions';
 import { AppDispatchType } from '../../redux/store';
-import { MainContainer, Result, Section, SectionPaper, SectionTitle } from './styles';
+import { 
+  MainContainer, 
+  Result, 
+  Section, 
+  SectionPaper, 
+  SectionTitle 
+} from './styles';
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
@@ -23,22 +29,37 @@ const Dashboard: React.FC = () => {
         <Section item>
           <SectionPaper>
             <SectionTitle variant='inherit'>Incomes</SectionTitle>
-            <StructureChart data={incomes} dataKey='amount' nameKey='category' />
-            <DynamicChart data={data.incomes} dataKey='categories' nameKey='amount' />
+            <StructureChart 
+              data={incomes} 
+              dataKey='amount' 
+              nameKey='category' 
+            />
+            <DynamicChart 
+              data={data.incomes} 
+              dataKey='categories' 
+              nameKey='amount' 
+            />
             <Result variant='inherit'>Total Income: ${data.totalIncome}</Result>
           </SectionPaper>
         </Section>
         <Section>
           <SectionPaper>
             <SectionTitle variant='inherit'>Expenses</SectionTitle>
-            <StructureChart data={data.expenses} dataKey='amount' nameKey='merchant' />
-            <DynamicChart data={data.expenses} dataKey='merchant' nameKey='amount' />
+            <StructureChart 
+              data={data.expenses} 
+              dataKey='amount' 
+              nameKey='merchant' 
+            />
+            <DynamicChart 
+              data={data.expenses} 
+              dataKey='merchant' 
+              nameKey='amount' 
+            />
             <Result variant='inherit'>Total Expenses: ${data.totalExpenses}</Result>
           </SectionPaper>
         </Section>  
       </MainContainer>
     </>
-    
   );
 };
 

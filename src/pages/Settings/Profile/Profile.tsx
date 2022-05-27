@@ -1,10 +1,21 @@
 import React from 'react';
 import { data } from '../../../helpers/data';
-import { ActionButton, DataItemKey, DataItemVaue, ProfilePhoto, Section, SectionTitle, UserActions, UserAvatar, UserData, UserDataContainer, UserDataItem } from './styles';
-
+import { 
+  ActionButton, 
+  DataItemKey, 
+  DataItemVaue, 
+  ProfilePhoto, 
+  Section, 
+  SectionTitle, 
+  UserActions, 
+  UserAvatar, 
+  UserData, 
+  UserDataContainer, 
+  UserDataItem 
+} from './styles';
 import avatar from '../../../assets/images/avatar.jpg';
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const userData = data.profile.user;
 
   return (

@@ -8,7 +8,11 @@ interface ICreateBtn {
 
 const CreateButton: React.FC<ICreateBtn> = ({ title, clickHandler }) => {
   return (
-    <CreateBtn variant='contained' color='success' onClick={clickHandler}>
+    <CreateBtn 
+      variant='contained' 
+      color='success' 
+      onClick={clickHandler}
+    >
       {title}
     </CreateBtn>
   );

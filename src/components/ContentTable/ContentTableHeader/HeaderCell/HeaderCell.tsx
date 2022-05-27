@@ -29,7 +29,7 @@ const HeaderCell: React.FC<IHeaderCell> = ({ sortKey, label, isSortable, type })
       setOrder(SortOrder.asc);
       dispatch(sortIncomes({key, order}));
     };
-  }
+  };
   
   return (
     <CellBody datatype={type}>
@@ -47,7 +47,7 @@ const HeaderCell: React.FC<IHeaderCell> = ({ sortKey, label, isSortable, type })
         )
       }
     </CellBody>
-  )
-}
+  );
+};
 
 export default HeaderCell;

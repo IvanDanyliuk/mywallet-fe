@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Option, OptionIcon, Options, OptionsButton, OptionsMenuContainer } from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import { 
+  Option, 
+  OptionIcon, 
+  Options, 
+  OptionsButton, 
+  OptionsMenuContainer 
+} from './styles';
 
 interface IOptionsMenu {
   id: string;
