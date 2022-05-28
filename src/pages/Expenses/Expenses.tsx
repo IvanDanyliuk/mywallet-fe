@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ContentTable from '../../components/ContentTable/ContentTable';
 import CreateButton from '../../components/CreateButton/CreateButton';
-import CreateFormModal from '../../components/Modals/CreateFormModal';
+import CreateFormModal from '../../components/Modals/CreateFormModal/CreateFormModal';
 import { MainContainer } from '../../components/Navigation/styles';
 import { getExpenses } from '../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../redux/store';

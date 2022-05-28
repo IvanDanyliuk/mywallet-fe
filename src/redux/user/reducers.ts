@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signin, signup } from "./asyncAction";
+import { signin, signup, updateUser } from "./asyncAction";
 import { IUserState } from "./types";
 
 //@ts-ignore
@@ -41,6 +41,17 @@ const userSlice = createSlice({
         state.user = action.payload.result;
       })
       .addCase(signin.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = 'error';
+      })
+      .addCase(updateUser.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.meta.arg.userData;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = 'error';
       })

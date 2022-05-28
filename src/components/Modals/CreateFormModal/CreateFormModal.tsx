@@ -6,12 +6,12 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
-import { data } from '../../helpers/data';
-import { createIncomeItem, updateIncomeItem } from '../../redux/incomes/asyncActions';
-import { createExpenseItem, updateExpenseItem } from '../../redux/expenses/asyncActions';
-import { AppDispatchType } from '../../redux/store';
-import { generateColor } from '../../helpers/helpers';
-import { IState } from '../../types/general';
+import { data } from '../../../helpers/data';
+import { createIncomeItem, updateIncomeItem } from '../../../redux/incomes/asyncActions';
+import { createExpenseItem, updateExpenseItem } from '../../../redux/expenses/asyncActions';
+import { AppDispatchType } from '../../../redux/store';
+import { generateColor } from '../../../helpers/helpers';
+import { IState } from '../../../types/general';
 import { 
   FormContainer, 
   FormOption, 
@@ -142,7 +142,11 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
             
             onChange={handleChange} 
           />
-          <SubmitButton color='primary' variant='contained' type='submit'>
+          <SubmitButton 
+            color='primary' 
+            variant='contained' 
+            type='submit'
+          >
             {id ? 'Update' : 'Create'}
           </SubmitButton>
         </FormContainer>

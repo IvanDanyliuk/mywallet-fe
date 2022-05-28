@@ -6,7 +6,7 @@ import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncAction
 import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
 import OptionsMenu from './RowMenu/OptionsMenu';
-import CreateIncomeFormModal from '../../Modals/CreateFormModal';
+import CreateIncomeFormModal from '../../Modals/CreateFormModal/CreateFormModal';
 import { IIncomes } from '../../../redux/incomes/types';
 import { IExpenses } from '../../../redux/expenses/types';
 import { ContentBody, ContentCell, ContentRow } from './styles';

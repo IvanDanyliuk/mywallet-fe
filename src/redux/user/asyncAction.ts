@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '../../api/api';
-import { IUser } from "./types";
+import { IUser, IUserToUpdate } from "./types";
 
 export const signin = createAsyncThunk(
   'user/signin',
@@ -21,6 +21,18 @@ export const signup = createAsyncThunk(
     try {
       const { data } = await api.signUp(userData);
       localStorage.setItem('profile', JSON.stringify(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (userData: IUserToUpdate, { rejectWithValue }) => {
+    try {
+      const { data } = await api.updateUser(userData.id, userData.userData);
       return data;
     } catch (error) {
       return rejectWithValue(error);
