@@ -18,8 +18,11 @@ const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
   const incomes = useSelector((state: any) => state.incomes.incomes);
 
+  //@ts-ignore
+  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+
   useEffect(() => {
-    dispatch(getIncomes());
+    dispatch(getIncomes(userId));
   }, []);
 
   return (

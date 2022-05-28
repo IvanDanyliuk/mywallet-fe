@@ -22,12 +22,15 @@ const Incomes: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //@ts-ignore
+  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+
   const openCreateIncomeHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   useEffect(() => {
-    dispatch(getIncomes());
+    dispatch(getIncomes(userId));
   }, [dispatch]);
 
   return (

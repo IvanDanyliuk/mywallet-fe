@@ -7,6 +7,7 @@ export interface IIncomesState {
 };
 
 export interface IIncomes {
+  userId: string;
   title: string;
   amount: string;
   category: string;
@@ -16,6 +17,7 @@ export interface IIncomes {
 };
 
 export interface IIncomeData {
+  userId: string;
   title: string;
   amount: string;
   category: string;

@@ -44,6 +44,8 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
   const dispatch = useDispatch<AppDispatchType>();
 
   const [itemData, setItemData] = useState({
+    //@ts-ignore
+    userId: JSON.parse(localStorage.getItem('profile')).result._id,
     title: '',
     amount: '',
     category: defaultCategoryValue,
@@ -52,6 +54,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
 
   const clear = () => {
     setItemData({
+      userId: '',
       title: '',
       amount: '',
       category: defaultCategoryValue,
@@ -81,6 +84,8 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
     if(id) {
       const dataToUpdate = stateData.find(item => id === item._id) || itemData;
       setItemData({
+        //@ts-ignore
+        userId: JSON.parse(localStorage.getItem('profile')).result._id,
         title: dataToUpdate.title,
         amount: dataToUpdate.amount,
         category: dataToUpdate.category,

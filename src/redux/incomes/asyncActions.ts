@@ -4,9 +4,9 @@ import { IIncomeData, IIncomeToUpdate } from './types';
 
 export const getIncomes = createAsyncThunk(
   'incomes/getIncomes',
-  async (id, { rejectWithValue }) => {
+  async (userId: string, { rejectWithValue }) => {
     try {
-      const { data } = await api.getIncomes();
+      const { data } = await api.getIncomes(userId);
       return data;
     } catch (error) {
       return rejectWithValue(error);

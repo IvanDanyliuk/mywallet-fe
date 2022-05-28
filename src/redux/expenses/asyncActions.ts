@@ -4,9 +4,9 @@ import { IExpenseData, IExpenseToUpdate } from './types';
 
 export const getExpenses = createAsyncThunk(
   'expenses/getExpenses',
-  async (id, { rejectWithValue }) => {
+  async (userId: string, { rejectWithValue }) => {
     try {
-      const { data } = await api.getExpenses();
+      const { data } = await api.getExpenses(userId);
       return data;
     } catch (error) {
       return rejectWithValue(error)

@@ -23,6 +23,9 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateItemId, setUpdateItemId] = useState('');
 
+  //@ts-ignore
+  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+
   const editItemHandler = (id: any) => {
     setIsModalOpen(true);
     setUpdateItemId(id);
@@ -39,8 +42,8 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
 
   useEffect(() => {
     type === 'incomes' ? 
-      getIncomes() : 
-      getExpenses();
+      getIncomes(userId) : 
+      getExpenses(userId);
   }, [dispatch, isModalOpen]);
 
   return (

@@ -13,12 +13,15 @@ const Expenses: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //@ts-ignore
+  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+
   const openCreateExpenseHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   useEffect(() => {
-    dispatch(getExpenses());
+    dispatch(getExpenses(userId));
   }, [dispatch]);
 
   return (
