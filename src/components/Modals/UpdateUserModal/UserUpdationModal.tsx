@@ -22,8 +22,7 @@ interface IUserUpdationModal {
 
 const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
   const dispatch = useDispatch<AppDispatchType>();
-  //@ts-ignore
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = JSON.parse(localStorage.getItem('profile') || '');
   
   const [userData, setUserData] = useState({
     ...user.result,

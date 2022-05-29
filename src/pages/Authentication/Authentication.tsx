@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Grid } from '@mui/material';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../../firebase';
 import { AppDispatchType } from '../../redux/store';
 import { signup, signin } from '../../redux/user/asyncAction';
 import AuthInput from './AuthInput/AuthInput';
@@ -8,7 +10,7 @@ import {
   AuthContainer, 
   AuthForm, 
   AuthTitle, 
-  AuthWrapper, 
+  AuthWrapper,  
   FormContainer, 
   SubmitButton 
 } from './styles';
@@ -16,6 +18,7 @@ import {
 const initialState = {
   firstName: '',
   lastName: '',
+  avatar: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -25,6 +28,7 @@ const Authentification: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const [progressPercent, setProgressPercent] = useState(0);
   const dispatch = useDispatch<AppDispatchType>();
 
   const handleSubmit = (e: any) => {
@@ -39,6 +43,33 @@ const Authentification: React.FC = () => {
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleUploadFileChange = (e: any) => {
+    e.preventDefault();
+
+    const file = e.target?.files[0];
+    if(!file) return;
+    const storageRef = ref(storage, `files/${file.name}`);
+    const uploadData = uploadBytesResumable(storageRef, file);
+
+    uploadData.on('state_changed', 
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgressPercent(progress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadData.snapshot.ref).then((downloadUrl) => {
+          setFormData({
+            ...formData,
+            avatar: downloadUrl
+          });
+        })
+      }
+    );
+  }
 
   const handleShowPassword = (e: any) => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -70,6 +101,7 @@ const Authentification: React.FC = () => {
                     type='text' 
                     handleChange={handleChange} 
                   />
+                  <AuthInput name='avatar' label='' type='file' handleChange={handleUploadFileChange} />
                 </>
               )
             }

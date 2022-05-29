@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, Input, Paper, TextField, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 export const AuthContainer = styled(Box)`
@@ -28,6 +28,12 @@ export const AuthTitle = styled(Typography)`
   font-weight: 600;
   text-align: center;
 `;
+
+export const FileInput = styled(TextField)`
+  margin-top: 10px;
+`;
+
+export const FileInputWrapper = styled(Box)``;
 
 export const SubmitButton = styled(Button)`
   width: 100%;

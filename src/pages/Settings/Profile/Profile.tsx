@@ -27,6 +27,8 @@ const Profile: React.FC = () => {
     setIsUpdationModalOpen(!isUpdationModalOpen);
   };
 
+  console.log(userData.avatar)
+
   return (
     <>
       <UserUpdationModal open={isUpdationModalOpen} onClose={handleClose} />
@@ -54,7 +56,7 @@ const Profile: React.FC = () => {
           <UserAvatar>
             <ProfilePhoto 
               alt={`${userData?.firstName} ${userData?.lastName}`}
-              src={avatar}
+              src={userData.avatar}
               sx={{ width: '100px', height: '100px' }}
             />
             <ActionButton variant='contained' color='success'>Update photo</ActionButton>
