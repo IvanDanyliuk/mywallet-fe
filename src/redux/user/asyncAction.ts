@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '../../api/api';
-import { IUser, IUserToUpdate } from "./types";
+import { IAuthData, IUser, IUserToUpdate } from "./types";
 
 export const signin = createAsyncThunk(
   'user/signin',
-  async (userData: IUser, { rejectWithValue }) => {
+  async (userData: IAuthData, { rejectWithValue }) => {
     try {
       const { data } = await api.signIn(userData);
       localStorage.setItem('profile', JSON.stringify(data));

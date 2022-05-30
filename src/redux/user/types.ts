@@ -15,3 +15,8 @@ export interface IUserToUpdate {
   id: string;
   userData: IUser;
 };
+
+export interface IAuthData {
+  email: string;
+  password: string;
+};

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './layouts/Layout';
 import Authentication from './pages/Authentication/Authentication';
@@ -11,14 +11,8 @@ import Reports from './pages/Reports/Reports';
 import Settings from './pages/Settings/Settings';
 
 function App() {
-  const navigate = useNavigate();
   //@ts-ignore
   const user = useSelector((state: IUserState) => state.user.user);
-  useEffect(() => {
-    if(user) {
-      navigate('/');
-    }
-  }, [user])
 
   return (
     <Layout>

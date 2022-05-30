@@ -14,6 +14,7 @@ import {
   FormContainer, 
   SubmitButton 
 } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   firstName: '',
@@ -25,18 +26,30 @@ const initialState = {
 };
 
 const Authentification: React.FC = () => {
+  const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [progressPercent, setProgressPercent] = useState(0);
   const dispatch = useDispatch<AppDispatchType>();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if(isSignUp) {
-      dispatch(signup(formData));
+      try {
+        await dispatch(signup(formData));
+        navigate('/');
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      dispatch(signin(formData));
+      try {
+        await dispatch(signin(formData));
+        navigate('/');
+      } catch (error) {
+        console.log(error);
+        alert('Invalid Password')
+      };
     }
   };
 
@@ -101,7 +114,12 @@ const Authentification: React.FC = () => {
                     type='text' 
                     handleChange={handleChange} 
                   />
-                  <AuthInput name='avatar' label='' type='file' handleChange={handleUploadFileChange} />
+                  <AuthInput 
+                    name='avatar' 
+                    label='' 
+                    type='file' 
+                    handleChange={handleUploadFileChange} 
+                  />
                 </>
               )
             }
