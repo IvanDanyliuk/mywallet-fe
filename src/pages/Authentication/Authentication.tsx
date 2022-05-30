@@ -101,7 +101,12 @@ const Authentification: React.FC = () => {
                     type='text' 
                     handleChange={handleChange} 
                   />
-                  <AuthInput name='avatar' label='' type='file' handleChange={handleUploadFileChange} />
+                  <AuthInput 
+                    name='avatar' 
+                    label='' 
+                    type='file' 
+                    handleChange={handleUploadFileChange} 
+                  />
                 </>
               )
             }

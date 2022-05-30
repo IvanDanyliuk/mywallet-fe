@@ -14,24 +14,28 @@ import {
   UserDataContainer, 
   UserDataItem 
 } from './styles';
-import avatar from '../../../assets/images/avatar.jpg';
 import { IUser } from '../../../redux/user/types';
+import UpdateAvatarModal from '../../../components/Modals/UpdateAvatarModal/UpdateAvatarModal';
 
 const Profile: React.FC = () => {
   //@ts-ignore
   const userData = useSelector((state: IUser) => state.user.user);
 
-  const [isUpdationModalOpen, setIsUpdationModalOpen] = useState(false);
+  const [isDataUpdationModalOpen, setIsDataUpdationModalOpen] = useState(false);
+  // const [isAvatarUpdationModalOpen, setIsAvatarUpdationModalOpen] = useState(false);
 
-  const handleClose = () => {
-    setIsUpdationModalOpen(!isUpdationModalOpen);
+  const handleUpdateUserDataClose = () => {
+    setIsDataUpdationModalOpen(!isDataUpdationModalOpen);
   };
 
-  console.log(userData.avatar)
+  // const handleUpdateAvatarClose = () => {
+  //   setIsAvatarUpdationModalOpen(!isAvatarUpdationModalOpen);
+  // }
 
   return (
     <>
-      <UserUpdationModal open={isUpdationModalOpen} onClose={handleClose} />
+      <UserUpdationModal open={isDataUpdationModalOpen} onClose={handleUpdateUserDataClose} />
+      {/* <UpdateAvatarModal open={isAvatarUpdationModalOpen} onClose={handleUpdateAvatarClose} /> */}
       <Section>
         <SectionTitle variant='inherit' >Profile</SectionTitle>
         <UserDataContainer>
@@ -49,7 +53,7 @@ const Profile: React.FC = () => {
               <DataItemVaue variant='inherit'>{userData?.email}</DataItemVaue>
             </UserDataItem>
             <UserActions>
-              <ActionButton variant='contained' color='success' onClick={handleClose}>Update profile</ActionButton>
+              <ActionButton variant='contained' color='success' onClick={handleUpdateUserDataClose}>Update profile</ActionButton>
               <ActionButton variant='contained' color='success'>Change password</ActionButton>
             </UserActions>
           </UserData>
@@ -59,7 +63,8 @@ const Profile: React.FC = () => {
               src={userData.avatar}
               sx={{ width: '100px', height: '100px' }}
             />
-            <ActionButton variant='contained' color='success'>Update photo</ActionButton>
+            {/* <ActionButton variant='contained' color='success' onClick={handleUpdateAvatarClose}>Update photo</ActionButton> */}
+            <UpdateAvatarModal />
           </UserAvatar>
         </UserDataContainer>
       </Section>
