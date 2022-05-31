@@ -20,6 +20,8 @@ const initialState = {
   firstName: '',
   lastName: '',
   avatar: '',
+  currency: 'usd',
+  language: 'en',
   email: '',
   password: '',
   confirmPassword: '',
@@ -48,7 +50,6 @@ const Authentification: React.FC = () => {
         navigate('/');
       } catch (error) {
         console.log(error);
-        alert('Invalid Password')
       };
     }
   };
@@ -166,7 +167,6 @@ const Authentification: React.FC = () => {
             </Grid>
           </FormContainer>
         </AuthForm>
-        
       </AuthWrapper>
     </AuthContainer>
   );

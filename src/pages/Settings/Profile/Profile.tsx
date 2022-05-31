@@ -22,20 +22,17 @@ const Profile: React.FC = () => {
   const userData = useSelector((state: IUser) => state.user.user);
 
   const [isDataUpdationModalOpen, setIsDataUpdationModalOpen] = useState(false);
-  // const [isAvatarUpdationModalOpen, setIsAvatarUpdationModalOpen] = useState(false);
 
   const handleUpdateUserDataClose = () => {
     setIsDataUpdationModalOpen(!isDataUpdationModalOpen);
   };
 
-  // const handleUpdateAvatarClose = () => {
-  //   setIsAvatarUpdationModalOpen(!isAvatarUpdationModalOpen);
-  // }
-
   return (
     <>
-      <UserUpdationModal open={isDataUpdationModalOpen} onClose={handleUpdateUserDataClose} />
-      {/* <UpdateAvatarModal open={isAvatarUpdationModalOpen} onClose={handleUpdateAvatarClose} /> */}
+      <UserUpdationModal 
+        open={isDataUpdationModalOpen} 
+        onClose={handleUpdateUserDataClose} 
+      />
       <Section>
         <SectionTitle variant='inherit' >Profile</SectionTitle>
         <UserDataContainer>
@@ -53,8 +50,19 @@ const Profile: React.FC = () => {
               <DataItemVaue variant='inherit'>{userData?.email}</DataItemVaue>
             </UserDataItem>
             <UserActions>
-              <ActionButton variant='contained' color='success' onClick={handleUpdateUserDataClose}>Update profile</ActionButton>
-              <ActionButton variant='contained' color='success'>Change password</ActionButton>
+              <ActionButton 
+                variant='contained' 
+                color='success' 
+                onClick={handleUpdateUserDataClose}
+              >
+                Update profile
+              </ActionButton>
+              <ActionButton 
+                variant='contained' 
+                color='success'
+              >
+                Change password
+              </ActionButton>
             </UserActions>
           </UserData>
           <UserAvatar>
@@ -63,7 +71,6 @@ const Profile: React.FC = () => {
               src={userData.avatar}
               sx={{ width: '100px', height: '100px' }}
             />
-            {/* <ActionButton variant='contained' color='success' onClick={handleUpdateAvatarClose}>Update photo</ActionButton> */}
             <UpdateAvatarModal />
           </UserAvatar>
         </UserDataContainer>
