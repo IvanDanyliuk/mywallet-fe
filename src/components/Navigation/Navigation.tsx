@@ -18,7 +18,7 @@ import {
 const Navigation: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
   //@ts-ignore
-  const user = useSelector((state: IUserState) => state.user.user);
+  const { user } = useSelector((state: IUserState) => state.user.user);
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -27,8 +27,12 @@ const Navigation: React.FC = () => {
     <NavWrapper>
       <MainContainer>
         <ProfileData>
-          <UserImage src={user.avatar} alt='avatar' />
-          <UserName>{`${user.firstName} ${user.lastName}`}</UserName>
+          {user && (
+            <>
+              <UserImage src={user.avatar} alt='avatar' />
+              <UserName>{`${user.firstName} ${user.lastName}`}</UserName>
+            </>
+          )}
         </ProfileData>
         <Navbar>
           <NavItem to='/'>Dashboard</NavItem>
