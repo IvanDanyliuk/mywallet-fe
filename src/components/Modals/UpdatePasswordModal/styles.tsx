@@ -10,7 +10,7 @@ export const ModalContent = styled(DialogContent)``;
 export const FormContainer = styled.form`
   padding: 5px 0;
   min-width: 300px;
-  min-height: 130px;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,3 +20,8 @@ export const FormContainer = styled.form`
 export const Input = styled(TextField)``;
 
 export const SubmitButton = styled(Button)``;
+
+export const ActionButton = styled(Button)`
+  width: 200px;
+  height: 30px;
+`;

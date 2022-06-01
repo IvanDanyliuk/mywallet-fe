@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IIncomeData } from '../redux/incomes/types';
 import { IExpenseData } from '../redux/expenses/types';
-import { IUser } from '../redux/user/types';
+import { IPasswordToUpdate, IUser } from '../redux/user/types';
 
 const API = axios.create({ baseURL: 'http://localhost:5000' });
 
@@ -26,3 +26,5 @@ export const deleteExpenseItem = (id: any) => API.delete('/expenses', { data: { 
 export const signIn = (userData: any) => API.post('/user/signin', userData);
 export const signUp = (userData: any) => API.post('/user/signup', userData);
 export const updateUser = (id: any, updatedUser: IUser) => API.patch('/user', { id, updatedUser });
+
+export const updatePassword = (passwordData: IPasswordToUpdate) => API.patch('/user/update-password', passwordData);

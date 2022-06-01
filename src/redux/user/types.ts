@@ -23,3 +23,9 @@ export interface IAuthData {
   email: string;
   password: string;
 };
+
+export interface IPasswordToUpdate {
+  id: string;
+  curPassword: string;
+  newPassword: string;
+}

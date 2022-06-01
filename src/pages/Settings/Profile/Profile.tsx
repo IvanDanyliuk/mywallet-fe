@@ -16,6 +16,7 @@ import {
 } from './styles';
 import { IUser } from '../../../redux/user/types';
 import UpdateAvatarModal from '../../../components/Modals/UpdateAvatarModal/UpdateAvatarModal';
+import PasswordUpdationModal from '../../../components/Modals/UpdatePasswordModal/UpdatePasswordModal';
 
 const Profile: React.FC = () => {
   //@ts-ignore
@@ -57,12 +58,7 @@ const Profile: React.FC = () => {
               >
                 Update profile
               </ActionButton>
-              <ActionButton 
-                variant='contained' 
-                color='success'
-              >
-                Change password
-              </ActionButton>
+              <PasswordUpdationModal />
             </UserActions>
           </UserData>
           <UserAvatar>
