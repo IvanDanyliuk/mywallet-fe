@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '../../api/api';
-import { IAuthData, IPasswordToUpdate, IUser, IUserToUpdate } from "./types";
+import { IAuthData, ICurrencyToUpdate, ILanguageToUpdate, IPasswordToUpdate, IUser, IUserToUpdate } from "./types";
 
 export const signin = createAsyncThunk(
   'user/signin',
@@ -45,6 +45,30 @@ export const updatePassword = createAsyncThunk(
   async (passwordData: IPasswordToUpdate, { rejectWithValue }) => {
     try {
       const { data } = await api.updatePassword(passwordData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const setLanguage = createAsyncThunk(
+  'user/setLanguage',
+  async (langData: ILanguageToUpdate, { rejectWithValue }) => {
+    try {
+      const { data } = await api.setLanguage(langData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const setCurrency = createAsyncThunk(
+  'user/setCurrency',
+  async (curData: ICurrencyToUpdate, { rejectWithValue }) => {
+    try {
+      const { data } = await api.setCurrency(curData);
       return data;
     } catch (error) {
       return rejectWithValue(error);

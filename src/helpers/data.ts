@@ -165,7 +165,13 @@ export const data = {
         country: 'USA',
       }
     ],
-    currencies: ['USD', 'EUR', 'GBP', 'PLN', 'UAH'],
+    currencies: [
+      { value: 'usd', label: 'USD' }, 
+      { value: 'eur', label: 'EUR' }, 
+      { value: 'gbp', label: 'GBP' }, 
+      { value: 'pln', label: 'PLN' }, 
+      { value: 'uah', label: 'UAH' }
+    ],
     categories: {
       incomes: ['Regular', 'Non-Regular'],
       expenses: ['All', 'Uncategorized', 'Benefits', 'Car', 'Equipment', 'Fees', 'Home Office', 'Insurance', 'Interest', 'Labor', 'Maintenance', 'Materials', 'Meal and Entertainment', 'Office Supllies', 'Other', 'Professional Services', 'Rent', 'Taxes', 'Travel', 'Utilities'],

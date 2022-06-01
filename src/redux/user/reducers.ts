@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signin, signup, updatePassword, updateUser } from "./asyncAction";
+import { setCurrency, setLanguage, signin, signup, updatePassword, updateUser } from "./asyncAction";
 import { IUserState } from "./types";
 
 //@ts-ignore
@@ -64,6 +64,30 @@ const userSlice = createSlice({
         state.user = { ...state.user, password: action.payload };
       })
       .addCase(updatePassword.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = 'error';
+      })
+      .addCase(setLanguage.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(setLanguage.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        //@ts-ignore
+        state.user = { ...state.user, language: action.payload };
+      })
+      .addCase(setLanguage.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = 'error';
+      })
+      .addCase(setCurrency.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(setCurrency.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        //@ts-ignore
+        state.user = { ...state.user, currency: action.payload };
+      })
+      .addCase(setCurrency.rejected, (state, action) => {
         state.status = 'failed';
         state.error = 'error';
       })

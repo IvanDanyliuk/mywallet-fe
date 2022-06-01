@@ -28,4 +28,14 @@ export interface IPasswordToUpdate {
   id: string;
   curPassword: string;
   newPassword: string;
-}
+};
+
+export interface ILanguageToUpdate {
+  id: string;
+  language: string;
+};
+
+export interface ICurrencyToUpdate {
+  id: string;
+  currency: string;
+};

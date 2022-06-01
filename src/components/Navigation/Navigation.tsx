@@ -14,7 +14,6 @@ import {
   MainContainer, 
   LogoutButton 
 } from './styles';
-import avatar from '../../assets/images/avatar.jpg';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
@@ -28,8 +27,8 @@ const Navigation: React.FC = () => {
     <NavWrapper>
       <MainContainer>
         <ProfileData>
-          <UserImage src={avatar} alt='avatar' />
-          <UserName>John Doe</UserName>
+          <UserImage src={user.avatar} alt='avatar' />
+          <UserName>{`${user.firstName} ${user.lastName}`}</UserName>
         </ProfileData>
         <Navbar>
           <NavItem to='/'>Dashboard</NavItem>
