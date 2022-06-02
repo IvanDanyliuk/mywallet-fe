@@ -60,7 +60,7 @@ const PasswordUpdationModal: React.FC = () => {
   return (
     <>
       <ModalBody open={isModalOpen} onClose={handleModalOpen}>
-        <ModalFormTitle>Update User</ModalFormTitle>
+        <ModalFormTitle>Update Password</ModalFormTitle>
         <ModalContent>
           <FormContainer onSubmit={handleSubmit}>
             <Input 

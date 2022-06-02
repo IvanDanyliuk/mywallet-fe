@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 export const ModalBody = styled(Dialog)``;
 
-export const ModalFormTitle = styled(DialogTitle)``;
+export const ModalFormTitle = styled(DialogTitle)`
+  text-align: center;
+`;
 
 export const ModalContent = styled(DialogContent)``;
 

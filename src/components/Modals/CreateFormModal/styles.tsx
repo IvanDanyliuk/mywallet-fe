@@ -1,17 +1,13 @@
 import { Box, Button, Dialog, DialogContent, DialogTitle, MenuItem, Select, TextField } from '@mui/material';
 import styled from 'styled-components';
 
-export const ModalBody = styled(Dialog)`
-
-`;
+export const ModalBody = styled(Dialog)``;
 
 export const ModalFormTitle = styled(DialogTitle)`
-
+  text-align: center;
 `;
 
-export const ModalContent = styled(DialogContent)`
-  
-`;
+export const ModalContent = styled(DialogContent)``;
 
 export const FormContainer = styled.form`
   padding: 5px 0;
@@ -22,20 +18,10 @@ export const FormContainer = styled.form`
   box-sizing: border-box;
 `;
 
+export const Input = styled(TextField)``;
 
+export const FormSelect = styled(Select)``;
 
-export const Input = styled(TextField)`
-  
-`;
+export const FormOption = styled(MenuItem)``;
 
-export const FormSelect = styled(Select)`
-
-`;
-
-export const FormOption = styled(MenuItem)`
-
-`;
-
-export const SubmitButton = styled(Button)`
-
-`;
+export const SubmitButton = styled(Button)``;
