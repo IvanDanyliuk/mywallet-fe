@@ -4,13 +4,15 @@ import styled from 'styled-components';
 export const MainContainer = styled(Grid)`
   position: relative;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
 `;
 
 export const Section = styled(Grid)`
   position: relative;
-  width: 49%;
+  width: 50%;
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 export const SectionTitle = styled(Typography)`
@@ -20,6 +22,8 @@ export const SectionTitle = styled(Typography)`
 
 export const SectionPaper = styled(Paper)`
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 export const ResultData = styled(Box)`

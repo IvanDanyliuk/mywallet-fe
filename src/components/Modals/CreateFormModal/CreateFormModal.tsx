@@ -44,8 +44,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
   const dispatch = useDispatch<AppDispatchType>();
 
   const [itemData, setItemData] = useState({
-    //@ts-ignore
-    userId: JSON.parse(localStorage.getItem('profile')).result._id,
+    userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
     title: '',
     amount: '',
     category: defaultCategoryValue,
@@ -54,7 +53,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
 
   const clear = () => {
     setItemData({
-      userId: '',
+      userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
       title: '',
       amount: '',
       category: defaultCategoryValue,
@@ -70,13 +69,13 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
     e.preventDefault();
     if(!id) {
       type === 'incomes' ? 
-        dispatch(createIncomeItem({ ...itemData, badgeColor: generateColor()})) : 
-        dispatch(createExpenseItem({ ...itemData, badgeColor: generateColor()}));
+        dispatch(createIncomeItem(itemData)) : 
+        dispatch(createExpenseItem(itemData));
       clear();
     } else {
       type === 'incomes' ? 
-        dispatch(updateIncomeItem({ id, updatedIncome: {...itemData, badgeColor: generateColor()} })) :
-        dispatch(updateExpenseItem({ id, updatedExpense: {...itemData, badgeColor: generateColor()} }));
+        dispatch(updateIncomeItem({ id, updatedIncome: itemData })) :
+        dispatch(updateExpenseItem({ id, updatedExpense: itemData }));
     }
   };
 

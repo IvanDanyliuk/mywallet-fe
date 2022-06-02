@@ -13,6 +13,7 @@ import {
   MainContainer, 
   MenuButton 
 } from './styles';
+import { setGreeting } from '../helpers/helpers';
 
 const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();
@@ -20,6 +21,8 @@ const Layout: React.FC<ILayout> = ({ children }) => {
   const user = useSelector((state: IUserState) => state.user.user);
 
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const greeting = setGreeting();
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
@@ -36,7 +39,7 @@ const Layout: React.FC<ILayout> = ({ children }) => {
           <MenuButton onClick={handleMenuToggle}>
             <MenuIcon />
           </MenuButton>
-          <Greeting>Good Afternoon, {user.firstName}!</Greeting>
+          <Greeting>{greeting}, {user.firstName}!</Greeting>
         </AppHeader>
       )}
       <AppContent>

@@ -19,7 +19,6 @@ export interface IExpenseData {
   title: string;
   amount: string;
   category: string;
-  badgeColor: string;
   description: string;
 };
 
