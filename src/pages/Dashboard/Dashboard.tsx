@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     dispatch(getIncomes(userId));
-    dispatch(getExpenses(userId))
+    dispatch(getExpenses(userId));
   }, []);
 
   return (

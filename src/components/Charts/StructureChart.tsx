@@ -16,7 +16,10 @@ const StructureChart: React.FC<IChart> = ({data, dataKey, nameKey}) => {
           data={data} 
           dataKey={dataKey} 
           nameKey={nameKey} 
-          innerRadius={80} 
+          innerRadius={80}
+          paddingAngle={5} 
+          cx='50%'
+          cy='50%'
           fill='#1ad37c' 
           label
         >
