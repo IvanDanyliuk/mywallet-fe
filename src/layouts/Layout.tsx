@@ -19,10 +19,11 @@ const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();
   //@ts-ignore
   const user = useSelector((state: IUserState) => state.user.user);
+  const language = localStorage.getItem('lang') || 'en';
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const greeting = setGreeting();
+  const greeting = setGreeting(language);
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);

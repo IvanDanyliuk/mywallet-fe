@@ -6,8 +6,10 @@ import { storage } from '../../../firebase';
 import { updateUser } from '../../../redux/user/asyncAction';
 import { FormContainer, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
 import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const UpdateAvatarModal: React.FC = () => {
+  const { t } = useTranslation(['settings']);
   const [isOpen, setIsOpen] = useState(false);
   const handleUpdateAvatarClose = () => {
     setIsOpen(!isOpen);
@@ -60,16 +62,29 @@ const UpdateAvatarModal: React.FC = () => {
 
   return (
     <>
-      <ModalBody open={isOpen} onClose={handleUpdateAvatarClose}>
-        <ModalFormTitle>Update Avatar</ModalFormTitle>
+      <ModalBody 
+        open={isOpen} 
+        onClose={handleUpdateAvatarClose}
+      >
+        <ModalFormTitle>{t('updateAvatarTitle')}</ModalFormTitle>
         <ModalContent>
           <FormContainer onSubmit={handleSubmit}>
-            <Input name='avatar' type='file' fullWidth />
-            <SubmitButton color='primary' variant='contained' type='submit'>Update</SubmitButton>
+            <Input 
+              name='avatar' 
+              type='file' 
+              fullWidth 
+            />
+            <SubmitButton 
+              color='primary' 
+              variant='contained' 
+              type='submit'
+            >
+              {t('updateAvatarBtn')}
+            </SubmitButton>
           </FormContainer>
         </ModalContent>
       </ModalBody>
-      <Button onClick={handleUpdateAvatarClose}>Update photo</Button>
+      <Button onClick={handleUpdateAvatarClose}>{t('updateAvatar')}</Button>
     </>
   );
 };

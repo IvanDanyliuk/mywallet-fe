@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatchType } from '../../redux/store';
 import { logout } from '../../redux/user/reducers';
@@ -16,6 +17,7 @@ import {
 } from './styles';
 
 const Navigation: React.FC = () => {
+  const { t } = useTranslation(['navigation']);
   const dispatch = useDispatch<AppDispatchType>();
   //@ts-ignore
   const user = useSelector((state: IUserState) => state.user.user);
@@ -35,20 +37,23 @@ const Navigation: React.FC = () => {
           )}
         </ProfileData>
         <Navbar>
-          <NavItem to='/'>Dashboard</NavItem>
-          <NavItem to='/incomes'>Incomes</NavItem>
-          <NavItem to='/expenses'>Expenses</NavItem>
-          <NavItem to='/reports'>Reports</NavItem>
-          <NavItem to='/settings'>Settings</NavItem>
+          <NavItem to='/'>{t('navLinkDashboard')}</NavItem>
+          <NavItem to='/incomes'>{t('navLinkIncomes')}</NavItem>
+          <NavItem to='/expenses'>{t('navLinkExpenses')}</NavItem>
+          <NavItem to='/reports'>{t('navLinkReports')}</NavItem>
+          <NavItem to='/settings'>{t('navLinkSettings')}</NavItem>
         </Navbar>
         {user && (
           <LogoutButton 
             variant='outlined' 
             onClick={logoutHandler}
-          >Logout</LogoutButton>
+            fullWidth
+          >
+            {t('logoutBtn')}
+          </LogoutButton>
         )}
       </MainContainer>
-      <Logo>MyWallet</Logo>
+      <Logo>{t('logo')}</Logo>
     </NavWrapper>
   );
 };

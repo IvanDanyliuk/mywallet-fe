@@ -1,0 +1,9 @@
+{
+  "headerColDate": "Date",
+  "headerColSource": "Source",
+  "headerColAmount": "Amount",
+  "headerColCategory": "Category",
+  "headerColDescription":" Description",
+  "btnEdit": "Edit",
+  "btnDelete": "Delete"
+}

@@ -173,8 +173,9 @@ export const data = {
       { value: 'uah', label: 'UAH' }
     ],
     categories: {
-      incomes: ['Regular', 'Non-Regular'],
-      expenses: ['All', 'Uncategorized', 'Benefits', 'Car', 'Equipment', 'Fees', 'Home Office', 'Insurance', 'Interest', 'Labor', 'Maintenance', 'Materials', 'Meal and Entertainment', 'Office Supllies', 'Other', 'Professional Services', 'Rent', 'Taxes', 'Travel', 'Utilities'],
+      incomes: ['categIncRegular', 'categIncNonReg'],
+      expenses: ['categExpAll', 'categExpUncateg', 'categExpChar', 'categExpCar', 'categExpEqp', 'categExpFees', 'categExpHomeOff', 'categExpIns', 'categExpInt', 'categExpLbr', 'categExpMtns', 'categExpMtrls', 'categExpMlEntmt', 'categExpOffSpls', 'categExpOther', 'categExpPrSrvs', 'categExpRent', 'categExpTaxes', 'categExpTrvl', 'categExpUtlts'],
     }
   }
 };
+

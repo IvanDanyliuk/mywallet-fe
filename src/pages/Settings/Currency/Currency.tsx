@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { data } from '../../../helpers/data';
@@ -12,6 +13,7 @@ import {
 } from './styles';
 
 const Currency: React.FC = () => {
+  const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
   const currencies = data.profile.currencies;
   const user = JSON.parse(localStorage.getItem('profile') || '');
@@ -40,7 +42,7 @@ const Currency: React.FC = () => {
 
   return (
     <Section>
-      <SectionTitle variant='inherit'>Currency</SectionTitle>
+      <SectionTitle variant='inherit'>{t('currencySectionTitle')}</SectionTitle>
       <CurrencySelect 
         value={currentCurrency} 
         onChange={handleCurrencyChange}

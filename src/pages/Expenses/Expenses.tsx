@@ -8,8 +8,10 @@ import { getExpenses } from '../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../redux/store';
 import { PageTitle } from '../../layouts/styles';
 import { Heading } from './styles';
+import { useTranslation } from 'react-i18next';
 
 const Expenses: React.FC = () => {
+  const { t } = useTranslation(['expenses']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -32,9 +34,9 @@ const Expenses: React.FC = () => {
         onClose={openCreateExpenseHandler} 
       />
       <Heading>
-        <PageTitle variant='inherit'>Expenses</PageTitle>
+        <PageTitle variant='inherit'>{t('pageHeading')}</PageTitle>
         <CreateButton 
-          title='New Expense' 
+          title={t('createBtnTitle')} 
           clickHandler={openCreateExpenseHandler} 
         />
       </Heading>

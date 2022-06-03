@@ -1,5 +1,6 @@
 import { IExpenses } from './../redux/expenses/types';
 import { IIncomes } from '../redux/incomes/types';
+import { useTranslation } from 'react-i18next';
 
 export const getPageTitleFromUrl = (urlData: string): string => {
   if(urlData === '/') return 'Dashboard';
@@ -72,18 +73,18 @@ export const setDiagramData = (data: IIncomes[] | IExpenses[]) => {
   ));
 };
 
-export const setGreeting = () => {
+export const setGreeting = (lang: string) => {
   const currentTime = new Date().getHours();
   switch(true) {
     case currentTime >= 23 && currentTime <= 24 || currentTime >= 0 && currentTime < 5:
-      return 'Good night';
+      return lang === 'ua' ? 'Доброї ночі' : 'Good night';
     case currentTime >= 5 && currentTime < 11:
-      return 'Good morning';
+      return lang === 'ua' ? 'Доброго ранку' : 'Good morning';
     case currentTime >= 11 && currentTime < 17:
-      return 'Good afternoon';
+      return lang === 'ua' ? 'Доброго дня' : 'Good afternoon';
     case currentTime >= 17 && currentTime < 23:
-      return 'Good evening';
+      return lang === 'ua' ? 'Доброго вечора' : 'Good evening';
     default: 
-      return 'Hello';
+      return lang === 'ua' ? 'Привіт' : 'Hello';
   }
 };

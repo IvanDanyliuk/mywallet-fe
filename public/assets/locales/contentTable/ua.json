@@ -1,0 +1,9 @@
+{
+  "headerColDate": "Дата",
+  "headerColSource": "Джерело",
+  "headerColAmount": "Сума",
+  "headerColCategory": "Категорія",
+  "headerColDescription":" Деталізація",
+  "btnEdit": "Редагувати",
+  "btnDelete": "Видалити"
+}

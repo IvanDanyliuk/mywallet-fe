@@ -17,8 +17,10 @@ import {
 import { IUser } from '../../../redux/user/types';
 import UpdateAvatarModal from '../../../components/Modals/UpdateAvatarModal/UpdateAvatarModal';
 import PasswordUpdationModal from '../../../components/Modals/UpdatePasswordModal/UpdatePasswordModal';
+import { useTranslation } from 'react-i18next';
 
 const Profile: React.FC = () => {
+  const { t } = useTranslation(['settings']);
   //@ts-ignore
   const userData = useSelector((state: IUser) => state.user.user);
 
@@ -35,19 +37,19 @@ const Profile: React.FC = () => {
         onClose={handleUpdateUserDataClose} 
       />
       <Section>
-        <SectionTitle variant='inherit' >Profile</SectionTitle>
+        <SectionTitle variant='inherit' >{t('profileSectionTitle')}</SectionTitle>
         <UserDataContainer>
           <UserData>
             <UserDataItem>
-              <DataItemKey variant='inherit'>First Name</DataItemKey>
+              <DataItemKey variant='inherit'>{t('firstName')}</DataItemKey>
               <DataItemVaue variant='inherit'>{userData?.firstName}</DataItemVaue>
             </UserDataItem>
             <UserDataItem>
-              <DataItemKey variant='inherit'>Last Name</DataItemKey>
+              <DataItemKey variant='inherit'>{t('lastName')}</DataItemKey>
               <DataItemVaue variant='inherit'>{userData?.lastName}</DataItemVaue>
             </UserDataItem>
             <UserDataItem>
-              <DataItemKey variant='inherit'>Email</DataItemKey>
+              <DataItemKey variant='inherit'>{t('email')}</DataItemKey>
               <DataItemVaue variant='inherit'>{userData?.email}</DataItemVaue>
             </UserDataItem>
             <UserActions>
@@ -56,7 +58,7 @@ const Profile: React.FC = () => {
                 color='success' 
                 onClick={handleUpdateUserDataClose}
               >
-                Update profile
+                {t('updateUserTitle')}
               </ActionButton>
               <PasswordUpdationModal />
             </UserActions>

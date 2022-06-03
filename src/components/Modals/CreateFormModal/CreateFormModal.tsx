@@ -10,7 +10,6 @@ import { data } from '../../../helpers/data';
 import { createIncomeItem, updateIncomeItem } from '../../../redux/incomes/asyncActions';
 import { createExpenseItem, updateExpenseItem } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
-import { generateColor } from '../../../helpers/helpers';
 import { IState } from '../../../types/general';
 import { 
   FormContainer, 
@@ -22,6 +21,7 @@ import {
   ModalFormTitle, 
   SubmitButton 
 } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface ICreateIncomeFormModal {
   open: boolean;
@@ -31,6 +31,8 @@ interface ICreateIncomeFormModal {
 };
 
 const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, id, onClose }) => {
+  const { t } = useTranslation(['authForm']);
+  
   const categories = type === 'incomes' 
     ? data.profile.categories.incomes : 
     data.profile.categories.expenses;
@@ -39,7 +41,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
     ? state.incomes.incomes : 
     state.expenses.expenses);
     
-  const defaultCategoryValue = type === 'incomes' ? 'Regular' : 'All';
+  const defaultCategoryValue = type === 'incomes' ? t('authSelectDefaultIncome') : t('authSelectDefaultExpenses');
 
   const dispatch = useDispatch<AppDispatchType>();
 
@@ -50,6 +52,8 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
     category: defaultCategoryValue,
     description: ''
   });
+
+  console.log(defaultCategoryValue)
 
   const clear = () => {
     setItemData({
@@ -95,14 +99,14 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
 
   return (
     <ModalBody open={open} onClose={onClose}>
-      <ModalFormTitle>{type === 'incomes' ? 'Create Income' : 'Create Expense'}</ModalFormTitle>
+      <ModalFormTitle>{type === 'incomes' ? t('authTitleIncomes') : t('authTitleExpense')}</ModalFormTitle>
       <ModalContent>
         <FormContainer onSubmit={handleSubmit}>
           <Input 
             required 
             id='title' 
             name='title' 
-            label='Title' 
+            label={t('inputLabelTitle')} 
             value={itemData.title} 
             fullWidth 
             onChange={handleChange} 
@@ -111,14 +115,14 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
             required 
             id='amount' 
             name='amount' 
-            label='Amount' 
+            label={t('inputLabelAmount')} 
             value={itemData.amount} 
             fullWidth 
             onChange={handleChange} 
           />
           <FormSelect 
             id='category' 
-            label='Category' 
+            label={t('inputLabelCategory')} 
             name='category' 
             value={itemData.category} 
             onChange={handleChange} 
@@ -126,7 +130,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
           >
             {
               categories.map((category, i) => (
-                <FormOption key={uuid()} value={category}>{category}</FormOption>
+                <FormOption key={uuid()} value={t(category)}>{t(category)}</FormOption>
               ))
             }
           </FormSelect>
@@ -134,7 +138,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
             required 
             id='description' 
             name='description' 
-            label='Description' 
+            label={t('inputLabelDescription')} 
             value={itemData.description} 
             multiline 
             fullWidth 
@@ -146,7 +150,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
             variant='contained' 
             type='submit'
           >
-            {id ? 'Update' : 'Create'}
+            {id ? t('updateBtn') : t('createBtn')}
           </SubmitButton>
         </FormContainer>
       </ModalContent>

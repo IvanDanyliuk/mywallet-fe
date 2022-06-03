@@ -9,6 +9,7 @@ import {
   OptionsButton, 
   OptionsMenuContainer 
 } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface IOptionsMenu {
   id: string;
@@ -17,6 +18,7 @@ interface IOptionsMenu {
 };
 
 const OptionsMenu: React.FC<IOptionsMenu> = ({ id, onEdit, onDelete }) => {
+  const { t } = useTranslation(['contentTable']);
   const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
   const open = Boolean(anchorEl);
 
@@ -53,12 +55,12 @@ const OptionsMenu: React.FC<IOptionsMenu> = ({ id, onEdit, onDelete }) => {
       >
         <Option onClick={onEdit}>
           <OptionIcon>
-            <EditIcon />&nbsp;Edit
+            <EditIcon />&nbsp;{t('btnEdit')}
           </OptionIcon>
         </Option>
         <Option>
           <OptionIcon onClick={onDelete}>
-            <DeleteIcon />&nbsp;Delete
+            <DeleteIcon />&nbsp;{t('btnDelete')}
           </OptionIcon>
         </Option>
       </Options>

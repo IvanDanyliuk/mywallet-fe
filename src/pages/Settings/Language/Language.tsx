@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { AppDispatchType } from '../../../redux/store';
 import { setLanguage } from '../../../redux/user/asyncAction';
+import i18n from '../../../services/langConfig';
 import { 
   Section, 
   LanguageItem, 
@@ -10,6 +12,7 @@ import {
 } from './styles';
 
 const Language: React.FC = () => {
+  const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
 
   const user = JSON.parse(localStorage.getItem('profile') || '');
@@ -33,15 +36,17 @@ const Language: React.FC = () => {
           result: { ...user.result, language: currentLanguage } 
         })
       );
+      localStorage.setItem('lang', currentLanguage);
+      i18n.changeLanguage(currentLanguage);
     }
   }, [currentLanguage]);
 
   return (
     <Section>
-      <SectionTitle variant='inherit'>Language</SectionTitle>
+      <SectionTitle variant='inherit'>{t('languageSectionTitle')}</SectionTitle>
       <LanguageSelect value={currentLanguage} onChange={handleLanguageChange}>
-        <LanguageItem value={'en'}>English</LanguageItem>
-        <LanguageItem value={'ua'}>Ukrainian</LanguageItem>
+        <LanguageItem value={'en'}>{t('languageOptionEn')}</LanguageItem>
+        <LanguageItem value={'ua'}>{t('languageOptionUa')}</LanguageItem>
       </LanguageSelect>
     </Section>
   );

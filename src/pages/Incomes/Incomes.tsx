@@ -7,6 +7,7 @@ import { AppDispatchType } from '../../redux/store';
 import ContentTable from '../../components/ContentTable/ContentTable';
 import { Heading, MainContainer } from './styles';
 import { PageTitle } from '../../layouts/styles';
+import { useTranslation } from 'react-i18next';
 
 export enum TableType {
   Incomes = 'incomes',
@@ -19,6 +20,7 @@ export enum FormModalType {
 };
 
 const Incomes: React.FC = () => {
+  const { t } = useTranslation(['incomes']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -41,9 +43,9 @@ const Incomes: React.FC = () => {
         onClose={openCreateIncomeHandler} 
       />
       <Heading>
-        <PageTitle variant='inherit'>Incomes</PageTitle>
+        <PageTitle variant='inherit'>{t('pageHeading')}</PageTitle>
         <CreateButton 
-          title='New income' 
+          title={t('createBtnTitle')} 
           clickHandler={openCreateIncomeHandler} 
         />
       </Heading>

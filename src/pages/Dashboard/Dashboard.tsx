@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import DynamicChart from '../../components/Charts/DynamicChart';
 import StructureChart from '../../components/Charts/StructureChart';
@@ -17,6 +18,7 @@ import {
 } from './styles';
 
 const Dashboard: React.FC = () => {
+  const { t } = useTranslation(['dashboard']);
   const dispatch = useDispatch<AppDispatchType>();
   const incomes = useSelector((state: any) => state.incomes.incomes);
   const expenses = useSelector((state: any) => state.expenses.expenses);
@@ -37,11 +39,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <PageTitle variant='inherit'>Dashboard</PageTitle>
+      <PageTitle variant='inherit'>{t('pageHeading')}</PageTitle>
       <MainContainer container spacing={3} >
         <Section item>
           <SectionPaper>
-            <SectionTitle variant='inherit'>Incomes</SectionTitle>
+            <SectionTitle variant='inherit'>{t('incomesSection')}</SectionTitle>
             <StructureChart 
               data={incomesToRender} 
               dataKey='amount' 
@@ -52,12 +54,12 @@ const Dashboard: React.FC = () => {
               dataKey='categories' 
               nameKey='amount' 
             />
-            <Result variant='inherit'>Total Income: ${totalIncome}</Result>
+            <Result variant='inherit'>{`${t('totalIncome')}: $${totalIncome}`}</Result>
           </SectionPaper>
         </Section>
         <Section item>
           <SectionPaper>
-            <SectionTitle variant='inherit'>Expenses</SectionTitle>
+            <SectionTitle variant='inherit'>{t('expensesSection')}</SectionTitle>
             <StructureChart 
               data={expensesToRender} 
               dataKey='amount' 
@@ -68,7 +70,7 @@ const Dashboard: React.FC = () => {
               dataKey='merchant' 
               nameKey='amount' 
             />
-            <Result variant='inherit'>Total Expenses: ${totalExpenses}</Result>
+            <Result variant='inherit'>{`${t('totalExpenses')}: $${totalExpenses}`}</Result>
           </SectionPaper>
         </Section>  
       </MainContainer>

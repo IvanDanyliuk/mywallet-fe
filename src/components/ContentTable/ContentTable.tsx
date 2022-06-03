@@ -5,12 +5,14 @@ import { IState } from '../../types/general';
 import ContentTableBody from './ContentTableBody/ContentTableBody';
 import ContentTableHeader from './ContentTableHeader/ContentTableHeader';
 import { ContentTableContainer, PaperContainer } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface IContentTable {
   type: string;
 };
 
 const ContentTable: React.FC<IContentTable> = ({ type }) => {
+  const { t } = useTranslation(['contentTable'])
   const data = useSelector((state: IState) => type === 'incomes' ? state.incomes.incomes : state.expenses.expenses);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -27,27 +29,27 @@ const ContentTable: React.FC<IContentTable> = ({ type }) => {
   const columns = [
     {
       sortKey: 'createdAt',
-      label: 'Date',
+      label: t('headerColDate'),
       isSortable: true,
     },
     {
       sortKey: 'source',
-      label: 'Source',
+      label: t('headerColSource'),
       isSortable: true,
     },
     {
       sortKey: 'amount',
-      label: 'Amount',
+      label: t('headerColAmount'),
       isSortable: true,
     },
     {
       sortKey: 'category',
-      label: 'Category',
+      label: t('headerColCategory'),
       isSortable: false,
     },
     {
       sortKey: 'description',
-      label: 'Description',
+      label: t('headerColDescription'),
       isSortable: false,
     },
   ];

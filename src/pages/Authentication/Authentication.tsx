@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../firebase';
 import { AppDispatchType } from '../../redux/store';
@@ -28,6 +29,7 @@ const initialState = {
 };
 
 const Authentification: React.FC = () => {
+  const { t } = useTranslation(['auth']);
   const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -97,7 +99,7 @@ const Authentification: React.FC = () => {
   return (
     <AuthContainer>
       <AuthWrapper elevation={22}>
-        <AuthTitle variant='inherit'>{isSignUp ? 'Sign Up' : 'Sign In'}</AuthTitle>
+        <AuthTitle variant='inherit'>{isSignUp ? t('signUpTitle') : t('signInTitle')}</AuthTitle>
         <AuthForm onSubmit={handleSubmit}>
           <FormContainer container spacing={1}>
             {
@@ -105,13 +107,13 @@ const Authentification: React.FC = () => {
                 <>
                   <AuthInput 
                     name='firstName' 
-                    label='First Name' 
+                    label={t('firstNameLabel')} 
                     type='text' 
                     handleChange={handleChange} 
                   />
                   <AuthInput 
                     name='lastName' 
-                    label='Last Name' 
+                    label={t('lastNameLabel')} 
                     type='text' 
                     handleChange={handleChange} 
                   />
@@ -126,13 +128,13 @@ const Authentification: React.FC = () => {
             }
             <AuthInput 
               name='email' 
-              label='Email' 
+              label={t('emailLabel')} 
               type='email' 
               handleChange={handleChange} 
             />
             <AuthInput 
               name='password' 
-              label='Password' 
+              label={t('passwordLabel')} 
               type={showPassword ? 'text' : 'password'} 
               handleShowPassword={handleShowPassword}
               handleChange={handleChange} 
@@ -141,7 +143,7 @@ const Authentification: React.FC = () => {
               isSignUp && (
                 <AuthInput 
                   name='confirmPassword' 
-                  label='Confirm Password' 
+                  label={t('confirmPasswordLabel')} 
                   type='password' 
                   handleChange={handleChange} 
                 />
@@ -155,14 +157,14 @@ const Authentification: React.FC = () => {
               type='submit' 
               style={{marginBottom: '10px'}}
             >
-              {isSignUp ? 'Sign Up' : 'Sign In'}
+              {isSignUp ? t('signUpBtn') : t('signInBtn')}
             </SubmitButton>
             <SubmitButton 
               variant='contained' 
               color='info'
               onClick={switchMode}
             >
-              {isSignUp ? 'Already have an account? Sign In' : 'Don\'t have an account? Sign Up'}
+              {isSignUp ? t('accountExistBtn') : t('noAccountBtn')}
             </SubmitButton>
             </Grid>
           </FormContainer>

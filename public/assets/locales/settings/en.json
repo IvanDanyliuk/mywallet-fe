@@ -1,0 +1,20 @@
+{
+  "currencySectionTitle": "Currency",
+  "languageSectionTitle": "Language",
+  "languageOptionEn": "English",
+  "languageOptionUa": "Ukrainian",
+  "profileSectionTitle": "Profile",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Email",
+  "updateUserTitle": "Update User",
+  "updateUserBtn": "Update",
+  "updateProfileBtn": "Update profile",
+  "changePasswordBtn": "Change password",
+  "curPassField": "Current password",
+  "newPassField": "New password",
+  "confirmNewPass": "Confirm new password",
+  "updateAvatar": "Update photo",
+  "updateAvatarTitle": "Update Avatar",
+  "updateAvatarBtn": "Update"
+}

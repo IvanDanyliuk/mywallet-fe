@@ -3,6 +3,7 @@ import React, {
   useEffect, 
   useState 
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { AppDispatchType } from '../../../redux/store';
 import { updatePassword, updateUser } from '../../../redux/user/asyncAction';
@@ -17,6 +18,7 @@ import {
 } from './styles';
 
 const PasswordUpdationModal: React.FC = () => {
+  const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
   const user = JSON.parse(localStorage.getItem('profile') || '');
   
@@ -60,13 +62,13 @@ const PasswordUpdationModal: React.FC = () => {
   return (
     <>
       <ModalBody open={isModalOpen} onClose={handleModalOpen}>
-        <ModalFormTitle>Update Password</ModalFormTitle>
+        <ModalFormTitle>{t('changePasswordBtn')}</ModalFormTitle>
         <ModalContent>
           <FormContainer onSubmit={handleSubmit}>
             <Input 
               id='curPassword' 
               name='curPassword' 
-              label='Current Password' 
+              label={t('curPassField')} 
               type='password' 
               value={passwordData.curPassword} 
               fullWidth 
@@ -75,7 +77,7 @@ const PasswordUpdationModal: React.FC = () => {
             <Input 
               id='newPassword' 
               name='newPassword' 
-              label='New Password' 
+              label={t('newPassField')} 
               type='password' 
               value={passwordData.newPassword} 
               fullWidth 
@@ -84,7 +86,7 @@ const PasswordUpdationModal: React.FC = () => {
             <Input 
               id='confirmNewPassword' 
               name='confirmNewPassword' 
-              label='Confirm New Password' 
+              label={t('confirmNewPass')} 
               type='password' 
               value={passwordData.confirmNewPassword} 
               fullWidth 
@@ -96,7 +98,7 @@ const PasswordUpdationModal: React.FC = () => {
               type='submit' 
               fullWidth
             >
-              Update
+              {t('updateUserBtn')}
             </SubmitButton>
           </FormContainer>
         </ModalContent>
@@ -106,7 +108,7 @@ const PasswordUpdationModal: React.FC = () => {
         color='success'
         onClick={handleModalOpen}
       >
-        Change password
+        {t('changePasswordBtn')}
       </ActionButton>
     </>
   );

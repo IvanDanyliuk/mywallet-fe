@@ -75,7 +75,6 @@ export const NavItem = styled(NavLink)`
 
 export const LogoutButton = styled(Button)`
   @media (max-width: 576px) {
-    width: 200px;
     height: 70px;
   }
 `;

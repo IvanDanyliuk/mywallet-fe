@@ -1,0 +1,20 @@
+{
+  "currencySectionTitle": "Валюта",
+  "languageSectionTitle": "Мова",
+  "languageOptionEn": "Англійська",
+  "languageOptionUa": "Українська",
+  "profileSectionTitle": "Профіль",
+  "firstName": "Ім'я",
+  "lastName": "Прізвище",
+  "email": "Ел. пошта",
+  "updateUserTitle": "Оновити дані",
+  "updateUserBtn": "Оновити",
+  "updateProfileBtn": "Оновити дані",
+  "changePasswordBtn": "Змінити пароль",
+  "curPassField": "Поточний пароль",
+  "newPassField": "Новий пароль",
+  "confirmNewPass": "Підтвердити новий пароль",
+  "updateAvatar": "Оновити фото",
+  "updateAvatarTitle": "Оновити фото",
+  "updateAvatarBtn": "Оновити"
+}

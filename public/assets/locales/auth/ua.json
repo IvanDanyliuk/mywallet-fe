@@ -1,0 +1,13 @@
+{
+  "signInTitle": "Увійти",
+  "signUpTitle": "Зареєструватися",
+  "firstNameLabel": "Ім\"я",
+  "lastNameLabel": "Прізвище",
+  "emailLabel": "Ел. пошта",
+  "passwordLabel": "Пароль",
+  "confirmPasswordLabel": "Підтвердити пароль",
+  "signInBtn": "Увійти",
+  "signUpBtn": "Зареєструватися",
+  "accountExistBtn": "Вже маєте акаунт? Увійти",
+  "noAccountBtn": "Ще не маєте акаунта? Зареєструватися"
+}

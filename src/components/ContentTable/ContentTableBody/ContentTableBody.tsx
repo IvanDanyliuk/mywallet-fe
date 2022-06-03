@@ -10,6 +10,7 @@ import CreateIncomeFormModal from '../../Modals/CreateFormModal/CreateFormModal'
 import { IIncomes } from '../../../redux/incomes/types';
 import { IExpenses } from '../../../redux/expenses/types';
 import { ContentBody, ContentCell, ContentRow } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface ITableData {
   type: string;
@@ -19,6 +20,7 @@ interface ITableData {
 };
 
 const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rowsPerPage }) => {
+  const { t } = useTranslation(['contentTable']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateItemId, setUpdateItemId] = useState('');
