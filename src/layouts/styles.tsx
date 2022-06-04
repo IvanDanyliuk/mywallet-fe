@@ -1,9 +1,7 @@
-import { AppBar, Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import styled from 'styled-components';
 
-export const MainContainer = styled(Box)`
-  
-`;
+export const MainContainer = styled(Box)``;
 
 export const AppHeader = styled(Box)`
   position: fixed;

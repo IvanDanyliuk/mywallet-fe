@@ -11,6 +11,9 @@ import { IIncomes } from '../../../redux/incomes/types';
 import { IExpenses } from '../../../redux/expenses/types';
 import { ContentBody, ContentCell, ContentRow } from './styles';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { IUserState } from '../../../redux/user/types';
+import { getCurrencyIcon } from '../../../helpers/helpers';
 
 interface ITableData {
   type: string;
@@ -26,7 +29,8 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
   const [updateItemId, setUpdateItemId] = useState('');
 
   //@ts-ignore
-  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+  const { _id, currency } = useSelector((state: IUserState) => state.user.user);
+  const currencyIcon = getCurrencyIcon(currency);
 
   const editItemHandler = (id: any) => {
     setIsModalOpen(true);
@@ -44,8 +48,8 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
 
   useEffect(() => {
     type === 'incomes' ? 
-      getIncomes(userId) : 
-      getExpenses(userId);
+      getIncomes(_id) : 
+      getExpenses(_id);
   }, [dispatch, isModalOpen]);
 
   return (
@@ -62,7 +66,7 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
             <ContentRow key={uuid()}>
               <ContentCell>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
               <ContentCell>{item.title}</ContentCell>
-              <ContentCell>{item.amount}</ContentCell>
+              <ContentCell>{currencyIcon}{item.amount}</ContentCell>
               <ContentCell>{item.category}</ContentCell>
               <ContentCell>{item.description}</ContentCell>
               <OptionsMenu 

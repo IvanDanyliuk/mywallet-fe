@@ -88,3 +88,20 @@ export const setGreeting = (lang: string) => {
       return lang === 'ua' ? 'Привіт' : 'Hello';
   }
 };
+
+export const getCurrencyIcon = (currency: string) => {
+  switch(currency) {
+    case 'usd':
+      return '$';
+    case 'eur':
+      return '€';
+    case 'gbp':
+      return '£';
+    case 'pln':
+      return 'zł';
+    case 'uah':
+      return '₴';
+    default: 
+      return '';
+  }
+};
