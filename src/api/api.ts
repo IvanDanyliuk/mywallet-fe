@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IIncomeData } from '../redux/incomes/types';
 import { IExpenseData } from '../redux/expenses/types';
 import { ICurrencyToUpdate, ILanguageToUpdate, IPasswordToUpdate, IUser } from '../redux/user/types';
+import { IReportData } from '../redux/reports/types';
 
 const API = axios.create({ baseURL: 'http://localhost:5000' });
 
@@ -30,3 +31,8 @@ export const updateUser = (id: any, updatedUser: IUser) => API.patch('/user', { 
 export const updatePassword = (passwordData: IPasswordToUpdate) => API.patch('/user/update-password', passwordData);
 export const setLanguage = (langData: ILanguageToUpdate) => API.patch('user/language', langData);
 export const setCurrency = (curData: ICurrencyToUpdate) => API.patch('user/currency', curData);
+
+export const getReports = (userId: any) => API.get('/reports', { params: { userId } });
+export const createReport = (reportData: any) => API.post('/reports', reportData); 
+export const updateReport = (id: any, updatedReport: IReportData) => API.patch('/reports', {id, updatedReport});
+export const deleteReport = (id: any) => API.delete('/reports', { data: { id } });

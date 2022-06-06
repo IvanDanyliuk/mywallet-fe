@@ -31,6 +31,7 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
   //@ts-ignore
   const { _id, currency } = useSelector((state: IUserState) => state.user.user);
   const currencyIcon = getCurrencyIcon(currency);
+  // const userId = JSON.parse(localStorage.getItem('profile')).result._id;
 
   const editItemHandler = (id: any) => {
     setIsModalOpen(true);
