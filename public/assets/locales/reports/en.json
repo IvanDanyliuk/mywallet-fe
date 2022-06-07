@@ -1,3 +1,15 @@
 {
-  "pageHeading": "Reports"
+  "pageHeading": "Reports",
+  "createReportFormHeading": "Create report",
+  "tableHeaderColDate": "Date",
+  "tableHeaderColTitle": "Title",
+  "tableHeaderColPeriod": "Period",
+  "tableHeaderColComment": "Comment",
+  "modalFormTitle": "Create report",
+  "modalFormLabelHeading": "Title",
+  "modalFormLabelFrom": "From",
+  "modalFormLabelTo": "To",
+  "modalFormLabelComment": "Comment",
+  "modalFormSubmitBtn": "Create",
+  "modalFormOpenBtn": "Create report"
 }

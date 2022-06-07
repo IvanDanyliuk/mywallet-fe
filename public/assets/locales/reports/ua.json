@@ -1,3 +1,15 @@
 {
-  "pageHeading": "Звіти"
+  "pageHeading": "Звіти",
+  "createReportFormHeading": "Ваш новий звіт",
+  "tableHeaderColDate": "Дата",
+  "tableHeaderColTitle": "Заголовок",
+  "tableHeaderColPeriod": "Період",
+  "tableHeaderColComment": "Коментар",
+  "modalFormTitle": "Ваш новий звіт",
+  "modalFormLabelHeading": "Заголовок",
+  "modalFormLabelFrom": "З",
+  "modalFormLabelTo": "До",
+  "modalFormLabelComment": "Коментар",
+  "modalFormSubmitBtn": "Створити",
+  "modalFormOpenBtn": "Створити звіт"
 }

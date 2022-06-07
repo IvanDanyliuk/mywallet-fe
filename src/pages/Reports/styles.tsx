@@ -3,7 +3,18 @@ import styled from 'styled-components';
 
 export const ReportsContainer = styled(Box)``;
 
-export const ReportsHeading = styled(Typography)``;
+export const Heading = styled(Box)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ReportsTitle = styled(Typography)`
+  padding-bottom: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  box-sizing: border-box;
+`;
 
 export const ReportsContent = styled(Box)``;
 

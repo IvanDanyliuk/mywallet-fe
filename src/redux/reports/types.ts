@@ -11,7 +11,10 @@ export interface IReports {
     from: string,
     to: string,
   },
-  data: [],
+  data: {
+    incomes: [],
+    expenses: [],
+  },
   comment: string,
   createdAt: string;
   _id: string;
@@ -24,7 +27,10 @@ export interface IReportData {
     from: string,
     to: string,
   },
-  data: [],
+  data: {
+    incomes: [],
+    expenses: [],
+  },
   comment: string,
 };
 

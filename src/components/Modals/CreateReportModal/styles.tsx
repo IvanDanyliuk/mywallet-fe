@@ -21,4 +21,8 @@ export const FormContainer = styled.form`
 
 export const Input = styled(TextField)``;
 
+export const CreateButton = styled(Button)`
+  height: 30px;
+`;
+
 export const SubmitButton = styled(Button)``;

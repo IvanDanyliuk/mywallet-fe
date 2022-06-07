@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CreateReportModal from '../../components/Modals/CreateReportModal/CreateReportModal';
+import ReportsTable from '../../components/ReportsTable/ReportsTable';
 import { 
-  ReportFilter, 
+  Heading, 
   ReportsContainer, 
   ReportsContent, 
-  ReportSection, 
-  ReportsHeading 
+  ReportsTitle 
 } from './styles';
 
 const Reports: React.FC = () => {
@@ -15,14 +14,12 @@ const Reports: React.FC = () => {
 
   return (
     <ReportsContainer>
-      <ReportsHeading>{t('pageHeading')}</ReportsHeading>
+      <Heading>
+        <ReportsTitle variant='inherit'>{t('pageHeading')}</ReportsTitle>
+        <CreateReportModal />
+      </Heading>
       <ReportsContent>
-        <ReportFilter>
-          <CreateReportModal />
-          
-        </ReportFilter>
-        <ReportSection></ReportSection>
-        <ReportSection></ReportSection>
+        <ReportsTable />
       </ReportsContent>
     </ReportsContainer>
   );

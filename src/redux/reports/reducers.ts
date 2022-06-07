@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getReports, createReport, updateReport, deleteReport } from './asyncActions';
+import { getReports, createReport, deleteReport } from './asyncActions';
 import { IReportState } from './types';
 
 const initialState: IReportState = {
@@ -12,7 +12,16 @@ const initialState: IReportState = {
 const reportsSlice = createSlice({
   name: 'reports',
   initialState,
-  reducers: {},
+  reducers: {
+    sortReports: (state, action) => {
+      state.reports = state.reports.sort((a: any, b: any) => {
+        if(action.payload === 'asc') {
+          return a.createdAt > b.createdAt ? -1 : 1;
+        }
+        return a.createdAt < b.createdAt ? -1 : 1;
+      })
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getReports.pending, (state, action) => {
@@ -37,17 +46,6 @@ const reportsSlice = createSlice({
         state.status = 'failed';
         state.error = 'error';
       })
-      .addCase(updateReport.pending, (state, action) => {
-        state.status = 'loading';
-      })
-      .addCase(updateReport.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.reports = [];
-      })
-      .addCase(updateReport.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = 'error';
-      })
       .addCase(deleteReport.pending, (state, action) => {
         state.status = 'loading';
       })
@@ -61,5 +59,7 @@ const reportsSlice = createSlice({
       })
   }
 });
+
+export const { sortReports } = reportsSlice.actions;
 
 export default reportsSlice.reducer;

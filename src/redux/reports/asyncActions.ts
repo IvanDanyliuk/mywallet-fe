@@ -6,7 +6,7 @@ export const getReports = createAsyncThunk(
   'reports/getReports',
   async (userId: string, { rejectWithValue }) => {
     try {
-      const { data } = await api.getIncomes(userId);
+      const { data } = await api.getReports(userId);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -17,20 +17,8 @@ export const getReports = createAsyncThunk(
 export const createReport = createAsyncThunk(
   'reports/createReport',
   async (reportData: IReportData) => {
-    const { data}  = await api.createReport(reportData);
+    const { data} = await api.createReport(reportData);
     return data;
-  }
-);
-
-export const updateReport = createAsyncThunk(
-  'reports/updateReport',
-  async (reportToUpdate: IReportToUpdate, { rejectWithValue }) => {
-    try {
-      const { data } = await api.updateReport(reportToUpdate.id, reportToUpdate.updatedReport);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
   }
 );
 

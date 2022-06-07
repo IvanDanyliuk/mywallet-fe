@@ -33,6 +33,5 @@ export const setLanguage = (langData: ILanguageToUpdate) => API.patch('user/lang
 export const setCurrency = (curData: ICurrencyToUpdate) => API.patch('user/currency', curData);
 
 export const getReports = (userId: any) => API.get('/reports', { params: { userId } });
-export const createReport = (reportData: any) => API.post('/reports', reportData); 
-export const updateReport = (id: any, updatedReport: IReportData) => API.patch('/reports', {id, updatedReport});
+export const createReport = (reportData: any) => API.post('/reports', reportData);
 export const deleteReport = (id: any) => API.delete('/reports', { data: { id } });
