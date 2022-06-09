@@ -1,4 +1,4 @@
-import { Button, Paper, Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
+import { Button, ButtonBase, Paper, Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import styled from 'styled-components';
 
 export const PaperContainer = styled(Paper)``;
@@ -38,6 +38,10 @@ export const ContentRow = styled(TableRow)`
 
 export const ContentCell = styled(TableCell)`
 
+`;
+
+export const ReportButton = styled(ButtonBase)`
+  cursor: pointer;
 `;
 
 export const DeleteButton = styled(Button)`

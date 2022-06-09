@@ -1,5 +1,6 @@
 export interface IReportState {
   reports: IReports[];
+  openedReport: IReportData | null;
   status: string;
   error: null | string;
 };

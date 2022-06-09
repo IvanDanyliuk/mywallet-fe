@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { 
@@ -11,13 +12,20 @@ import {
 } from './styles';
 import { useTranslation } from 'react-i18next';
 
+export enum OptionsMenuType {
+  Content = 'content',
+  Reports = 'reports'
+};
+
 interface IOptionsMenu {
   id: string;
-  onEdit: (id: any) => void;
+  type: OptionsMenuType;
+  onOpen?: (id: any) => void;
+  onEdit?: (id: any) => void;
   onDelete: (id: any) => void;
 };
 
-const OptionsMenu: React.FC<IOptionsMenu> = ({ id, onEdit, onDelete }) => {
+const OptionsMenu: React.FC<IOptionsMenu> = ({ id, type, onOpen, onEdit, onDelete }) => {
   const { t } = useTranslation(['contentTable']);
   const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
   const open = Boolean(anchorEl);
@@ -53,11 +61,20 @@ const OptionsMenu: React.FC<IOptionsMenu> = ({ id, onEdit, onDelete }) => {
         }}
         onClose={handleMenuClose}
       >
-        <Option onClick={onEdit}>
-          <OptionIcon>
-            <EditIcon />&nbsp;{t('btnEdit')}
-          </OptionIcon>
-        </Option>
+        {type === OptionsMenuType.Content && (
+          <Option onClick={onEdit}>
+            <OptionIcon>
+              <EditIcon />&nbsp;{t('btnEdit')}
+            </OptionIcon>
+          </Option>
+        )}
+        {type === OptionsMenuType.Reports && (
+          <Option onClick={onOpen}>
+            <OptionIcon>
+              <FolderOpenIcon />&nbsp;{t('btnOpen')}
+            </OptionIcon>
+          </Option>
+        )}
         <Option>
           <OptionIcon onClick={onDelete}>
             <DeleteIcon />&nbsp;{t('btnDelete')}

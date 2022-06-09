@@ -1,16 +1,25 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch,  useSelector } from 'react-redux';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteReport, getReports } from '../../redux/reports/asyncActions';
 import { sortReports } from '../../redux/reports/reducers';
 import { AppDispatchType } from '../../redux/store';
-import { HeaderCell, HeaderRow, PaperContainer, ReportTableContainer, ReportsHeader, SortLabel, ReportsBody, ContentRow, ContentCell, DeleteButton } from './styles';
-import OptionsMenu from '../ContentTable/ContentTableBody/RowMenu/OptionsMenu';
+import OptionsMenu, { OptionsMenuType } from '../ContentTable/ContentTableBody/RowMenu/OptionsMenu';
 import { TablePagination } from '@mui/material';
+import { 
+  HeaderCell, 
+  HeaderRow, 
+  PaperContainer, 
+  ReportTableContainer, 
+  ReportsHeader, 
+  SortLabel, 
+  ReportsBody, 
+  ContentRow, 
+  ContentCell 
+} from './styles';
 
 enum SortOrder {
   asc = 'asc',
@@ -20,6 +29,7 @@ enum SortOrder {
 const ReportsTable: React.FC = () => {
   const { t } = useTranslation(['reports']);
   const dispatch = useDispatch<AppDispatchType>();
+  let navigate = useNavigate();
   
   const reports = useSelector((state: any) => state.reports.reports);
   const user = useSelector((state: any) => state.user.user);
@@ -27,8 +37,6 @@ const ReportsTable: React.FC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = useState(SortOrder.desc);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [updateItemId, setUpdateItemId] = useState('');
   
 
   const handleSort = () => {
@@ -41,6 +49,10 @@ const ReportsTable: React.FC = () => {
       dispatch(sortReports(order));
     };
   };
+
+  const openReportHandler = (id: any) => {
+    navigate(`/reports/${id}`);
+  }
 
   const deleteReportHandler = (id: string) => {
     dispatch(deleteReport(id));
@@ -83,7 +95,7 @@ const ReportsTable: React.FC = () => {
 
   useEffect(() => {
     dispatch(getReports(user._id));
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   return (
     <PaperContainer>
@@ -115,13 +127,11 @@ const ReportsTable: React.FC = () => {
           {
             reports.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item: any) => (
               <ContentRow key={uuid()}>
-                <ContentCell>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
-                <ContentCell>{item.heading}</ContentCell>
-                <ContentCell>{`${moment(item.period.from).format('MMM DD, YYYY')} - ${moment(item.period.to).format('MMM DD, YYYY')}`}</ContentCell>
-                <ContentCell>{item.comment}</ContentCell>
-                <DeleteButton onClick={() => deleteReportHandler(item._id)}>
-                  <DeleteIcon />
-                </DeleteButton>
+                <ContentCell datatype='createdAt'>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
+                <ContentCell datatype='heading'>{item.heading}</ContentCell>
+                <ContentCell datatype='period'>{`${moment(item.period.from).format('MMM DD, YYYY')} - ${moment(item.period.to).format('MMM DD, YYYY')}`}</ContentCell>
+                <ContentCell datatype='comment'>{item.comment}</ContentCell>
+                <OptionsMenu id={item._id} type={OptionsMenuType.Reports} onOpen={() => openReportHandler(item._id)} onDelete={() => deleteReportHandler(item._id)} />
               </ContentRow>
             ))
           }

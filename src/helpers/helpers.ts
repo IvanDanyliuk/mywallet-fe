@@ -59,6 +59,11 @@ export const generateColor = (category: any) => {
   }
 };
 
+export const setColor = () => {
+  const color = Math.floor(Math.random() * 16777215).toString(16);
+  return `#${color}`;
+};
+
 export const setDiagramData = (data: IIncomes[] | IExpenses[]) => {
   const dataKeys = data.map((item: any) => item.category);
   const uniqueKeys = Array.from(new Set(dataKeys));

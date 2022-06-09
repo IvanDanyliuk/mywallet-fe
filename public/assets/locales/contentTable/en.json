@@ -4,6 +4,7 @@
   "headerColAmount": "Amount",
   "headerColCategory": "Category",
   "headerColDescription":" Description",
+  "btnOpen": "Open",
   "btnEdit": "Edit",
   "btnDelete": "Delete"
 }

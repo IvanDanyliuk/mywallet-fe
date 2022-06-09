@@ -11,5 +11,10 @@
   "modalFormLabelTo": "To",
   "modalFormLabelComment": "Comment",
   "modalFormSubmitBtn": "Create",
-  "modalFormOpenBtn": "Create report"
+  "modalFormOpenBtn": "Create report",
+  "goBackBtn": "Go back",
+  "sectionIncomes": "Incomes",
+  "sectionExpenses": "Expenses",
+  "totalIncome": "Total income",
+  "totalExpenses": "Total expenses"
 }

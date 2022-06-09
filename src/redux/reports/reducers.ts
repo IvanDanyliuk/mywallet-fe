@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getReports, createReport, deleteReport } from './asyncActions';
+import { getReports, createReport, deleteReport, getReport } from './asyncActions';
 import { IReportState } from './types';
 
 const initialState: IReportState = {
   reports: [],
+  openedReport: null,
   status: 'idle',
   error: null,
 };
@@ -32,6 +33,17 @@ const reportsSlice = createSlice({
         state.reports = action.payload;
       })
       .addCase(getReports.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = 'error'
+      })
+      .addCase(getReport.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getReport.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.openedReport = action.payload;
+      })
+      .addCase(getReport.rejected, (state, action) => {
         state.status = 'failed';
         state.error = 'error'
       })

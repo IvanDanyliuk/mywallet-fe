@@ -4,6 +4,7 @@
   "headerColAmount": "Сума",
   "headerColCategory": "Категорія",
   "headerColDescription":" Деталізація",
+  "btnOpen": "Відкрити",
   "btnEdit": "Редагувати",
   "btnDelete": "Видалити"
 }

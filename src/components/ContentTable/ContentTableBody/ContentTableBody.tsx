@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncActions';
 import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
-import OptionsMenu from './RowMenu/OptionsMenu';
+import OptionsMenu, { OptionsMenuType } from './RowMenu/OptionsMenu';
 import CreateIncomeFormModal from '../../Modals/CreateFormModal/CreateFormModal';
 import { IIncomes } from '../../../redux/incomes/types';
 import { IExpenses } from '../../../redux/expenses/types';
@@ -72,6 +72,7 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
               <ContentCell>{item.description}</ContentCell>
               <OptionsMenu 
                 id={item._id} 
+                type={OptionsMenuType.Content}
                 onEdit={() => editItemHandler(item._id)} 
                 onDelete={() => deleteItemHandler(item._id)} 
               />

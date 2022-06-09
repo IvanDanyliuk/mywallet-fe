@@ -11,5 +11,10 @@
   "modalFormLabelTo": "До",
   "modalFormLabelComment": "Коментар",
   "modalFormSubmitBtn": "Створити",
-  "modalFormOpenBtn": "Створити звіт"
+  "modalFormOpenBtn": "Створити звіт",
+  "goBackBtn": "Назад",
+  "sectionIncomes": "Доходи",
+  "sectionExpenses": "Витрати",
+  "totalIncome": "Загальний дохід",
+  "totalExpenses": "Загальні витрати"
 }

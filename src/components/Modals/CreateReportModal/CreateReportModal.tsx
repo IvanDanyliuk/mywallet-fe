@@ -5,11 +5,20 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
-import { CreateButton, FormContainer, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
 import { useTranslation } from 'react-i18next';
 import { createReport, getReports } from '../../../redux/reports/asyncActions';
 import { getIncomes } from '../../../redux/incomes/asyncActions';
 import { getExpenses } from '../../../redux/expenses/asyncActions';
+import { setColor } from '../../../helpers/helpers';
+import { 
+  CreateButton, 
+  FormContainer, 
+  Input, 
+  ModalBody, 
+  ModalContent, 
+  ModalFormTitle, 
+  SubmitButton 
+} from './styles';
 
 const CreateReportModal: React.FC = () => {
   const { t } = useTranslation(['reports']);
@@ -50,10 +59,10 @@ const CreateReportModal: React.FC = () => {
 
     const filteredIncomes = incomes
       .filter((income: any) => (new Date(income.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(income.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
-      .map((income: any) => ({ source: income.title, amount: income.amount }));
+      .map((income: any) => ({ source: income.title, amount: income.amount, badgeColor: setColor() }));
     const filteredExpenses = expenses
       .filter((expense: any) => (new Date(expense.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(expense.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
-      .map((expense: any) => ({ source: expense.title, amount: expense.amount }));
+      .map((expense: any) => ({ source: expense.title, amount: expense.amount, badgeColor: setColor() }));
 
     //@ts-ignore
     dispatch(createReport({ ...reportData, data: { incomes: filteredIncomes, expenses: filteredExpenses } }));
