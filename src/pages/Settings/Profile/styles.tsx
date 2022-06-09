@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Avatar, Box, Button, Paper, Typography } from '@mui/material';
+import { Avatar, Box, Button, Grid, Paper, Typography } from '@mui/material';
 
 export const Section = styled(Paper)`
   padding: 15px 20px;
@@ -11,21 +11,20 @@ export const SectionTitle = styled(Typography)`
   font-weight: 600;
 `;
 
-export const UserDataContainer = styled(Box)`
+export const UserDataContainer = styled(Grid)`
   margin-top: 10px;
   position: relative;
   width: 100%;
-  display: flex;
 `;
 
-export const UserData = styled(Box)`
+export const UserData = styled(Grid)`
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-export const UserAvatar = styled(Box)`
+export const UserAvatar = styled(Grid)`
   position: relative;
   width: 100%;
   display: flex;
@@ -40,8 +39,14 @@ export const UserDataItem = styled(Box)`
   display: flex;
 `;
 
+export const UserDataWrapper = styled(Grid)``;
+
+export const PersonalInfo = styled(Grid)``;
+
+export const UpdateActions = styled(Grid)``;
+
 export const DataItemKey = styled(Typography)`
-  width: 150px;
+  width: 100px;
   color: #535353;
 `;
 
@@ -50,14 +55,11 @@ export const DataItemVaue = styled(Typography)`
 `;
 
 
-export const UserActions = styled(Box)`
-  margin-top: 20px;
-  max-width: 420px;
-  display: flex;
-  justify-content: space-between;
-`;
+export const UserActions = styled(Grid)``;
+
+export const ButtonWrapper = styled(Grid)``;
 
 export const ActionButton = styled(Button)`
-  width: 200px;
+  width: 100%;
   height: 30px;
 `;
