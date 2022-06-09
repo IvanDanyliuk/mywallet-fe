@@ -32,8 +32,24 @@ export const ResultData = styled(Box)`
   display: flex;
 `;
 
-export const Result = styled(Typography)`
-  
-  font-size: 24px;
+export const Result = styled(Box)`
+  padding: 20px 0;
+  display: flex;
+  align-items: flex-end;
   color: #24384a;
+`;
+
+export const Name = styled(Typography)`
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+export const Currency = styled(Typography)`
+  font-size: 18px;
+`;
+
+export const Amount = styled(Typography)`
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 26px;
 `;

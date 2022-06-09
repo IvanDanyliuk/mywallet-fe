@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import DynamicChart from '../../components/Charts/DynamicChart';
 import StructureChart from '../../components/Charts/StructureChart';
-import { data } from '../../helpers/data';
 import { getCurrencyIcon, setDiagramData } from '../../helpers/helpers';
 import { PageTitle } from '../../layouts/styles';
 import { getExpenses } from '../../redux/expenses/asyncActions';
@@ -11,7 +10,10 @@ import { getIncomes } from '../../redux/incomes/asyncActions';
 import { AppDispatchType } from '../../redux/store';
 import { IUserState } from '../../redux/user/types';
 import { 
+  Amount,
+  Currency,
   MainContainer, 
+  Name, 
   Result, 
   Section, 
   SectionPaper, 
@@ -53,11 +55,21 @@ const Dashboard: React.FC = () => {
               nameKey='category' 
             />
             <DynamicChart 
-              data={data.incomes} 
-              dataKey='categories' 
+              data={incomes} 
+              dataKey='title' 
               nameKey='amount' 
             />
-            <Result variant='inherit'>{`${t('totalIncome')}: ${curIcon}${totalIncome}`}</Result>
+            <Result>
+              <Name variant='inherit'>
+                {t('totalIncome')}&nbsp;
+              </Name>
+              <Currency variant='inherit'>
+                {curIcon}
+              </Currency>
+              <Amount variant='inherit'>
+                {totalIncome}
+              </Amount>
+            </Result>
           </SectionPaper>
         </Section>
         <Section item>
@@ -69,12 +81,14 @@ const Dashboard: React.FC = () => {
               nameKey='category' 
             />
             <DynamicChart 
-              data={data.expenses} 
-              dataKey='merchant' 
+              data={expenses} 
+              dataKey='title' 
               nameKey='amount' 
             />
-            <Result variant='inherit'>
-              {`${t('totalExpenses')}: ${curIcon}${totalExpenses}`}
+            <Result>
+              <Name variant='inherit'>{t('totalExpenses')}&nbsp;</Name>
+              <Currency variant='inherit'>{curIcon}</Currency>
+              <Amount variant='inherit'>{totalExpenses}</Amount>
             </Result>
           </SectionPaper>
         </Section>  
