@@ -4,6 +4,7 @@ import Language from './Language/Language';
 import Profile from './Profile/Profile';
 import { SettingsContainer, SettingSection } from './styles';
 
+
 const Settings: React.FC = () => {
   return (
     <SettingsContainer 

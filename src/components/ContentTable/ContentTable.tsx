@@ -1,19 +1,19 @@
 import React, { ChangeEvent, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { TablePagination } from '@mui/material';
-import { IState } from '../../types/general';
-import ContentTableBody from './ContentTableBody/ContentTableBody';
-import ContentTableHeader from './ContentTableHeader/ContentTableHeader';
-import { ContentTableContainer, PaperContainer } from './styles';
 import { useTranslation } from 'react-i18next';
+import { IContentTable } from '../../redux/general';
+import ContentTableHeader from './ContentTableHeader/ContentTableHeader';
+import ContentTableBody from './ContentTableBody/ContentTableBody';
+import { selectIncomes } from '../../redux/incomes/selectors';
+import { selectExpenses } from '../../redux/expenses/selectors';
+import { ContentTableContainer, PaperContainer } from './styles';
 
-interface IContentTable {
-  type: string;
-};
 
 const ContentTable: React.FC<IContentTable> = ({ type }) => {
-  const { t } = useTranslation(['contentTable'])
-  const data = useSelector((state: IState) => type === 'incomes' ? state.incomes.incomes : state.expenses.expenses);
+  const { t } = useTranslation(['contentTable']);
+  const data = useSelector(type === 'incomes' ? selectIncomes : selectExpenses);
+  
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 

@@ -17,7 +17,7 @@ export const getExpenses = createAsyncThunk(
 export const createExpenseItem = createAsyncThunk(
   'expenses/createExpenseItem',
   async (expenseData: IExpenseData) => {
-    const { data}  = await api.createExpenseItem(expenseData);
+    const { data }  = await api.createExpenseItem(expenseData);
     return data;
   }
 );

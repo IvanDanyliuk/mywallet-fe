@@ -3,9 +3,11 @@ import React, {
   useEffect, 
   useState 
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatchType } from '../../../redux/store';
 import { updateUser } from '../../../redux/user/asyncAction';
+import { selectUser } from '../../../redux/user/selectors';
+import { IUserUpdationModal } from '../../../redux/general';
 import { 
   FormContainer, 
   Input, 
@@ -15,20 +17,18 @@ import {
   SubmitButton 
 } from './styles';
 
-interface IUserUpdationModal {
-  open: boolean;
-  onClose: () => void;
-};
 
 const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
   const dispatch = useDispatch<AppDispatchType>();
-  const user = JSON.parse(localStorage.getItem('profile') || '');
   
+  const user = useSelector(selectUser);
+  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+
   const [userData, setUserData] = useState({
-    ...user.result,
-    firstName: user.result.firstName,
-    lastName: user.result.lastName,
-    email: user.result.email,
+    ...user!,
+    firstName: user!.firstName,
+    lastName: user!.lastName,
+    email: user!.email,
   });
 
   const handleChange = (e: any) => {
@@ -41,16 +41,16 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(updateUser({ id: userData._id, userData }));
-    localStorage.setItem('profile', JSON.stringify({ token: user.token, result: userData }));
+    localStorage.setItem('profile', JSON.stringify({ token, result: userData }));
   };
 
   useEffect(() => {
     if(user) {
       setUserData({
-        ...user.result,
-        firstName: user.result.firstName,
-        lastName: user.result.lastName,
-        email: user.result.email,
+        ...user,
+        firstName: user!.firstName,
+        lastName: user!.lastName,
+        email: user!.email,
       });
     }
   }, [dispatch]);

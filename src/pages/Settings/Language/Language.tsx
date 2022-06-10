@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { AppDispatchType } from '../../../redux/store';
 import { setLanguage } from '../../../redux/user/asyncAction';
+import { selectUser } from '../../../redux/user/selectors';
 import i18n from '../../../services/langConfig';
 import { 
   Section, 
@@ -11,12 +12,15 @@ import {
   SectionTitle 
 } from './styles';
 
+
 const Language: React.FC = () => {
   const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
 
-  const user = JSON.parse(localStorage.getItem('profile') || '');
-  const [currentLanguage, setCurrentLanguage] = useState(user.result.language);
+  const user = useSelector(selectUser);
+  const [currentLanguage, setCurrentLanguage] = useState(user!.language);
+  
+  const token = JSON.parse(localStorage.getItem('profile') || '').token;
 
   const handleLanguageChange = (e: any) => {
     e.preventDefault();
@@ -24,16 +28,16 @@ const Language: React.FC = () => {
   };
 
   useEffect(() => {
-    if(user.result.language !== currentLanguage) {
+    if(user!.language !== currentLanguage) {
       dispatch(setLanguage({ 
-        id: user.result._id, 
+        id: user!._id, 
         language: currentLanguage 
       }));
       localStorage.setItem(
         'profile', 
         JSON.stringify({ 
-          token: user.token, 
-          result: { ...user.result, language: currentLanguage } 
+          token: token, 
+          result: { ...user, language: currentLanguage } 
         })
       );
       localStorage.setItem('lang', currentLanguage);

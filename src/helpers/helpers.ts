@@ -1,5 +1,5 @@
-import { IExpenses } from './../redux/expenses/types';
-import { IIncomes } from '../redux/incomes/types';
+import { IExpense } from './../redux/expenses/types';
+import { IIncome } from '../redux/incomes/types';
 import { useTranslation } from 'react-i18next';
 
 export const getPageTitleFromUrl = (urlData: string): string => {
@@ -64,7 +64,7 @@ export const setColor = () => {
   return `#${color}`;
 };
 
-export const setDiagramData = (data: IIncomes[] | IExpenses[]) => {
+export const setDiagramData = (data: IIncome[] | IExpense[]) => {
   const dataKeys = data.map((item: any) => item.category);
   const uniqueKeys = Array.from(new Set(dataKeys));
   return uniqueKeys.map(key => (

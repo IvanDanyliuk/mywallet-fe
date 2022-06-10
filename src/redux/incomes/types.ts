@@ -1,17 +1,18 @@
 
 
 export interface IIncomesState {
-  incomes: IIncomes[];
+  incomes: IIncome[];
   status: string;
   error: null | string;
 };
 
-export interface IIncomes {
+export interface IIncome {
   userId: string;
   title: string;
-  amount: string;
+  amount: number;
   category: string;
   description: string;
+  badgeColor: string;
   createdAt: string;
   _id: string;
 };
@@ -19,9 +20,10 @@ export interface IIncomes {
 export interface IIncomeData {
   userId: string;
   title: string;
-  amount: string;
+  amount: number;
   category: string;
   description: string;
+  badgeColor: string;
 };
 
 export interface IIncomeToUpdate {

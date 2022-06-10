@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import ContentTable from '../../components/ContentTable/ContentTable';
 import CreateButton from '../../components/CreateButton/CreateButton';
 import CreateFormModal from '../../components/Modals/CreateFormModal/CreateFormModal';
-import { MainContainer } from '../../components/Navigation/styles';
 import { getExpenses } from '../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../redux/store';
+import { selectUserId } from '../../redux/user/selectors';
+import { FormModalType, DataType } from '../../redux/general';
+import { MainContainer } from '../../components/Navigation/styles';
 import { PageTitle } from '../../layouts/styles';
 import { Heading } from './styles';
-import { useTranslation } from 'react-i18next';
+
 
 const Expenses: React.FC = () => {
   const { t } = useTranslation(['expenses']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //@ts-ignore
-  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+  const userId = useSelector(selectUserId);
 
   const openCreateExpenseHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   useEffect(() => {
-    dispatch(getExpenses(userId));
+    dispatch(getExpenses(userId!));
   }, [dispatch]);
 
   return (
     <>
       <CreateFormModal 
-        type={'expenses'} 
+        type={FormModalType.Expenses} 
         open={isModalOpen} 
         onClose={openCreateExpenseHandler} 
       />
@@ -41,7 +43,7 @@ const Expenses: React.FC = () => {
         />
       </Heading>
       <MainContainer>
-        <ContentTable type={'expenses'} />
+        <ContentTable type={DataType.Expenses} />
       </MainContainer>
     </>
   );

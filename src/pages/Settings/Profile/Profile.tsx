@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import UserUpdationModal from '../../../components/Modals/UpdateUserModal/UserUpdationModal';
+import UpdateAvatarModal from '../../../components/Modals/UpdateAvatarModal/UpdateAvatarModal';
+import PasswordUpdationModal from '../../../components/Modals/UpdatePasswordModal/UpdatePasswordModal';
+import { selectUser } from '../../../redux/user/selectors';
 import { 
   ActionButton, 
   DataItemKey, 
@@ -14,15 +18,11 @@ import {
   UserDataContainer, 
   UserDataItem 
 } from './styles';
-import { IUser } from '../../../redux/user/types';
-import UpdateAvatarModal from '../../../components/Modals/UpdateAvatarModal/UpdateAvatarModal';
-import PasswordUpdationModal from '../../../components/Modals/UpdatePasswordModal/UpdatePasswordModal';
-import { useTranslation } from 'react-i18next';
+
 
 const Profile: React.FC = () => {
   const { t } = useTranslation(['settings']);
-  //@ts-ignore
-  const userData = useSelector((state: IUser) => state.user.user);
+  const user = useSelector(selectUser);
 
   const [isDataUpdationModalOpen, setIsDataUpdationModalOpen] = useState(false);
 
@@ -42,15 +42,15 @@ const Profile: React.FC = () => {
           <UserData>
             <UserDataItem>
               <DataItemKey variant='inherit'>{t('firstName')}</DataItemKey>
-              <DataItemVaue variant='inherit'>{userData?.firstName}</DataItemVaue>
+              <DataItemVaue variant='inherit'>{user?.firstName}</DataItemVaue>
             </UserDataItem>
             <UserDataItem>
               <DataItemKey variant='inherit'>{t('lastName')}</DataItemKey>
-              <DataItemVaue variant='inherit'>{userData?.lastName}</DataItemVaue>
+              <DataItemVaue variant='inherit'>{user?.lastName}</DataItemVaue>
             </UserDataItem>
             <UserDataItem>
               <DataItemKey variant='inherit'>{t('email')}</DataItemKey>
-              <DataItemVaue variant='inherit'>{userData?.email}</DataItemVaue>
+              <DataItemVaue variant='inherit'>{user?.email}</DataItemVaue>
             </UserDataItem>
             <UserActions>
               <ActionButton 
@@ -65,8 +65,8 @@ const Profile: React.FC = () => {
           </UserData>
           <UserAvatar>
             <ProfilePhoto 
-              alt={`${userData?.firstName} ${userData?.lastName}`}
-              src={userData.avatar}
+              alt={`${user?.firstName} ${user?.lastName}`}
+              src={user?.avatar}
               sx={{ width: '100px', height: '100px' }}
             />
             <UpdateAvatarModal />

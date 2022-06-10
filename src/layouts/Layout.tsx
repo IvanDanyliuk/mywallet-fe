@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Navigation from '../components/Navigation/Navigation';
-import { ILayout } from '../types/general';
+import { ILayout } from '../redux/general';
 import { IUserState } from '../redux/user/types';
 import { 
   AppContent, 

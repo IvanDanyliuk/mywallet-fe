@@ -8,31 +8,24 @@ import ContentTable from '../../components/ContentTable/ContentTable';
 import { Heading, MainContainer } from './styles';
 import { PageTitle } from '../../layouts/styles';
 import { useTranslation } from 'react-i18next';
+import { FormModalType, DataType } from '../../redux/general';
+import { useSelector } from 'react-redux';
+import { selectUserId } from '../../redux/user/selectors';
 
-export enum TableType {
-  Incomes = 'incomes',
-  Expenses = 'expenses'
-};
-
-export enum FormModalType {
-  Incomes = 'incomes',
-  Expenses = 'expenses'
-};
 
 const Incomes: React.FC = () => {
   const { t } = useTranslation(['incomes']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //@ts-ignore
-  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+  const userId = useSelector(selectUserId);
 
   const openCreateIncomeHandler = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   useEffect(() => {
-    dispatch(getIncomes(userId));
+    dispatch(getIncomes(userId!));
   }, [dispatch]);
 
   return (
@@ -50,7 +43,7 @@ const Incomes: React.FC = () => {
         />
       </Heading>
       <MainContainer>
-        <ContentTable type={TableType.Incomes} />
+        <ContentTable type={DataType.Incomes} />
       </MainContainer>
     </>
   );

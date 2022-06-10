@@ -1,10 +1,7 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
+import { ICreateBtn } from '../../redux/general';
 import { CreateBtn } from './styles';
 
-interface ICreateBtn {
-  title: string;
-  clickHandler: MouseEventHandler;
-}
 
 const CreateButton: React.FC<ICreateBtn> = ({ title, clickHandler }) => {
   return (
