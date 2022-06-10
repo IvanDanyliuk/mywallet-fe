@@ -17,8 +17,6 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      // localStorage.removeItem('profile');
-      // localStorage.removeItem('lang');
       localStorage.clear();
     }
   },
