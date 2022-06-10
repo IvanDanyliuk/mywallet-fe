@@ -6,7 +6,8 @@ import {
   Legend, 
   ResponsiveContainer 
 } from 'recharts';
-import { IChart } from '../../types/general';
+import { IChart } from '../../redux/general';
+
 
 const StructureChart: React.FC<IChart> = ({data, dataKey, nameKey}) => {
   return (

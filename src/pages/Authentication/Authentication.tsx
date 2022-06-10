@@ -17,6 +17,7 @@ import {
 } from './styles';
 import { useNavigate } from 'react-router-dom';
 
+
 const initialState = {
   firstName: '',
   lastName: '',
@@ -28,14 +29,16 @@ const initialState = {
   confirmPassword: '',
 };
 
+
 const Authentification: React.FC = () => {
   const { t } = useTranslation(['auth']);
+  const dispatch = useDispatch<AppDispatchType>();
   const navigate = useNavigate();
+
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [progressPercent, setProgressPercent] = useState(0);
-  const dispatch = useDispatch<AppDispatchType>();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

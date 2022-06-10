@@ -1,16 +1,18 @@
 import React, { 
-  MouseEventHandler, 
   SyntheticEvent, 
   useEffect, 
   useState 
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
+import { useTranslation } from 'react-i18next';
 import { data } from '../../../helpers/data';
 import { createIncomeItem, updateIncomeItem } from '../../../redux/incomes/asyncActions';
 import { createExpenseItem, updateExpenseItem } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
-import { IState } from '../../../types/general';
+import { selectIncomes } from '../../../redux/incomes/selectors';
+import { selectExpenses } from '../../../redux/expenses/selectors';
+import { ICreateIncomeFormModal } from '../../../redux/general';
 import { 
   FormContainer, 
   FormOption, 
@@ -21,46 +23,38 @@ import {
   ModalFormTitle, 
   SubmitButton 
 } from './styles';
-import { useTranslation } from 'react-i18next';
 
-interface ICreateIncomeFormModal {
-  open: boolean;
-  type: string;
-  id?: string;
-  onClose: MouseEventHandler;
-};
 
 const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, id, onClose }) => {
   const { t } = useTranslation(['authForm']);
+  const dispatch = useDispatch<AppDispatchType>();
   
   const categories = type === 'incomes' 
     ? data.profile.categories.incomes : 
     data.profile.categories.expenses;
 
-  const stateData = useSelector((state: IState) => type === 'incomes' 
-    ? state.incomes.incomes : 
-    state.expenses.expenses);
+  const stateData = useSelector(type === 'incomes' 
+    ? selectIncomes : 
+    selectExpenses);
     
   const defaultCategoryValue = type === 'incomes' ? t('authSelectDefaultIncome') : t('authSelectDefaultExpenses');
-
-  const dispatch = useDispatch<AppDispatchType>();
 
   const [itemData, setItemData] = useState({
     userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
     title: '',
-    amount: '',
+    amount: 0,
     category: defaultCategoryValue,
+    badgeColor: '',
     description: ''
   });
-
-  console.log(defaultCategoryValue)
 
   const clear = () => {
     setItemData({
       userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
       title: '',
-      amount: '',
+      amount: 0,
       category: defaultCategoryValue,
+      badgeColor: '',
       description: ''
     });
   };
@@ -87,8 +81,8 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
     if(id) {
       const dataToUpdate = stateData.find(item => id === item._id) || itemData;
       setItemData({
-        //@ts-ignore
-        userId: JSON.parse(localStorage.getItem('profile')).result._id,
+        ...itemData,
+        userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
         title: dataToUpdate.title,
         amount: dataToUpdate.amount,
         category: dataToUpdate.category,
@@ -129,7 +123,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
             fullWidth
           >
             {
-              categories.map((category, i) => (
+              categories.map((category) => (
                 <FormOption key={uuid()} value={t(category)}>{t(category)}</FormOption>
               ))
             }

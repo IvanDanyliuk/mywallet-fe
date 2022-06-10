@@ -5,6 +5,17 @@ export interface IUserState {
 };
 
 export interface IUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  currency: string;
+  language: string;
+  email: string;
+  password: string;
+};
+
+export interface IUserData {
   firstName: string;
   lastName: string;
   avatar?: string;

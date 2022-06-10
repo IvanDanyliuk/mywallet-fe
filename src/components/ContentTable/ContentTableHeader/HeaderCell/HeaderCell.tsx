@@ -2,31 +2,21 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { sortIncomes } from '../../../../redux/incomes/reducers';
 import { AppDispatchType } from '../../../../redux/store';
+import { ITableHeaderCell, TableSortOrder } from '../../../../redux/general';
 import { CellBody, SortLabel } from './styles';
 
-interface IHeaderCell {
-  type: string;
-  sortKey: string;
-  label: string;
-  isSortable: boolean;
-};
 
-enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
-};
-
-const HeaderCell: React.FC<IHeaderCell> = ({ sortKey, label, isSortable, type }) => {
+const HeaderCell: React.FC<ITableHeaderCell> = ({ sortKey, label, isSortable, type }) => {
   const dispatch = useDispatch<AppDispatchType>();
-  const [order, setOrder] = useState(SortOrder.desc);
+  const [order, setOrder] = useState(TableSortOrder.desc);
 
   const handleSort = ( key: string ) => {
     if(order === 'asc') {
-      setOrder(SortOrder.desc);
+      setOrder(TableSortOrder.desc);
       dispatch(sortIncomes({key, order}));
     };
     if(order === 'desc') {
-      setOrder(SortOrder.asc);
+      setOrder(TableSortOrder.asc);
       dispatch(sortIncomes({key, order}));
     };
   };

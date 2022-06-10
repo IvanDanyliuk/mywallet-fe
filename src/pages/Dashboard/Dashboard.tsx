@@ -5,10 +5,13 @@ import DynamicChart from '../../components/Charts/DynamicChart';
 import StructureChart from '../../components/Charts/StructureChart';
 import { getCurrencyIcon, setDiagramData } from '../../helpers/helpers';
 import { PageTitle } from '../../layouts/styles';
-import { getExpenses } from '../../redux/expenses/asyncActions';
 import { getIncomes } from '../../redux/incomes/asyncActions';
+import { getExpenses } from '../../redux/expenses/asyncActions';
+import { selectIncomes } from '../../redux/incomes/selectors';
+import { selectExpenses } from '../../redux/expenses/selectors';
+import { selectUser, selectUserId } from '../../redux/user/selectors';
 import { AppDispatchType } from '../../redux/store';
-import { IUserState } from '../../redux/user/types';
+import { ChartParams } from '../../redux/general';
 import { 
   Amount,
   Currency,
@@ -20,26 +23,26 @@ import {
   SectionTitle 
 } from './styles';
 
+
 const Dashboard: React.FC = () => {
   const { t } = useTranslation(['dashboard']);
   const dispatch = useDispatch<AppDispatchType>();
-  const incomes = useSelector((state: any) => state.incomes.incomes);
-  const expenses = useSelector((state: any) => state.expenses.expenses);
-  //@ts-ignore
-  const user = useSelector((state: IUserState) => state.user.user);
-  const curIcon = getCurrencyIcon(user.currency);
+
+  const incomes = useSelector(selectIncomes);
+  const expenses = useSelector(selectExpenses);
+  const user = useSelector(selectUser);
+  const userId = useSelector(selectUserId);
+
+  const curIcon = getCurrencyIcon(user!.currency);
   const incomesToRender = setDiagramData(incomes);
   const expensesToRender = setDiagramData(expenses);
 
   const totalIncome = incomes.reduce((acc: any, cur: any) => acc + cur.amount, 0);
   const totalExpenses = expenses.reduce((acc: any, cur: any) => acc + cur.amount, 0);
-
-  //@ts-ignore
-  const userId = JSON.parse(localStorage.getItem('profile')).result._id;
-
+  
   useEffect(() => {
-    dispatch(getIncomes(userId));
-    dispatch(getExpenses(userId));
+    dispatch(getIncomes(userId!));
+    dispatch(getExpenses(userId!));
   }, [dispatch, user]);
 
   return (
@@ -51,13 +54,13 @@ const Dashboard: React.FC = () => {
             <SectionTitle variant='inherit'>{t('incomesSection')}</SectionTitle>
             <StructureChart 
               data={incomesToRender} 
-              dataKey='amount' 
-              nameKey='category' 
+              dataKey={ChartParams.Amount} 
+              nameKey={ChartParams.Category} 
             />
             <DynamicChart 
               data={incomes} 
-              dataKey='title' 
-              nameKey='amount' 
+              dataKey={ChartParams.Title} 
+              nameKey={ChartParams.Amount} 
             />
             <Result>
               <Name variant='inherit'>
@@ -77,13 +80,13 @@ const Dashboard: React.FC = () => {
             <SectionTitle variant='inherit'>{t('expensesSection')}</SectionTitle>
             <StructureChart 
               data={expensesToRender} 
-              dataKey='amount' 
-              nameKey='category' 
+              dataKey={ChartParams.Amount} 
+              nameKey={ChartParams.Category} 
             />
             <DynamicChart 
               data={expenses} 
-              dataKey='title' 
-              nameKey='amount' 
+              dataKey={ChartParams.Title} 
+              nameKey={ChartParams.Amount} 
             />
             <Result>
               <Name variant='inherit'>{t('totalExpenses')}&nbsp;</Name>

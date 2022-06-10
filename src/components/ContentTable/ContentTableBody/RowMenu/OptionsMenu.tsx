@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useTranslation } from 'react-i18next';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { IOptionsMenu, OptionsMenuType } from '../../../../redux/general';
 import { 
   Option, 
   OptionIcon, 
@@ -10,20 +12,7 @@ import {
   OptionsButton, 
   OptionsMenuContainer 
 } from './styles';
-import { useTranslation } from 'react-i18next';
 
-export enum OptionsMenuType {
-  Content = 'content',
-  Reports = 'reports'
-};
-
-interface IOptionsMenu {
-  id: string;
-  type: OptionsMenuType;
-  onOpen?: (id: any) => void;
-  onEdit?: (id: any) => void;
-  onDelete: (id: any) => void;
-};
 
 const OptionsMenu: React.FC<IOptionsMenu> = ({ id, type, onOpen, onEdit, onDelete }) => {
   const { t } = useTranslation(['contentTable']);
@@ -37,7 +26,6 @@ const OptionsMenu: React.FC<IOptionsMenu> = ({ id, type, onOpen, onEdit, onDelet
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
 
   return (
     <OptionsMenuContainer>

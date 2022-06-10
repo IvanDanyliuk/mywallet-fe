@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 import { data } from '../../../helpers/data';
 import { AppDispatchType } from '../../../redux/store';
 import { setCurrency } from '../../../redux/user/asyncAction';
+import { selectUser } from '../../../redux/user/selectors';
 import { 
   CurrencyItem, 
   CurrencySelect, 
@@ -14,12 +16,15 @@ import {
   SectionTitle 
 } from './styles';
 
+
 const Currency: React.FC = () => {
   const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
   const currencies = data.profile.currencies;
-  const user = JSON.parse(localStorage.getItem('profile') || '');
-  const [currentCurrency, setCurrentCurrency] = useState(user.result.currency);
+  const user = useSelector(selectUser);
+  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+
+  const [currentCurrency, setCurrentCurrency] = useState(user!.currency);
 
   const handleCurrencyChange = (e: any) => {
     e.preventDefault();
@@ -27,16 +32,16 @@ const Currency: React.FC = () => {
   };
 
   useEffect(() => {
-    if(user.result.currency !== currentCurrency) {
+    if(user!.currency !== currentCurrency) {
       dispatch(setCurrency({
-        id: user.result._id,
+        id: user!._id,
         currency: currentCurrency,
       }));
       localStorage.setItem(
         'profile', 
         JSON.stringify({ 
-          token: user.token, 
-          result: { ...user.result, currency: currentCurrency } 
+          token: token, 
+          result: { ...user, currency: currentCurrency } 
         })
       );
     }
@@ -45,6 +50,7 @@ const Currency: React.FC = () => {
   return (
     <Section>
       <SectionTitle variant='inherit'>{t('currencySectionTitle')}</SectionTitle>
+
       <CurrencySelectContainer container>
         <CurrencySelectItem item md={3} xs={12}>
           <CurrencySelect 
@@ -59,6 +65,7 @@ const Currency: React.FC = () => {
           </CurrencySelect>
         </CurrencySelectItem>
       </CurrencySelectContainer>
+
     </Section>
   );
 };

@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncActions';
 import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
-import OptionsMenu, { OptionsMenuType } from './RowMenu/OptionsMenu';
+import OptionsMenu from './RowMenu/OptionsMenu';
 import CreateIncomeFormModal from '../../Modals/CreateFormModal/CreateFormModal';
-import { IIncomes } from '../../../redux/incomes/types';
-import { IExpenses } from '../../../redux/expenses/types';
-import { ContentBody, ContentCell, ContentRow } from './styles';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { IUserState } from '../../../redux/user/types';
 import { getCurrencyIcon } from '../../../helpers/helpers';
+import { ITableData, OptionsMenuType, DataType } from '../../../redux/general';
+import { selectCurrency, selectUserId } from '../../../redux/user/selectors';
+import { ContentBody, ContentCell, ContentRow } from './styles';
 
-interface ITableData {
-  type: string;
-  dataToRender: IIncomes[] | IExpenses[];
-  page: number;
-  rowsPerPage: number;
-};
 
 const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rowsPerPage }) => {
-  const { t } = useTranslation(['contentTable']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateItemId, setUpdateItemId] = useState('');
 
-  //@ts-ignore
-  const { _id, currency } = useSelector((state: IUserState) => state.user.user);
-  const currencyIcon = getCurrencyIcon(currency);
-  // const userId = JSON.parse(localStorage.getItem('profile')).result._id;
+  const userId = useSelector(selectUserId);
+  const currency = useSelector(selectCurrency);
+
+  const currencyIcon = getCurrencyIcon(currency!);
 
   const editItemHandler = (id: any) => {
     setIsModalOpen(true);
@@ -39,7 +29,7 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
   };
 
   const deleteItemHandler = (id: string) => {
-    type === 'incomes' ? 
+    type === DataType.Incomes ? 
       dispatch(deleteIncomeItem(id)) : 
       dispatch(deleteExpenseItem(id));
   };
@@ -48,9 +38,9 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
     ? Math.max(0, (page + 1)) * rowsPerPage - dataToRender.length : 0;
 
   useEffect(() => {
-    type === 'incomes' ? 
-      getIncomes(_id) : 
-      getExpenses(_id);
+    type === DataType.Incomes ? 
+      getIncomes(userId!) : 
+      getExpenses(userId!);
   }, [dispatch, isModalOpen]);
 
   return (

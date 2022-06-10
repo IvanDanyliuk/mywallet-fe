@@ -1,12 +1,12 @@
 import React, { 
   SyntheticEvent, 
-  useEffect, 
   useState 
 } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { AppDispatchType } from '../../../redux/store';
-import { updatePassword, updateUser } from '../../../redux/user/asyncAction';
+import { updatePassword } from '../../../redux/user/asyncAction';
+import { selectUser } from '../../../redux/user/selectors';
 import { 
   ActionButton,
   FormContainer, 
@@ -17,10 +17,11 @@ import {
   SubmitButton 
 } from './styles';
 
+
 const PasswordUpdationModal: React.FC = () => {
   const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
-  const user = JSON.parse(localStorage.getItem('profile') || '');
+  const user = useSelector(selectUser);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [passwordData, setPasswordData] = useState({
@@ -31,7 +32,7 @@ const PasswordUpdationModal: React.FC = () => {
 
   const handleModalOpen = () => {
     setIsModalOpen(!isModalOpen);
-  }
+  };
 
   const handleChange = (e: any) => {
     setPasswordData({
@@ -42,17 +43,20 @@ const PasswordUpdationModal: React.FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    
     if(passwordData.newPassword === passwordData.confirmNewPassword) {
       dispatch(updatePassword({ 
-        id: user.result._id, 
+        id: user!._id, 
         curPassword: passwordData.curPassword, 
         newPassword: passwordData.newPassword 
       }));
+
       setPasswordData({
         curPassword: '',
         newPassword: '',
         confirmNewPassword: '',
-      })
+      });
+
       handleModalOpen();
     } else {
       alert('Passwords don\'t match.');

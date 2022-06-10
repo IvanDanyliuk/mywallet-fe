@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { deleteReport, getReports } from '../../redux/reports/asyncActions';
 import { sortReports } from '../../redux/reports/reducers';
 import { AppDispatchType } from '../../redux/store';
-import OptionsMenu, { OptionsMenuType } from '../ContentTable/ContentTableBody/RowMenu/OptionsMenu';
+import OptionsMenu from '../ContentTable/ContentTableBody/RowMenu/OptionsMenu';
 import { TablePagination } from '@mui/material';
 import { 
   HeaderCell, 
@@ -20,11 +20,9 @@ import {
   ContentRow, 
   ContentCell 
 } from './styles';
+import { OptionsMenuType, TableSortOrder } from '../../redux/general';
 
-enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
-};
+
 
 const ReportsTable: React.FC = () => {
   const { t } = useTranslation(['reports']);
@@ -36,16 +34,16 @@ const ReportsTable: React.FC = () => {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [order, setOrder] = useState(SortOrder.desc);
+  const [order, setOrder] = useState(TableSortOrder.desc);
   
 
   const handleSort = () => {
     if(order === 'asc') {
-      setOrder(SortOrder.desc);
+      setOrder(TableSortOrder.desc);
       dispatch(sortReports(order));
     };
     if(order === 'desc') {
-      setOrder(SortOrder.asc);
+      setOrder(TableSortOrder.asc);
       dispatch(sortReports(order));
     };
   };

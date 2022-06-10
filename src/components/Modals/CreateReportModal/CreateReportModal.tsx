@@ -10,6 +10,9 @@ import { createReport, getReports } from '../../../redux/reports/asyncActions';
 import { getIncomes } from '../../../redux/incomes/asyncActions';
 import { getExpenses } from '../../../redux/expenses/asyncActions';
 import { setColor } from '../../../helpers/helpers';
+import { selectIncomes } from '../../../redux/incomes/selectors';
+import { selectExpenses } from '../../../redux/expenses/selectors';
+import { selectUserId } from '../../../redux/user/selectors';
 import { 
   CreateButton, 
   FormContainer, 
@@ -20,21 +23,18 @@ import {
   SubmitButton 
 } from './styles';
 
+
 const CreateReportModal: React.FC = () => {
   const { t } = useTranslation(['reports']);
   const dispatch = useDispatch<AppDispatchType>();
 
-  const incomes = useSelector((state: any) => state.incomes.incomes);
-  const expenses = useSelector((state: any) => state.expenses.expenses);
-  const user = useSelector((state: any) => state.user.user);
+  const incomes = useSelector(selectIncomes);
+  const expenses = useSelector(selectExpenses);
+  const userId = useSelector(selectUserId);
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleModalClose = () => {
-    setIsOpen(!isOpen);
-  };
- 
   const [reportData, setReportData] = useState({
-    userId: user._id,
+    userId: userId,
     heading: '',
     period: {
       from: '',
@@ -46,6 +46,10 @@ const CreateReportModal: React.FC = () => {
     },
     comment: '',
   });
+
+  const handleModalClose = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleChange = (e: any) => {
     setReportData({
@@ -64,15 +68,15 @@ const CreateReportModal: React.FC = () => {
       .filter((expense: any) => (new Date(expense.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(expense.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
       .map((expense: any) => ({ source: expense.title, amount: expense.amount, badgeColor: setColor() }));
 
-    //@ts-ignore
     dispatch(createReport({ ...reportData, data: { incomes: filteredIncomes, expenses: filteredExpenses } }));
+
     handleModalClose();
   };
 
   useEffect(() => {
-    dispatch(getIncomes(user._id));
-    dispatch(getExpenses(user._id));
-    dispatch(getReports(user._id));
+    dispatch(getIncomes(userId!));
+    dispatch(getExpenses(userId!));
+    dispatch(getReports(userId!));
   }, [dispatch]);
 
   return (

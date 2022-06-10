@@ -9,6 +9,7 @@ import {
   ReportsTitle 
 } from './styles';
 
+
 const Reports: React.FC = () => {
   const { t } = useTranslation(['reports']);
 

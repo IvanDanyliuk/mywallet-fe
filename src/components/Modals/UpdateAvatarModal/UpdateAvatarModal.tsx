@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { AppDispatchType } from '../../../redux/store';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase';
 import { updateUser } from '../../../redux/user/asyncAction';
 import { FormContainer, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
-import { Button } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../redux/user/selectors';
+
 
 const UpdateAvatarModal: React.FC = () => {
   const { t } = useTranslation(['settings']);
-  const [isOpen, setIsOpen] = useState(false);
-  const handleUpdateAvatarClose = () => {
-    setIsOpen(!isOpen);
-  }
-
   const dispatch = useDispatch<AppDispatchType>();
-  const user = JSON.parse(localStorage.getItem('profile') || '');
+
+  const [isOpen, setIsOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');
+
+  const user = useSelector(selectUser);
+  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+
+  const handleUpdateAvatarClose = () => {
+    setIsOpen(!isOpen);
+  };
 
   const uploadAvatar = (file: any) => {
     if(!file) return;
@@ -51,11 +57,11 @@ const UpdateAvatarModal: React.FC = () => {
     if(avatarUrl) {
       dispatch(
         updateUser({
-          id: user.result.id, 
-          userData: { ...user.result, avatar: avatarUrl }
+          id: user!._id, 
+          userData: { ...user!, avatar: avatarUrl }
         })
       );
-      localStorage.setItem('profile', JSON.stringify({ token: user.token, result: { ...user.result, avatar: avatarUrl } }))
+      localStorage.setItem('profile', JSON.stringify({ token, result: { ...user, avatar: avatarUrl } }))
     }
     setAvatarUrl('')
   }, [avatarUrl]);

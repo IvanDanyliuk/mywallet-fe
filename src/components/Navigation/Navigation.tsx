@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { AppDispatchType } from '../../redux/store';
 import { logout } from '../../redux/user/reducers';
-import { IUserState } from '../../redux/user/types'; 
+import { selectUser } from '../../redux/user/selectors';
 import { 
   UserImage, 
   NavWrapper, 
@@ -16,11 +16,13 @@ import {
   LogoutButton 
 } from './styles';
 
+
 const Navigation: React.FC = () => {
   const { t } = useTranslation(['navigation']);
   const dispatch = useDispatch<AppDispatchType>();
-  //@ts-ignore
-  const user = useSelector((state: IUserState) => state.user.user);
+  
+  const user = useSelector(selectUser);
+  
   const logoutHandler = () => {
     dispatch(logout());
   };

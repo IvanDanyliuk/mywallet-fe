@@ -1,27 +1,21 @@
 import React from 'react';
+import { IContentTableHeader } from '../../../redux/general';
 import HeaderCell from './HeaderCell/HeaderCell';
 import { HeaderContainer, HeaderRow } from './styles';
 
-interface IContentTableHeader {
-  columns: {
-    sortKey: string;
-    label: string;
-    isSortable: boolean;
-  }[]
-};
 
 const ContentTableHeader: React.FC<IContentTableHeader> = ({ columns }) => {
   return (
     <HeaderContainer>
       <HeaderRow>
         {
-          columns.map(column => (
+          columns.map(({ sortKey, label, isSortable }) => (
             <HeaderCell 
-              key={column.sortKey}
-              type={column.sortKey}
-              sortKey={column.sortKey}
-              label={column.label}
-              isSortable={column.isSortable}
+              key={sortKey}
+              type={sortKey}
+              sortKey={sortKey}
+              label={label}
+              isSortable={isSortable}
             />
           ))
         }

@@ -8,7 +8,8 @@ import {
   XAxis, 
   YAxis 
 } from 'recharts';
-import { IChart } from '../../types/general';
+import { IChart } from '../../redux/general';
+
 
 const DynamicChart: React.FC<IChart> = ({ data, dataKey, nameKey }) => {
   return (

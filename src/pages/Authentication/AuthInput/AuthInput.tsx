@@ -1,5 +1,6 @@
 import React from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { IAuthInput } from '../../../redux/general';
 import { 
   FieldAdornment, 
   FormInput, 
@@ -7,13 +8,6 @@ import {
   InputContainer 
 } from './styles';
 
-interface IAuthInput {
-  name: string;
-  label: string;
-  type: string;
-  handleShowPassword?: (e: any) => void;
-  handleChange: (e: any) => void;
-};
 
 const AuthInput: React.FC<IAuthInput> = ({ 
   name, 

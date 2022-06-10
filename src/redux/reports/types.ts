@@ -22,15 +22,15 @@ export interface IReports {
 };
 
 export interface IReportData {
-  userId: string,
+  userId: any,
   heading: string,
   period: {
     from: string,
     to: string,
   },
   data: {
-    incomes: [],
-    expenses: [],
+    incomes: { source: string; amount: any; badgeColor: string; }[],
+    expenses: { source: string; amount: any; badgeColor: string; }[],
   },
   comment: string,
 };
@@ -38,4 +38,4 @@ export interface IReportData {
 export interface IReportToUpdate {
   id: string | undefined;
   updatedReport: IReportData;
-}
+};
