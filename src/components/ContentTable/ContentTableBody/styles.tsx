@@ -7,7 +7,5 @@ export const ContentRow = styled(TableRow)`
   position: relative;
 `;
 
-export const ContentCell = styled(TableCell)`
-
-`;
+export const ContentCell = styled(TableCell)``;
 

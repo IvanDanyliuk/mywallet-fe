@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MenuItem, Paper, Select, Typography } from '@mui/material';
+import { Grid, MenuItem, Paper, Select, Typography } from '@mui/material';
 
 export const Section = styled(Paper)`
   padding: 15px 20px;
@@ -11,9 +11,13 @@ export const SectionTitle = styled(Typography)`
   font-weight: 600;
 `;
 
+export const LanguageSelectContainer = styled(Grid)``;
+
+export const LanguageSelectItem = styled(Grid)``;
+
 export const LanguageSelect = styled(Select)`
   margin-top: 20px;
-  width: 200px;
+  width: 100%;
 `;
 
 export const LanguageItem = styled(MenuItem)``;

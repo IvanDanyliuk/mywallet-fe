@@ -24,6 +24,6 @@ export const Input = styled(TextField)``;
 export const SubmitButton = styled(Button)``;
 
 export const ActionButton = styled(Button)`
-  width: 200px;
+  width: 100%;
   height: 30px;
 `;

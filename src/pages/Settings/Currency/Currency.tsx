@@ -8,6 +8,8 @@ import { setCurrency } from '../../../redux/user/asyncAction';
 import { 
   CurrencyItem, 
   CurrencySelect, 
+  CurrencySelectContainer, 
+  CurrencySelectItem, 
   Section, 
   SectionTitle 
 } from './styles';
@@ -43,16 +45,20 @@ const Currency: React.FC = () => {
   return (
     <Section>
       <SectionTitle variant='inherit'>{t('currencySectionTitle')}</SectionTitle>
-      <CurrencySelect 
-        value={currentCurrency} 
-        onChange={handleCurrencyChange}
-      >
-        {
-          currencies.map(item => (
-            <CurrencyItem key={uuid()} value={item.value}>{item.label}</CurrencyItem>
-          ))
-        }
-      </CurrencySelect>
+      <CurrencySelectContainer container>
+        <CurrencySelectItem item md={3} xs={12}>
+          <CurrencySelect 
+            value={currentCurrency} 
+            onChange={handleCurrencyChange}
+          >
+            {
+              currencies.map(item => (
+                <CurrencyItem key={uuid()} value={item.value}>{item.label}</CurrencyItem>
+              ))
+            }
+          </CurrencySelect>
+        </CurrencySelectItem>
+      </CurrencySelectContainer>
     </Section>
   );
 };
