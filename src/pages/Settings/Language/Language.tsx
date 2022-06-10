@@ -9,7 +9,9 @@ import {
   Section, 
   LanguageItem, 
   LanguageSelect, 
-  SectionTitle 
+  SectionTitle, 
+  LanguageSelectContainer,
+  LanguageSelectItem
 } from './styles';
 
 
@@ -48,10 +50,14 @@ const Language: React.FC = () => {
   return (
     <Section>
       <SectionTitle variant='inherit'>{t('languageSectionTitle')}</SectionTitle>
-      <LanguageSelect value={currentLanguage} onChange={handleLanguageChange}>
-        <LanguageItem value={'en'}>{t('languageOptionEn')}</LanguageItem>
-        <LanguageItem value={'ua'}>{t('languageOptionUa')}</LanguageItem>
-      </LanguageSelect>
+      <LanguageSelectContainer container>
+        <LanguageSelectItem item md={3} xs={12}>
+          <LanguageSelect value={currentLanguage} onChange={handleLanguageChange}>
+            <LanguageItem value={'en'}>{t('languageOptionEn')}</LanguageItem>
+            <LanguageItem value={'ua'}>{t('languageOptionUa')}</LanguageItem>
+          </LanguageSelect>
+        </LanguageSelectItem>
+      </LanguageSelectContainer>
     </Section>
   );
 };

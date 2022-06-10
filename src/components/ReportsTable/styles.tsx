@@ -1,7 +1,9 @@
 import { Button, ButtonBase, Paper, Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import styled from 'styled-components';
 
-export const PaperContainer = styled(Paper)``;
+export const PaperContainer = styled(Paper)`
+  overflow: auto;
+`;
 
 export const ReportTableContainer = styled(Table)`
   position: relative;

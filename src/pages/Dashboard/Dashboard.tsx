@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
     <>
       <PageTitle variant='inherit'>{t('pageHeading')}</PageTitle>
       <MainContainer container spacing={3} >
-        <Section item>
+        <Section item xs={12} md={6}>
           <SectionPaper>
             <SectionTitle variant='inherit'>{t('incomesSection')}</SectionTitle>
             <StructureChart 
@@ -75,7 +75,7 @@ const Dashboard: React.FC = () => {
             </Result>
           </SectionPaper>
         </Section>
-        <Section item>
+        <Section item  xs={12} md={6}>
           <SectionPaper>
             <SectionTitle variant='inherit'>{t('expensesSection')}</SectionTitle>
             <StructureChart 
