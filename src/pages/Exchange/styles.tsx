@@ -66,4 +66,6 @@ export const SubmitButton = styled(Button)`
   height: 100%;
 `;
 
-export const ResetButton = styled(Button)``
+export const ResetButton = styled(Button)`
+  width: 100%;
+`;
