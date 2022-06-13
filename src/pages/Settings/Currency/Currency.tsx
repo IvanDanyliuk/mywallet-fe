@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
-import { data } from '../../../helpers/data';
+import { currencies } from '../../../constants/constants';
 import { AppDispatchType } from '../../../redux/store';
 import { setCurrency } from '../../../redux/user/asyncAction';
 import { selectUser } from '../../../redux/user/selectors';
@@ -20,7 +20,6 @@ import {
 const Currency: React.FC = () => {
   const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
-  const currencies = data.profile.currencies;
   const user = useSelector(selectUser);
   const token = JSON.parse(localStorage.getItem('profile') || '').token;
 

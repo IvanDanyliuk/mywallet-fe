@@ -6,7 +6,7 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
-import { data } from '../../../helpers/data';
+import { categories } from '../../../constants/constants';
 import { createIncomeItem, updateIncomeItem } from '../../../redux/incomes/asyncActions';
 import { createExpenseItem, updateExpenseItem } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
@@ -29,9 +29,9 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
   const { t } = useTranslation(['authForm']);
   const dispatch = useDispatch<AppDispatchType>();
   
-  const categories = type === 'incomes' 
-    ? data.profile.categories.incomes : 
-    data.profile.categories.expenses;
+  const categoriesData = type === 'incomes' 
+    ? categories.incomes : 
+    categories.expenses;
 
   const stateData = useSelector(type === 'incomes' 
     ? selectIncomes : 
@@ -123,7 +123,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
             fullWidth
           >
             {
-              categories.map((category) => (
+              categoriesData.map((category) => (
                 <FormOption key={uuid()} value={t(category)}>{t(category)}</FormOption>
               ))
             }

@@ -110,3 +110,9 @@ export const getCurrencyIcon = (currency: string) => {
       return '';
   }
 };
+
+export const getDifferentCurrency = (currenctCurrency: string, currencyList: string[]) => {
+  return currenctCurrency !== 'usd' ? 
+    'usd' : 
+    currencyList[currencyList.indexOf(currenctCurrency!) + 1];
+};

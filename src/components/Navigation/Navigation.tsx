@@ -43,6 +43,7 @@ const Navigation: React.FC = () => {
           <NavItem to='/incomes'>{t('navLinkIncomes')}</NavItem>
           <NavItem to='/expenses'>{t('navLinkExpenses')}</NavItem>
           <NavItem to='/reports'>{t('navLinkReports')}</NavItem>
+          <NavItem to='/exchange'>{t('navLinkExchange')}</NavItem>
           <NavItem to='/settings'>{t('navLinkSettings')}</NavItem>
         </Navbar>
         {user && (

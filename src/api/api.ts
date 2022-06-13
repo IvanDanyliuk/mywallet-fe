@@ -2,14 +2,14 @@ import axios from 'axios';
 import { IIncomeData } from '../redux/incomes/types';
 import { IExpenseData } from '../redux/expenses/types';
 import { ICurrencyToUpdate, ILanguageToUpdate, IPasswordToUpdate, IUser } from '../redux/user/types';
-import { IReportData } from '../redux/reports/types';
+import { IExchangeData } from '../redux/exchange/types';
+
 
 const API = axios.create({ baseURL: 'http://localhost:5000' });
 
 API.interceptors.request.use((req) => {
   if(localStorage.getItem('profile')) {
-    //@ts-ignore
-    req.headers.Authorization = `Bearer ${JSON.parse(localStorage?.getItem('profile')).token}`
+    req!.headers!.Authorization = `Bearer ${JSON.parse(localStorage?.getItem('profile') || '').token}`
   }
   return req;
 });
@@ -36,3 +36,5 @@ export const getReports = (userId: any) => API.get('/reports', { params: { userI
 export const getReport = (reportId: any) => API.get(`/reports/${reportId}`);
 export const createReport = (reportData: any) => API.post('/reports', reportData);
 export const deleteReport = (id: any) => API.delete('/reports', { data: { id } });
+
+export const getExchangeRate = (exchangeData: IExchangeData) => API.get('/exchange', { params: { exchangeData } });
