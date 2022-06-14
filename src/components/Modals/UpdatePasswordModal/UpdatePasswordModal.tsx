@@ -79,6 +79,7 @@ const PasswordUpdationModal: React.FC = () => {
                   label={t('curPassField')} 
                   type='password' 
                   value={passwordData.curPassword} 
+                  required
                   fullWidth 
                   onChange={handleChange} 
                 />
@@ -90,6 +91,7 @@ const PasswordUpdationModal: React.FC = () => {
                   label={t('newPassField')} 
                   type='password' 
                   value={passwordData.newPassword} 
+                  required
                   fullWidth 
                   onChange={handleChange} 
                 />
@@ -101,6 +103,7 @@ const PasswordUpdationModal: React.FC = () => {
                   label={t('confirmNewPass')} 
                   type='password' 
                   value={passwordData.confirmNewPassword} 
+                  required
                   fullWidth 
                   onChange={handleChange} 
                 />

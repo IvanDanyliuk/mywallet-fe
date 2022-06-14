@@ -97,6 +97,8 @@ const CreateReportModal: React.FC = () => {
                 <Input 
                   name='heading' 
                   label={t('modalFormLabelHeading')} 
+                  type='text'
+                  required
                   onChange={handleChange} 
                 />
               </FormItem>
@@ -124,6 +126,7 @@ const CreateReportModal: React.FC = () => {
                 <Input 
                   name='comment' 
                   label={t('modalFormLabelComment')} 
+                  type='text'
                   onChange={handleChange} 
                 />
               </FormItem>

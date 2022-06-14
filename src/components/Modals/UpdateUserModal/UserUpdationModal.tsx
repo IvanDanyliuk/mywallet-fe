@@ -69,6 +69,7 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
                 name='firstName' 
                 label='First Name' 
                 value={userData.firstName} 
+                type='text'
                 fullWidth 
                 onChange={handleChange} 
               />
@@ -79,6 +80,7 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
                 name='lastName' 
                 label='Last Name' 
                 value={userData.lastName} 
+                type='text'
                 fullWidth 
                 onChange={handleChange} 
               />
@@ -89,6 +91,7 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
                 name='email' 
                 label='Email' 
                 value={userData.email} 
+                type='email'
                 fullWidth 
                 onChange={handleChange} 
               />

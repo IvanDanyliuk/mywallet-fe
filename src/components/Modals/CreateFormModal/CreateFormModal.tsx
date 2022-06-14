@@ -108,6 +108,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
                 name='title' 
                 label={t('inputLabelTitle')} 
                 value={itemData.title} 
+                type='text'
                 fullWidth 
                 onChange={handleChange} 
               />
@@ -120,6 +121,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
                   label={t('inputLabelAmount')} 
                   value={itemData.amount} 
                   fullWidth 
+                  type='number'
                   onChange={handleChange} 
                 />
               </FormItem>
@@ -147,6 +149,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
                   label={t('inputLabelDescription')} 
                   value={itemData.description} 
                   multiline 
+                  type='text'
                   fullWidth 
                   
                   onChange={handleChange} 
