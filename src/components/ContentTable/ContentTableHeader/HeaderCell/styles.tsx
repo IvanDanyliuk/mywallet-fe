@@ -8,7 +8,8 @@ export const CellBody = styled(TableCell)`
     if(props.datatype === 'source') return '25%';
     if(props.datatype === 'amount') return '15%';
     if(props.datatype === 'category') return '15%';
-    if(props.datatype === 'description') return '35%';
+    if(props.datatype === 'description') return '34%';
+    if(props.datatype === 'actions') return '1%';
   })};
 `;
 

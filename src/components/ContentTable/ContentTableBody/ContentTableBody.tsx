@@ -60,12 +60,14 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
               <ContentCell>{currencyIcon}{item.amount}</ContentCell>
               <ContentCell>{item.category}</ContentCell>
               <ContentCell>{item.description}</ContentCell>
-              <OptionsMenu 
-                id={item._id} 
-                type={OptionsMenuType.Content}
-                onEdit={() => editItemHandler(item._id)} 
-                onDelete={() => deleteItemHandler(item._id)} 
-              />
+              <ContentCell>
+                <OptionsMenu 
+                  id={item._id} 
+                  type={OptionsMenuType.Content}
+                  onEdit={() => editItemHandler(item._id)} 
+                  onDelete={() => deleteItemHandler(item._id)} 
+                />
+              </ContentCell>
             </ContentRow>
           ))
         }

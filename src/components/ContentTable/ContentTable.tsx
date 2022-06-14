@@ -52,6 +52,11 @@ const ContentTable: React.FC<IContentTable> = ({ type }) => {
       label: t('headerColDescription'),
       isSortable: false,
     },
+    {
+      sortKey: 'actions',
+      label: '',
+      isSortable: false,
+    }
   ];
 
   return (

@@ -1,5 +1,6 @@
-import { Box, TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@mui/material';
 import styled from 'styled-components';
+import { TableHead, TableRow } from '@mui/material';
+
 
 export const HeaderContainer = styled(TableHead)`
   position: relative;

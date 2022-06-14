@@ -1,13 +1,12 @@
-import { ListItemIcon, Menu, MenuItem } from '@mui/material';
-import { Box } from '@mui/system';
 import styled from 'styled-components';
+import { Box, ListItemIcon, Menu, MenuItem } from '@mui/material';
+
 
 export const OptionsMenuContainer = styled(Box)``;
 
 export const OptionsButton = styled.button`
   cursor: pointer;
-  position: absolute;
-  right: 0;
+  padding: 0;
   height: 100%;
   background: transparent;
   border: none;
@@ -15,9 +14,7 @@ export const OptionsButton = styled.button`
 
 export const Options = styled(Menu)``;
 
-export const Option = styled(MenuItem)`
-  
-`;
+export const Option = styled(MenuItem)``;
 
 export const OptionIcon = styled(ListItemIcon)`
   display: flex;
