@@ -10,11 +10,13 @@ import { selectUser } from '../../../redux/user/selectors';
 import { 
   ActionButton,
   FormContainer, 
+  FormItem, 
   Input, 
   ModalBody, 
   ModalContent, 
   ModalFormTitle, 
-  SubmitButton 
+  SubmitButton, 
+  UpdationForm
 } from './styles';
 
 
@@ -68,43 +70,53 @@ const PasswordUpdationModal: React.FC = () => {
       <ModalBody open={isModalOpen} onClose={handleModalOpen}>
         <ModalFormTitle>{t('changePasswordBtn')}</ModalFormTitle>
         <ModalContent>
-          <FormContainer onSubmit={handleSubmit}>
-            <Input 
-              id='curPassword' 
-              name='curPassword' 
-              label={t('curPassField')} 
-              type='password' 
-              value={passwordData.curPassword} 
-              fullWidth 
-              onChange={handleChange} 
-            />
-            <Input 
-              id='newPassword' 
-              name='newPassword' 
-              label={t('newPassField')} 
-              type='password' 
-              value={passwordData.newPassword} 
-              fullWidth 
-              onChange={handleChange} 
-            />
-            <Input 
-              id='confirmNewPassword' 
-              name='confirmNewPassword' 
-              label={t('confirmNewPass')} 
-              type='password' 
-              value={passwordData.confirmNewPassword} 
-              fullWidth 
-              onChange={handleChange} 
-            />
-            <SubmitButton 
-              color='primary' 
-              variant='contained' 
-              type='submit' 
-              fullWidth
-            >
-              {t('updateUserBtn')}
-            </SubmitButton>
-          </FormContainer>
+          <UpdationForm onSubmit={handleSubmit}>
+            <FormContainer container direction='column' spacing={2}>
+              <FormItem item md={12}>
+                <Input 
+                  id='curPassword' 
+                  name='curPassword' 
+                  label={t('curPassField')} 
+                  type='password' 
+                  value={passwordData.curPassword} 
+                  fullWidth 
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <Input 
+                  id='newPassword' 
+                  name='newPassword' 
+                  label={t('newPassField')} 
+                  type='password' 
+                  value={passwordData.newPassword} 
+                  fullWidth 
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <Input 
+                  id='confirmNewPassword' 
+                  name='confirmNewPassword' 
+                  label={t('confirmNewPass')} 
+                  type='password' 
+                  value={passwordData.confirmNewPassword} 
+                  fullWidth 
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <SubmitButton 
+                  color='primary' 
+                  variant='contained' 
+                  type='submit' 
+                  fullWidth
+                >
+                  {t('updateUserBtn')}
+                </SubmitButton>
+              </FormItem>
+            </FormContainer>
+          </UpdationForm>
         </ModalContent>
       </ModalBody>
       <ActionButton 

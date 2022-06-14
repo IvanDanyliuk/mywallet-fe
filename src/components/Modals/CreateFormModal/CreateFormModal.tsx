@@ -14,7 +14,9 @@ import { selectIncomes } from '../../../redux/incomes/selectors';
 import { selectExpenses } from '../../../redux/expenses/selectors';
 import { ICreateIncomeFormModal } from '../../../redux/general';
 import { 
+  CreationForm, 
   FormContainer, 
+  FormItem, 
   FormOption, 
   FormSelect, 
   Input, 
@@ -93,60 +95,74 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
 
   return (
     <ModalBody open={open} onClose={onClose}>
-      <ModalFormTitle>{type === 'incomes' ? t('authTitleIncomes') : t('authTitleExpense')}</ModalFormTitle>
+      <ModalFormTitle>
+        {type === 'incomes' ? t('authTitleIncomes') : t('authTitleExpense')}
+      </ModalFormTitle>
       <ModalContent>
-        <FormContainer onSubmit={handleSubmit}>
-          <Input 
-            required 
-            id='title' 
-            name='title' 
-            label={t('inputLabelTitle')} 
-            value={itemData.title} 
-            fullWidth 
-            onChange={handleChange} 
-          />
-          <Input 
-            required 
-            id='amount' 
-            name='amount' 
-            label={t('inputLabelAmount')} 
-            value={itemData.amount} 
-            fullWidth 
-            onChange={handleChange} 
-          />
-          <FormSelect 
-            id='category' 
-            label={t('inputLabelCategory')} 
-            name='category' 
-            value={itemData.category} 
-            onChange={handleChange} 
-            fullWidth
-          >
-            {
-              categoriesData.map((category) => (
-                <FormOption key={uuid()} value={t(category)}>{t(category)}</FormOption>
-              ))
-            }
-          </FormSelect>
-          <Input 
-            required 
-            id='description' 
-            name='description' 
-            label={t('inputLabelDescription')} 
-            value={itemData.description} 
-            multiline 
-            fullWidth 
-            
-            onChange={handleChange} 
-          />
-          <SubmitButton 
-            color='primary' 
-            variant='contained' 
-            type='submit'
-          >
-            {id ? t('updateBtn') : t('createBtn')}
-          </SubmitButton>
-        </FormContainer>
+        <CreationForm onSubmit={handleSubmit}>
+          <FormContainer container direction='column' spacing={2}>
+            <FormItem item md={12}>
+              <Input 
+                required 
+                id='title' 
+                name='title' 
+                label={t('inputLabelTitle')} 
+                value={itemData.title} 
+                fullWidth 
+                onChange={handleChange} 
+              />
+              </FormItem>
+              <FormItem item md={12}>
+                <Input 
+                  required 
+                  id='amount' 
+                  name='amount' 
+                  label={t('inputLabelAmount')} 
+                  value={itemData.amount} 
+                  fullWidth 
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <FormSelect 
+                  id='category' 
+                  label={t('inputLabelCategory')} 
+                  name='category' 
+                  value={itemData.category} 
+                  onChange={handleChange} 
+                  fullWidth
+                >
+                  {
+                    categoriesData.map((category) => (
+                      <FormOption key={uuid()} value={t(category)}>{t(category)}</FormOption>
+                    ))
+                  }
+                </FormSelect>
+              </FormItem>
+              <FormItem item md={12}>
+                <Input 
+                  required 
+                  id='description' 
+                  name='description' 
+                  label={t('inputLabelDescription')} 
+                  value={itemData.description} 
+                  multiline 
+                  fullWidth 
+                  
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <SubmitButton 
+                  color='primary' 
+                  variant='contained' 
+                  type='submit'
+                >
+                  {id ? t('updateBtn') : t('createBtn')}
+                </SubmitButton>
+              </FormItem>
+          </FormContainer>
+        </CreationForm>
       </ModalContent>
     </ModalBody>
   );

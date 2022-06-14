@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AppDispatchType } from '../../../redux/store';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase';
 import { updateUser } from '../../../redux/user/asyncAction';
-import { FormContainer, Input, ModalBody, ModalContent, ModalFormTitle, SubmitButton } from './styles';
-import { useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/user/selectors';
+import { 
+  FormContainer, 
+  FormItem, 
+  Input, 
+  ModalBody, 
+  ModalContent, 
+  ModalFormTitle, 
+  SubmitButton, 
+  UpdateButton, 
+  UpdationForm 
+} from './styles';
 
 
 const UpdateAvatarModal: React.FC = () => {
@@ -74,23 +82,29 @@ const UpdateAvatarModal: React.FC = () => {
       >
         <ModalFormTitle>{t('updateAvatarTitle')}</ModalFormTitle>
         <ModalContent>
-          <FormContainer onSubmit={handleSubmit}>
-            <Input 
-              name='avatar' 
-              type='file' 
-              fullWidth 
-            />
-            <SubmitButton 
-              color='primary' 
-              variant='contained' 
-              type='submit'
-            >
-              {t('updateAvatarBtn')}
-            </SubmitButton>
-          </FormContainer>
+          <UpdationForm onSubmit={handleSubmit}>
+            <FormContainer container direction='column' spacing={2}>
+              <FormItem item md={12}>
+                <Input 
+                  name='avatar' 
+                  type='file' 
+                  fullWidth 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <SubmitButton 
+                  color='primary' 
+                  variant='contained' 
+                  type='submit'
+                >
+                  {t('updateAvatarBtn')}
+                </SubmitButton>
+              </FormItem>
+            </FormContainer>
+          </UpdationForm>
         </ModalContent>
       </ModalBody>
-      <Button onClick={handleUpdateAvatarClose}>{t('updateAvatar')}</Button>
+      <UpdateButton variant='contained' color='success' onClick={handleUpdateAvatarClose}>{t('updateAvatar')}</UpdateButton>
     </>
   );
 };

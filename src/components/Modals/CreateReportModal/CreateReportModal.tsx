@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatchType } from '../../../redux/store';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -13,9 +13,13 @@ import { setColor } from '../../../helpers/helpers';
 import { selectIncomes } from '../../../redux/incomes/selectors';
 import { selectExpenses } from '../../../redux/expenses/selectors';
 import { selectUserId } from '../../../redux/user/selectors';
+import { IIncome } from '../../../redux/incomes/types';
+import { IExpense } from '../../../redux/expenses/types';
 import { 
   CreateButton, 
+  CreationForm, 
   FormContainer, 
+  FormItem, 
   Input, 
   ModalBody, 
   ModalContent, 
@@ -58,15 +62,15 @@ const CreateReportModal: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
     const filteredIncomes = incomes
-      .filter((income: any) => (new Date(income.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(income.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
-      .map((income: any) => ({ source: income.title, amount: income.amount, badgeColor: setColor() }));
+      .filter((income: IIncome) => (new Date(income.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(income.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
+      .map((income: IIncome) => ({ source: income.title, amount: income.amount, badgeColor: setColor() }));
     const filteredExpenses = expenses
-      .filter((expense: any) => (new Date(expense.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(expense.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
-      .map((expense: any) => ({ source: expense.title, amount: expense.amount, badgeColor: setColor() }));
+      .filter((expense: IExpense) => (new Date(expense.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(expense.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
+      .map((expense: IExpense) => ({ source: expense.title, amount: expense.amount, badgeColor: setColor() }));
 
     dispatch(createReport({ ...reportData, data: { incomes: filteredIncomes, expenses: filteredExpenses } }));
 
@@ -87,38 +91,62 @@ const CreateReportModal: React.FC = () => {
       >
         <ModalFormTitle>{t('modalFormTitle')}</ModalFormTitle>
         <ModalContent>
-          <FormContainer onSubmit={handleSubmit}>
-            <Input name='heading' label={t('modalFormLabelHeading')} onChange={handleChange} />
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-              <DatePicker 
-                label={t('modalFormLabelFrom')}
-                data-name='from'
-                value={reportData.period.from}
-                //@ts-ignore
-                onChange={(val) => setReportData({ ...reportData, period: { ...reportData.period, from: val._d } })}
-                renderInput={(params) => <TextField { ...params } />}
-              />
-              <DatePicker 
-                label={t('modalFormLabelTo')}
-                data-name='to'
-                value={reportData.period.to}
-                //@ts-ignore
-                onChange={(val) => setReportData({ ...reportData, period: { ...reportData.period, to: val._d } })}
-                renderInput={(params) => <TextField { ...params } />}
-              />
-            </LocalizationProvider>
-            <Input name='comment' label={t('modalFormLabelComment')} onChange={handleChange} />
-            <SubmitButton 
-              color='primary' 
-              variant='contained' 
-              type='submit'
-            >
-              {t('modalFormSubmitBtn')}
-            </SubmitButton>
-          </FormContainer>
+          <CreationForm onSubmit={handleSubmit}>
+            <FormContainer container direction='column' spacing={2}>
+              <FormItem item md={12}>
+                <Input 
+                  name='heading' 
+                  label={t('modalFormLabelHeading')} 
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <LocalizationProvider dateAdapter={AdapterMoment}>
+                <FormItem item md={12}>
+                  <DatePicker 
+                    label={t('modalFormLabelFrom')}
+                    data-name='from'
+                    value={reportData.period.from}
+                    onChange={(val: any) => setReportData({ ...reportData, period: { ...reportData.period, from: val._d! } })}
+                    renderInput={(params) => <TextField { ...params } />}
+                  />
+                </FormItem>
+                <FormItem item md={12}>
+                  <DatePicker 
+                    label={t('modalFormLabelTo')}
+                    data-name='to'
+                    value={reportData.period.to}
+                    onChange={(val: any) => setReportData({ ...reportData, period: { ...reportData.period, to: val._d } })}
+                    renderInput={(params) => <TextField { ...params } />}
+                  />
+                </FormItem>
+              </LocalizationProvider>
+              <FormItem item md={12}>
+                <Input 
+                  name='comment' 
+                  label={t('modalFormLabelComment')} 
+                  onChange={handleChange} 
+                />
+              </FormItem>
+              <FormItem item md={12}>
+                <SubmitButton 
+                  color='primary' 
+                  variant='contained' 
+                  type='submit'
+                >
+                  {t('modalFormSubmitBtn')}
+                </SubmitButton>
+              </FormItem>
+            </FormContainer>
+          </CreationForm>
         </ModalContent>
       </ModalBody>
-      <CreateButton variant='contained' color='success' onClick={handleModalClose}>{t('modalFormOpenBtn')}</CreateButton>
+      <CreateButton 
+        variant='contained' 
+        color='success' 
+        onClick={handleModalClose}
+      >
+        {t('modalFormOpenBtn')}
+      </CreateButton>
     </>
   );
 };
