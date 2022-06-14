@@ -49,6 +49,7 @@ export const PassedAmount = styled(Typography)``;
 export const ResultAmount = styled(Typography)`
   font-size: 22px;
   font-weight: 600;
+  line-height: 30px;
 `;
 
 export const Rate = styled(Typography)`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
@@ -68,6 +68,10 @@ const Exchange: React.FC = () => {
       to: defaultToCurrency 
     });
   };
+
+  useEffect(() => {
+    return handleReset();
+  }, []);
 
   return (
     <>
