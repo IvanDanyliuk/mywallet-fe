@@ -25,11 +25,14 @@ import {
   ModalFormTitle, 
   SubmitButton 
 } from './styles';
+import { selectUserId } from '../../../redux/user/selectors';
 
 
 const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, id, onClose }) => {
   const { t } = useTranslation(['authForm']);
   const dispatch = useDispatch<AppDispatchType>();
+
+  const userId = useSelector(selectUserId);
   
   const categoriesData = type === 'incomes' 
     ? categories.incomes : 
@@ -42,7 +45,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
   const defaultCategoryValue = type === 'incomes' ? t('authSelectDefaultIncome') : t('authSelectDefaultExpenses');
 
   const [itemData, setItemData] = useState({
-    userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
+    userId: userId!,
     title: '',
     amount: 0,
     category: defaultCategoryValue,
@@ -52,7 +55,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
 
   const clear = () => {
     setItemData({
-      userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
+      userId: userId!,
       title: '',
       amount: 0,
       category: defaultCategoryValue,
@@ -84,7 +87,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
       const dataToUpdate = stateData.find(item => id === item._id) || itemData;
       setItemData({
         ...itemData,
-        userId: JSON.parse(localStorage.getItem('profile') || '').result._id,
+        userId: userId!,
         title: dataToUpdate.title,
         amount: dataToUpdate.amount,
         category: dataToUpdate.category,

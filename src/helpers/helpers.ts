@@ -1,6 +1,5 @@
 import { IExpense } from './../redux/expenses/types';
 import { IIncome } from '../redux/incomes/types';
-import { useTranslation } from 'react-i18next';
 
 export const getPageTitleFromUrl = (urlData: string): string => {
   if(urlData === '/') return 'Dashboard';
@@ -8,7 +7,7 @@ export const getPageTitleFromUrl = (urlData: string): string => {
   return title[0].toUpperCase() + title.slice(1);
 };
 
-export const generateColor = (category: any) => {
+export const generateColor = (category: string) => {
   switch(category) {
     case 'Regular':
       return '#ff6361';
