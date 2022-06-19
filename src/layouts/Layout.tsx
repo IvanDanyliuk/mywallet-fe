@@ -14,11 +14,11 @@ import {
   MenuButton 
 } from './styles';
 import { setGreeting } from '../helpers/helpers';
+import { selectUser } from '../redux/user/selectors';
 
 const Layout: React.FC<ILayout> = ({ children }) => {
   const { pathname } = useLocation();
-  //@ts-ignore
-  const user = useSelector((state: IUserState) => state.user.user);
+  const user = useSelector(selectUser);
   const language = localStorage.getItem('lang') || 'en';
 
   const [menuOpen, setMenuOpen] = useState(false);

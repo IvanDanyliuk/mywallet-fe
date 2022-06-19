@@ -9,7 +9,7 @@ import { getIncomes } from '../../redux/incomes/asyncActions';
 import { getExpenses } from '../../redux/expenses/asyncActions';
 import { selectIncomes } from '../../redux/incomes/selectors';
 import { selectExpenses } from '../../redux/expenses/selectors';
-import { selectUser, selectUserId } from '../../redux/user/selectors';
+import { selectCurrency, selectUser, selectUserId } from '../../redux/user/selectors';
 import { AppDispatchType } from '../../redux/store';
 import { ChartParams } from '../../redux/general';
 import { 
@@ -30,10 +30,10 @@ const Dashboard: React.FC = () => {
 
   const incomes = useSelector(selectIncomes);
   const expenses = useSelector(selectExpenses);
-  const user = useSelector(selectUser);
+  const currency = useSelector(selectCurrency);
   const userId = useSelector(selectUserId);
 
-  const curIcon = getCurrencyIcon(user!.currency);
+  const curIcon = getCurrencyIcon(currency!);
   const incomesToRender = setDiagramData(incomes);
   const expensesToRender = setDiagramData(expenses);
 
@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     dispatch(getIncomes(userId!));
     dispatch(getExpenses(userId!));
-  }, [dispatch, user]);
+  }, [dispatch, currency]);
 
   return (
     <>

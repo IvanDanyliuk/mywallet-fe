@@ -2,20 +2,20 @@ import { screen, render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import store from '../../redux/store';
-import Incomes from './Incomes';
+import Expenses from './Expenses';
 
 
-describe('The Incomes page tests', () => {
+describe('The Expenses page tests', () => {
   beforeEach(() => {
     render(
       <Provider store={store}>
-        <Incomes />
+        <Expenses />
       </Provider>
     );
   });
 
-  it('should render fetched incomes data from the server', async () => {
-    expect(await screen.findByText('Deposit revenue')).toBeInTheDocument();
+  it('should render fetched expenses data from the server', async () => {
+    expect(await screen.findByText('Taxes payment')).toBeInTheDocument();
   });
 
   it('should open modal window after clicking the add button', async () => {

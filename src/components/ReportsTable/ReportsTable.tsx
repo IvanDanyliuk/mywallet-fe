@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch,  useSelector } from 'react-redux';
+import { TablePagination } from '@mui/material';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +9,9 @@ import { deleteReport, getReports } from '../../redux/reports/asyncActions';
 import { sortReports } from '../../redux/reports/reducers';
 import { AppDispatchType } from '../../redux/store';
 import OptionsMenu from '../ContentTable/ContentTableBody/RowMenu/OptionsMenu';
-import { TablePagination } from '@mui/material';
+import { OptionsMenuType, TableSortOrder } from '../../redux/general';
+import { selectUserId } from '../../redux/user/selectors';
+import { selectReports } from '../../redux/reports/selectors';
 import { 
   HeaderCell, 
   HeaderRow, 
@@ -20,8 +23,6 @@ import {
   ContentRow, 
   ContentCell 
 } from './styles';
-import { OptionsMenuType, TableSortOrder } from '../../redux/general';
-
 
 
 const ReportsTable: React.FC = () => {
@@ -29,8 +30,8 @@ const ReportsTable: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
   let navigate = useNavigate();
   
-  const reports = useSelector((state: any) => state.reports.reports);
-  const user = useSelector((state: any) => state.user.user);
+  const reports = useSelector(selectReports);
+  const userId = useSelector(selectUserId);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -92,7 +93,7 @@ const ReportsTable: React.FC = () => {
   ];
 
   useEffect(() => {
-    dispatch(getReports(user._id));
+    dispatch(getReports(userId!));
   }, [dispatch, navigate]);
 
   return (
