@@ -24,7 +24,7 @@ const StructureChart: React.FC<IChart> = ({data, dataKey, nameKey}) => {
           fill='#1ad37c' 
           label
         >
-          {data.map((item: any, i: number) => (
+          {data?.map((item: any, i: number) => (
             <Cell key={i} fill={item.badgeColor} />
           ))}
         </Pie>

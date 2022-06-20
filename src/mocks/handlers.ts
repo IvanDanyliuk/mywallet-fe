@@ -134,4 +134,66 @@ export const handlers = [
       )
     )
   }),
+
+  rest.get('http://localhost:5000/reports/:id', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json(
+        {
+          period: {
+            from: "2022-05-31T21:00:00.000Z",
+            to: "2022-06-04T21:00:00.000Z"
+          },
+          data: {
+            incomes: [
+              {
+                source: "Salary",
+                amount: 2200,
+                badgeColor: "#1373cf",
+                _id: "62a1bf6bb8d2482aba0870a2"
+              },
+              {
+                source: "Deposit revenue",
+                amount: 150,
+                badgeColor: "#c85750",
+                _id: "62a1bf6bb8d2482aba0870a3"
+              },
+              {
+                source: "Freelance",
+                amount: 700,
+                badgeColor: "#a72d76",
+                _id: "62a1bf6bb8d2482aba0870a4"
+              }
+            ],
+            expenses: [
+              {
+                source: "Garage rent",
+                amount: 20,
+                badgeColol: "#56fc1a",
+                _id: "62a1bf6bb8d2482aba0870a5"
+              },
+              {
+                source: "Taxes payment",
+                amount: 150,
+                badgeColor: "#4516c5",
+                _id: "62a1bf6bb8d2482aba0870a6"
+              },
+              {
+                source: "Pizza",
+                amount: 20,
+                badgeColor: "#25886a",
+                _id: "62a1bf6bb8d2482aba0870a7"
+              }
+            ]
+          },
+          _id: "62a1bf6bb8d2482aba0870a1",
+          userId: "6295f2be26cf5e82fcc3b1ca",
+          heading: "Report 1",
+          comment: "This report includes data from June 1st to June 5th.",
+          createdAt:"2022-06-09T09:32:01.243Z",
+          __v:0
+        }
+      )
+    )
+  })
 ]

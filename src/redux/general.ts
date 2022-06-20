@@ -17,7 +17,7 @@ export interface IChart {
     amount: number;
     category?: string;
     badgeColor: string;
-  }[];
+  }[] | undefined;
   dataKey: string;
   nameKey?: string;
 };

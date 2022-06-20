@@ -62,75 +62,73 @@ const ReportDetails: React.FC = () => {
     }
   }, [report]);
 
+  if(!report) {
+    <CircularProgress />
+  }
+
   return (
-    <>
-      {!report ? (
-        <CircularProgress />
-      ) : (
-        <ReportDetailsContainer>
-          <ReportHeader>
-            <ReportInfo>
-              <ReportTitle variant='inherit'>{report.heading}</ReportTitle>
-              <ReportPeriod variant='inherit'>
-                {`${moment(report.period.from).format('MMM DD, YYYY')} - ${moment(report.period.to).format('MMM DD, YYYY')}`}
-              </ReportPeriod>
-            </ReportInfo>
-            <GoBackButton variant='contained' onClick={goBack}>{t('goBackBtn')}</GoBackButton>
-          </ReportHeader>
-          <DataContainer>
-            <ReportSection elevation={4}>
-              <SectionTitle variant='inherit'>{t('sectionIncomes')}</SectionTitle>
-              <SectionContent>
-                <DataList>
-                  {
-                    report.data.incomes.map((income: any) => (
-                      <DataListItem>{income.source} {income.amount}</DataListItem>
-                    ))
-                  }
-                </DataList>
-                <Diagrams>
-                  <StructureChart data={report.data.incomes} dataKey={'amount'} nameKey={'source'} />
-                </Diagrams>
-              </SectionContent>
-            </ReportSection>
-            <ReportSection elevation={4}>
-              <SectionTitle variant='inherit'>{t('sectionExpenses')}</SectionTitle>
-              <SectionContent>
-                <DataList>
-                  {
-                    report.data.expenses.map((expense: any) => (
-                      <DataListItem>{expense.source} {expense.amount}</DataListItem>
-                    ))
-                  }
-                </DataList>
-                <Diagrams>
-                  <StructureChart data={report.data.expenses} dataKey={'amount'} nameKey={'source'} />
-                </Diagrams>
-              </SectionContent>
-            </ReportSection>
-            <ReportSection>
-              <SectionContent>
-                <Comment variant='inherit'>
-                  Comment: {report.comment}
-                </Comment>
-                <TotalData>
-                  <TotalItem>
-                    <Name variant='inherit'>{t('totalIncome')}:&nbsp;</Name>
-                    <Currency variant='inherit'>{getCurrencyIcon(currency!)}</Currency>
-                    <Amount variant='inherit'>{totalIncome}</Amount>
-                  </TotalItem>
-                  <TotalItem>
-                    <Name variant='inherit'>{t('totalExpenses')}:&nbsp;</Name>
-                    <Currency variant='inherit'>{getCurrencyIcon(currency!)}</Currency>
-                    <Amount variant='inherit'>{totalExpenses}</Amount>
-                  </TotalItem>
-                </TotalData>
-              </SectionContent>
-            </ReportSection>
-          </DataContainer>
-        </ReportDetailsContainer>
-      )}
-    </>
+    <ReportDetailsContainer>
+      <ReportHeader>
+        <ReportInfo>
+          <ReportTitle variant='inherit'>{report?.heading}</ReportTitle>
+          <ReportPeriod variant='inherit'>
+            {`${moment(report?.period.from).format('MMM DD, YYYY')} - ${moment(report?.period.to).format('MMM DD, YYYY')}`}
+          </ReportPeriod>
+        </ReportInfo>
+        <GoBackButton variant='contained' onClick={goBack}>{t('goBackBtn')}</GoBackButton>
+      </ReportHeader>
+      <DataContainer>
+        <ReportSection elevation={4}>
+          <SectionTitle variant='inherit'>{t('sectionIncomes')}</SectionTitle>
+          <SectionContent>
+            <DataList>
+              {
+                report?.data.incomes.map((income: any) => (
+                  <DataListItem>{income.source} {income.amount}</DataListItem>
+                ))
+              }
+            </DataList>
+            <Diagrams>
+              <StructureChart data={report?.data.incomes} dataKey={'amount'} nameKey={'source'} />
+            </Diagrams>
+          </SectionContent>
+        </ReportSection>
+        <ReportSection elevation={4}>
+          <SectionTitle variant='inherit'>{t('sectionExpenses')}</SectionTitle>
+          <SectionContent>
+            <DataList>
+              {
+                report?.data.expenses.map((expense: any) => (
+                  <DataListItem>{expense.source} {expense.amount}</DataListItem>
+                ))
+              }
+            </DataList>
+            <Diagrams>
+              <StructureChart data={report?.data.expenses} dataKey={'amount'} nameKey={'source'} />
+            </Diagrams>
+          </SectionContent>
+        </ReportSection>
+        <ReportSection>
+          <SectionContent>
+            <Comment variant='inherit'>
+              Comment: {report?.comment}
+            </Comment>
+            <TotalData>
+              <TotalItem>
+                <Name variant='inherit'>{t('totalIncome')}:&nbsp;</Name>
+                <Currency variant='inherit'>{getCurrencyIcon(currency!)}</Currency>
+                <Amount variant='inherit'>{totalIncome}</Amount>
+              </TotalItem>
+              <TotalItem>
+                <Name variant='inherit'>{t('totalExpenses')}:&nbsp;</Name>
+                <Currency variant='inherit'>{getCurrencyIcon(currency!)}</Currency>
+                <Amount variant='inherit'>{totalExpenses}</Amount>
+              </TotalItem>
+            </TotalData>
+          </SectionContent>
+        </ReportSection>
+      </DataContainer>
+    </ReportDetailsContainer>
   );
 };
 
