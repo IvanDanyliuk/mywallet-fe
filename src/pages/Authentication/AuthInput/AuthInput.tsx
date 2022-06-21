@@ -19,21 +19,22 @@ const AuthInput: React.FC<IAuthInput> = ({
   return (
     <InputContainer item xs={12}>
       <FormInput 
-          name={name} 
-          label={label} 
-          type={type} 
-          fullWidth
-          onChange={handleChange} 
-          InputProps={{
-            endAdornment: name === 'password' && (
-              <FieldAdornment position='end'>
-                <InputButton onClick={handleShowPassword}>
-                  {type === 'password' ? <Visibility /> : <VisibilityOff />}
-                </InputButton>
-              </FieldAdornment>
-            )
-          }}
-        />
+        data-testid='authInput'
+        name={name} 
+        label={label} 
+        type={type} 
+        fullWidth
+        onChange={handleChange} 
+        InputProps={{
+          endAdornment: name === 'password' && (
+            <FieldAdornment position='end'>
+              <InputButton onClick={handleShowPassword}>
+                {type === 'password' ? <Visibility /> : <VisibilityOff />}
+              </InputButton>
+            </FieldAdornment>
+          )
+        }}
+      />
     </InputContainer>
   );
 };

@@ -103,7 +103,7 @@ const Authentification: React.FC = () => {
     <AuthContainer>
       <AuthWrapper elevation={22}>
         <AuthTitle variant='inherit'>{isSignUp ? t('signUpTitle') : t('signInTitle')}</AuthTitle>
-        <AuthForm onSubmit={handleSubmit}>
+        <AuthForm onSubmit={handleSubmit} data-testid='authForm'>
           <FormContainer container spacing={1}>
             {
               isSignUp && (

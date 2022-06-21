@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuid } from 'uuid';
 import moment from 'moment';
 import StructureChart from '../../../components/Charts/StructureChart';
 import { getCurrencyIcon } from '../../../helpers/helpers';
@@ -84,7 +85,7 @@ const ReportDetails: React.FC = () => {
             <DataList>
               {
                 report?.data.incomes.map((income: any) => (
-                  <DataListItem>{income.source} {income.amount}</DataListItem>
+                  <DataListItem key={uuid()}>{income.source} {income.amount}</DataListItem>
                 ))
               }
             </DataList>

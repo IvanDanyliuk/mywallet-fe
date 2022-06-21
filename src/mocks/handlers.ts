@@ -195,5 +195,49 @@ export const handlers = [
         }
       )
     )
+  }),
+
+  rest.post('http://localhost:5000/user/signin', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json(
+        {
+          result: {
+            _id: '6295f2be26cf5e82fcc3b1ca',
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'j.doe@gmail.com',
+            password: '$2a$12$VSqDjXVvCD0d7bl9sXVGUeTQOmt33f303Hr7GuppVT2.NulxaCoJ.',
+            avatar: 'https://firebasestorage.googleapis.com/v0/b/my-wallet-be092.appspot.com/o/files%2Favatar.jpg?alt=media&token=e75c8c5a-2fa6-4043-95ff-2b2fe546d46c',
+            language: 'en',
+            currency: 'usd',
+            __v: 0
+          },
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImouZG9lQGdtYWlsLmNvbSIsImlkIjoiNjI5NWYyYmUyNmNmNWU4MmZjYzNiMWNhIiwiaWF0IjoxNjU1NzQ2MjA5LCJleHAiOjE2NTU3NDk4MDl9.iZb-k7a4YxkYtGlKwUPe1rg3TVZCy3uMPN6vxJH4lxY'
+        }
+      )
+    )
+  }),
+  
+  rest.post('http://localhost:5000/user/signup', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json(
+        {
+          result: {
+            firstName: 'Trent',
+            lastName: 'Alexander-Arnold',
+            email: 't.a.arnold@gmail.com',
+            password: '$2a$12$nFrbkRh8C/8E.AJsCUM7H.syzTPkP4jW8r3WytoLB7KGMdFND9d5C',
+            avatar: 'https://firebasestorage.googleapis.com/v0/b/my-wallet-be092.appspot.com/o/files%2Fgoal_trent-alexander-arnold_14434wta7ezwh1fwtk4pcmeevd.jpg?alt=media&token=177eb67f-46a2-4100-a917-f17fb19f6789',
+            language: 'en',
+            currency: 'usd',
+            _id: '62b0af87e22f544c0246d8f2',
+            __v: 0
+          },
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InQuYS5hcm5vbGRAZ21haWwuY29tIiwiaWQiOiI2MmIwYWY4N2UyMmY1NDRjMDI0NmQ4ZjIiLCJpYXQiOjE2NTU3NDY0MzksImV4cCI6MTY1NTc1MDAzOX0.CcqFO4v-wEzUByAmlUBuTyu8kOBfcSryNpDcluO6mZ8'
+        }
+      )
+    )
   })
 ]
