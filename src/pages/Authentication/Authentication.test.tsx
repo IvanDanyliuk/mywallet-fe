@@ -56,9 +56,11 @@ describe('The Authentication page tests', () => {
     fireEvent.change(inputs[4], { target: { value: '123456' } });
     fireEvent.change(inputs[5], { target: { value: '123456' } });
 
-    const visibilityIcon = screen.getByTestId('VisibilityIcon');
-    fireEvent.click(visibilityIcon);
-
+    await waitFor(() => {
+      const visibilityIcon = screen.getByTestId('VisibilityIcon');
+      fireEvent.click(visibilityIcon);
+    });
+    
     const signUpBtn = screen.getByText('signUpBtn');
     fireEvent.click(signUpBtn);
 

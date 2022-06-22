@@ -21,9 +21,9 @@ const Currency: React.FC = () => {
   const { t } = useTranslation(['settings']);
   const dispatch = useDispatch<AppDispatchType>();
   const user = useSelector(selectUser);
-  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+  const token = localStorage.getItem('profile') && JSON.parse(localStorage.getItem('profile') || '').token;
 
-  const [currentCurrency, setCurrentCurrency] = useState(user!.currency);
+  const [currentCurrency, setCurrentCurrency] = useState(user?.currency);
 
   const handleCurrencyChange = (e: any) => {
     e.preventDefault();
@@ -31,9 +31,9 @@ const Currency: React.FC = () => {
   };
 
   useEffect(() => {
-    if(user!.currency !== currentCurrency) {
+    if(user?.currency !== currentCurrency) {
       dispatch(setCurrency({
-        id: user!._id,
+        id: user?._id,
         currency: currentCurrency,
       }));
       localStorage.setItem(
@@ -55,6 +55,9 @@ const Currency: React.FC = () => {
           <CurrencySelect 
             value={currentCurrency} 
             onChange={handleCurrencyChange}
+            inputProps={{
+              'data-testid': 'currencySelect'
+            }}
           >
             {
               currencies.map(item => (

@@ -28,7 +28,7 @@ const UpdateAvatarModal: React.FC = () => {
   const [avatarUrl, setAvatarUrl] = useState('');
 
   const user = useSelector(selectUser);
-  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+  const token = localStorage.getItem('profile') && JSON.parse(localStorage.getItem('profile') || '').token;
 
   const handleUpdateAvatarClose = () => {
     setIsOpen(!isOpen);

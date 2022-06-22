@@ -239,5 +239,19 @@ export const handlers = [
         }
       )
     )
+  }),
+
+  rest.patch('http://localhost:5000/user/currency', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json('eur')
+    )
+  }),
+
+  rest.patch('http://localhost:5000/user/language', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json('ua')
+    )
   })
 ]

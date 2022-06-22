@@ -42,11 +42,11 @@ export interface IPasswordToUpdate {
 };
 
 export interface ILanguageToUpdate {
-  id: string;
-  language: string;
+  id: string | undefined;
+  language: string | undefined;
 };
 
 export interface ICurrencyToUpdate {
-  id: string;
-  currency: string;
+  id: string | undefined;
+  currency: string | undefined;
 };

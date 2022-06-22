@@ -20,9 +20,9 @@ const Language: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const user = useSelector(selectUser);
-  const [currentLanguage, setCurrentLanguage] = useState(user!.language);
+  const [currentLanguage, setCurrentLanguage] = useState(user?.language);
   
-  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+  const token = localStorage.getItem('profile') && JSON.parse(localStorage.getItem('profile') || '').token;
 
   const handleLanguageChange = (e: any) => {
     e.preventDefault();
@@ -30,9 +30,9 @@ const Language: React.FC = () => {
   };
 
   useEffect(() => {
-    if(user!.language !== currentLanguage) {
+    if(user?.language !== currentLanguage) {
       dispatch(setLanguage({ 
-        id: user!._id, 
+        id: user?._id, 
         language: currentLanguage 
       }));
       localStorage.setItem(
@@ -42,7 +42,7 @@ const Language: React.FC = () => {
           result: { ...user, language: currentLanguage } 
         })
       );
-      localStorage.setItem('lang', currentLanguage);
+      localStorage.setItem('lang', currentLanguage || '');
       i18n.changeLanguage(currentLanguage);
     }
   }, [currentLanguage]);
@@ -52,7 +52,13 @@ const Language: React.FC = () => {
       <SectionTitle variant='inherit'>{t('languageSectionTitle')}</SectionTitle>
       <LanguageSelectContainer container>
         <LanguageSelectItem item md={3} xs={12}>
-          <LanguageSelect value={currentLanguage} onChange={handleLanguageChange}>
+          <LanguageSelect 
+            value={currentLanguage} 
+            onChange={handleLanguageChange}
+            inputProps={{
+              'data-testid': 'languageSelect'
+            }}
+          >
             <LanguageItem value={'en'}>{t('languageOptionEn')}</LanguageItem>
             <LanguageItem value={'ua'}>{t('languageOptionUa')}</LanguageItem>
           </LanguageSelect>

@@ -24,13 +24,13 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
   const dispatch = useDispatch<AppDispatchType>();
   
   const user = useSelector(selectUser);
-  const token = JSON.parse(localStorage.getItem('profile') || '').token;
+  const token = localStorage.getItem('profile') && JSON.parse(localStorage.getItem('profile') || '').token;
 
   const [userData, setUserData] = useState({
-    ...user!,
-    firstName: user!.firstName,
-    lastName: user!.lastName,
-    email: user!.email,
+    ...user,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    email: user?.email,
   });
 
   const handleChange = (e: any) => {
