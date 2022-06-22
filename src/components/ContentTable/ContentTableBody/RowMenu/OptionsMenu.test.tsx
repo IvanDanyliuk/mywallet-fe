@@ -1,11 +1,8 @@
-import { screen, render, fireEvent, waitFor } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event'
-import { Provider } from 'react-redux';
-import store from '../../../../redux/store';
+import userEvent from '@testing-library/user-event';
 import OptionsMenu from './OptionsMenu';
 import { OptionsMenuType } from '../../../../redux/general';
-import { act } from 'react-dom/test-utils';
 
 
 describe('OptionsMenu tests', () => {
