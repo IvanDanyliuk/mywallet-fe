@@ -1,10 +1,10 @@
 import { screen, render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import ContentTableBody from './ContentTableBody';
 import { Provider } from 'react-redux';
 import store from '../../../redux/store';
 import { DataType } from '../../../redux/general';
+import ContentTableBody from './ContentTableBody';
 
 
 describe('Content Table Body tests', () => {
