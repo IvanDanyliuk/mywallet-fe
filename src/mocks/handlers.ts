@@ -42,6 +42,13 @@ export const handlers = [
       ]
     ))
   }),
+
+  rest.delete('http://localhost:5000/incomes', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({ message: 'Income has been deleted successfully' })
+    )
+  }),
   
   rest.get('http://localhost:5000/expenses', (req, res, ctx) => {
     return res(
@@ -83,6 +90,13 @@ export const handlers = [
           }
         ]
       )
+    )
+  }),
+
+  rest.delete('http://localhost:5000/expenses', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({ message: 'Expense has been deleted successfully' })
     )
   }),
 

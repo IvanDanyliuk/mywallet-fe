@@ -106,6 +106,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
           <FormContainer container direction='column' spacing={2}>
             <FormItem item md={12}>
               <Input 
+                data-testid='createFormInput'
                 required 
                 id='title' 
                 name='title' 
@@ -118,6 +119,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
               </FormItem>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='createFormInput'
                   required 
                   id='amount' 
                   name='amount' 
@@ -130,6 +132,7 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
               </FormItem>
               <FormItem item md={12}>
                 <FormSelect 
+                  data-testid='createFormInput'
                   id='category' 
                   label={t('inputLabelCategory')} 
                   name='category' 
@@ -146,12 +149,13 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
               </FormItem>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='createFormInput'
                   required 
                   id='description' 
                   name='description' 
                   label={t('inputLabelDescription')} 
                   value={itemData.description} 
-                  multiline 
+                  // multiline 
                   type='text'
                   fullWidth 
                   

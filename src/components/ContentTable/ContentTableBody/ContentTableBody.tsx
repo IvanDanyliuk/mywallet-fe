@@ -6,14 +6,16 @@ import { deleteIncomeItem, getIncomes } from '../../../redux/incomes/asyncAction
 import { deleteExpenseItem, getExpenses } from '../../../redux/expenses/asyncActions';
 import { AppDispatchType } from '../../../redux/store';
 import OptionsMenu from './RowMenu/OptionsMenu';
-import CreateIncomeFormModal from '../../Modals/CreateFormModal/CreateFormModal';
+import CreateFormModal from '../../Modals/CreateFormModal/CreateFormModal';
 import { getCurrencyIcon } from '../../../helpers/helpers';
 import { ITableData, OptionsMenuType, DataType } from '../../../redux/general';
 import { selectCurrency, selectUserId } from '../../../redux/user/selectors';
 import { ContentBody, ContentCell, ContentRow } from './styles';
+import { useTranslation } from 'react-i18next';
 
 
 const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rowsPerPage }) => {
+  const { t } = useTranslation(['contentTable']);
   const dispatch = useDispatch<AppDispatchType>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateItemId, setUpdateItemId] = useState('');
@@ -45,7 +47,7 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
 
   return (
     <>
-      <CreateIncomeFormModal 
+      <CreateFormModal 
         open={isModalOpen} 
         type={type} 
         id={updateItemId} 
@@ -53,27 +55,34 @@ const ContentTableBody: React.FC<ITableData> = ({ type, dataToRender, page, rows
       />
       <ContentBody>
         {
-          dataToRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
-            <ContentRow key={uuid()}>
-              <ContentCell>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
-              <ContentCell>{item.title}</ContentCell>
-              <ContentCell>{currencyIcon}{item.amount}</ContentCell>
-              <ContentCell>{item.category}</ContentCell>
-              <ContentCell>{item.description}</ContentCell>
-              <ContentCell>
-                <OptionsMenu 
-                  id={item._id} 
-                  type={OptionsMenuType.Content}
-                  onEdit={() => editItemHandler(item._id)} 
-                  onDelete={() => deleteItemHandler(item._id)} 
-                />
-              </ContentCell>
-            </ContentRow>
-          ))
+          dataToRender.length ?
+            dataToRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+              <ContentRow key={uuid()} data-testid='tableRow'>
+                <ContentCell>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
+                <ContentCell>{item.title}</ContentCell>
+                <ContentCell>{currencyIcon}{item.amount}</ContentCell>
+                <ContentCell>{item.category}</ContentCell>
+                <ContentCell>{item.description}</ContentCell>
+                <ContentCell>
+                  <OptionsMenu 
+                    id={item._id} 
+                    type={OptionsMenuType.Content}
+                    onEdit={() => editItemHandler(item._id)} 
+                    onDelete={() => deleteItemHandler(item._id)} 
+                  />
+                </ContentCell>
+              </ContentRow>
+            )) : (
+              <ContentRow style={{ height: 53 * 5 }}>
+                <ContentCell colSpan={12} style={{textAlign: 'center'}}>
+                  {t('noDataMessage')}
+                </ContentCell>
+              </ContentRow>
+            )
         }
         {emptyRows > 0 && (
           <ContentRow style={{ height: 53 * emptyRows }}>
-            <ContentCell  />
+            <ContentCell data-testid='emptyRow'  />
           </ContentRow>
         )}
       </ContentBody>

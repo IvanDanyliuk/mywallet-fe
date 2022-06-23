@@ -6,5 +6,6 @@
   "headerColDescription":" Деталізація",
   "btnOpen": "Відкрити",
   "btnEdit": "Редагувати",
-  "btnDelete": "Видалити"
+  "btnDelete": "Видалити",
+  "noDataMessage": "Додайте дані..."
 }
