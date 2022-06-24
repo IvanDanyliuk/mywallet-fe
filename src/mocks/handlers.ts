@@ -43,6 +43,30 @@ export const handlers = [
     ))
   }),
 
+  rest.post('http://localhost:5000/incomes', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        userId: '6295f2be26cf5e82fcc3b1ca',
+        title: 'New Income',
+        amount: 1000,
+        category: 'Regular',
+        description: 'absasbdlkasjd',
+        badgeColor: '',
+        createdAt: '2022-06-24T16:56:23.494Z',
+        _id: '62b5ecd7f20551d8417657c7',
+        __v: 0
+      })
+    )
+  }),
+
+  rest.patch('http://localhost:5000/incomes', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json('Income item has been updated successfully')
+    )
+  }),
+
   rest.delete('http://localhost:5000/incomes', (req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -90,6 +114,30 @@ export const handlers = [
           }
         ]
       )
+    )
+  }),
+
+  rest.post('http://localhost:5000/expenses', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        userId: '6295f2be26cf5e82fcc3b1ca',
+        title: 'New Expense',
+        amount: 100,
+        category: 'All',
+        description: 'asdalkhdklajshdlkahs',
+        badgeColor: '',
+        createdAt: '2022-06-24T16:56:23.543Z',
+        _id: '62b5ed27f20551d8417657cb',
+        __v: 0
+      })
+    )
+  }),
+
+  rest.patch('http://localhost:5000/expenses', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json('Expense item has been updated successfully')
     )
   }),
 

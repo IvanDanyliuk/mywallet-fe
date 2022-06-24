@@ -12,7 +12,7 @@ import { createExpenseItem, updateExpenseItem } from '../../../redux/expenses/as
 import { AppDispatchType } from '../../../redux/store';
 import { selectIncomes } from '../../../redux/incomes/selectors';
 import { selectExpenses } from '../../../redux/expenses/selectors';
-import { ICreateIncomeFormModal } from '../../../redux/general';
+import { ICreateFormModal } from '../../../redux/general';
 import { 
   CreationForm, 
   FormContainer, 
@@ -28,7 +28,7 @@ import {
 import { selectUserId } from '../../../redux/user/selectors';
 
 
-const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, id, onClose }) => {
+const CreateFormModal: React.FC<ICreateFormModal> = ({ open, type, id, onClose }) => {
   const { t } = useTranslation(['authForm']);
   const dispatch = useDispatch<AppDispatchType>();
 
@@ -178,4 +178,4 @@ const CreateIncomeFormModal: React.FC<ICreateIncomeFormModal> = ({ open, type, i
   );
 };
 
-export default CreateIncomeFormModal;
+export default CreateFormModal;

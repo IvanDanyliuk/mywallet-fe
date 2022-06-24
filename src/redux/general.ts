@@ -87,7 +87,7 @@ export interface ICreateBtn {
   clickHandler: MouseEventHandler;
 }
 
-export interface ICreateIncomeFormModal {
+export interface ICreateFormModal {
   open: boolean;
   type: string;
   id?: string;
