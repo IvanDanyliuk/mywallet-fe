@@ -103,14 +103,12 @@ describe('CreateReportModal tests', () => {
 
   it('should open the modal form after clicking the button', async () => {
     openModalForm();
-
     const modalForm = screen.getByRole('dialog');
     expect(modalForm).toBeInTheDocument();
   });
 
   it('should submit form data after clicking the submit button', async () => {
     openModalForm();
-
     const inputs = screen.getAllByRole('textbox')
     const submitBtn = screen.getByRole('button', { name: 'modalFormSubmitBtn' });
 
