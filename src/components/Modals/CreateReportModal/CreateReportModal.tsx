@@ -71,7 +71,7 @@ const CreateReportModal: React.FC = () => {
     const filteredExpenses = expenses
       .filter((expense: IExpense) => (new Date(expense.createdAt).toLocaleDateString() >= new Date(reportData.period.from).toLocaleDateString() && new Date(expense.createdAt).toLocaleDateString() <= new Date(reportData.period.to).toLocaleDateString()))
       .map((expense: IExpense) => ({ source: expense.title, amount: expense.amount, badgeColor: setColor() }));
-
+    
     dispatch(createReport({ ...reportData, data: { incomes: filteredIncomes, expenses: filteredExpenses } }));
 
     handleModalClose();
@@ -95,6 +95,7 @@ const CreateReportModal: React.FC = () => {
             <FormContainer container direction='column' spacing={2}>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='formInput'
                   name='heading' 
                   label={t('modalFormLabelHeading')} 
                   type='text'
@@ -105,6 +106,7 @@ const CreateReportModal: React.FC = () => {
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <FormItem item md={12}>
                   <DatePicker 
+                    data-testid='formInput'
                     label={t('modalFormLabelFrom')}
                     data-name='from'
                     value={reportData.period.from}
@@ -114,6 +116,7 @@ const CreateReportModal: React.FC = () => {
                 </FormItem>
                 <FormItem item md={12}>
                   <DatePicker 
+                    data-testid='formInput'
                     label={t('modalFormLabelTo')}
                     data-name='to'
                     value={reportData.period.to}
@@ -124,6 +127,7 @@ const CreateReportModal: React.FC = () => {
               </LocalizationProvider>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='formInput'
                   name='comment' 
                   label={t('modalFormLabelComment')} 
                   type='text'

@@ -2,6 +2,7 @@ import { rest } from "msw";
 
 export const handlers = [
   rest.get('http://localhost:5000/incomes', (req, res, ctx) => {
+    console.log('Get Incomes request')
     return res(
       ctx.status(200),
       ctx.json(
@@ -75,6 +76,7 @@ export const handlers = [
   }),
   
   rest.get('http://localhost:5000/expenses', (req, res, ctx) => {
+    console.log('Get Expenses request')
     return res(
       ctx.status(200),
       ctx.json(
@@ -158,7 +160,48 @@ export const handlers = [
               from: '2022-05-31T21:00:00.000Z',
               to: '2022-06-04T21:00:00.000Z'
             },
-            data: { incomes: [Array], expenses: [Array] },
+            data: { 
+              incomes: [
+                {
+                  source: "Salary",
+                  amount: 2200,
+                  badgeColor: "#1373cf",
+                  _id: "62a1bf6bb8d2482aba0870a2"
+                },
+                {
+                  source: "Deposit revenue",
+                  amount: 150,
+                  badgeColor: "#c85750",
+                  _id: "62a1bf6bb8d2482aba0870a3"
+                },
+                {
+                  source: "Freelance",
+                  amount: 700,
+                  badgeColor: "#a72d76",
+                  _id: "62a1bf6bb8d2482aba0870a4"
+                },
+              ], 
+              expenses: [
+                {
+                  source: "Garage rent",
+                  amount: 20,
+                  badgeColol: "#56fc1a",
+                  _id: "62a1bf6bb8d2482aba0870a5"
+                },
+                {
+                  source: "Taxes payment",
+                  amount: 150,
+                  badgeColor: "#4516c5",
+                  _id: "62a1bf6bb8d2482aba0870a6"
+                },
+                {
+                  source: "Pizza",
+                  amount: 20,
+                  badgeColor: "#25886a",
+                  _id: "62a1bf6bb8d2482aba0870a7"
+                },
+              ],
+            },
             _id: '62a1bf6bb8d2482aba0870a1',
             userId: '6295f2be26cf5e82fcc3b1ca',
             heading: 'Report 1',
@@ -171,7 +214,48 @@ export const handlers = [
               from: '2022-05-31T21:00:00.000Z',
               to: '2022-06-08T21:00:00.000Z'
             },
-            data: { incomes: [Array], expenses: [Array] },
+            data: { 
+              incomes: [
+                {
+                  source: "Salary",
+                  amount: 2200,
+                  badgeColor: "#1373cf",
+                  _id: "62a1bf6bb8d2482aba0870a2"
+                },
+                {
+                  source: "Deposit revenue",
+                  amount: 150,
+                  badgeColor: "#c85750",
+                  _id: "62a1bf6bb8d2482aba0870a3"
+                },
+                {
+                  source: "Freelance",
+                  amount: 700,
+                  badgeColor: "#a72d76",
+                  _id: "62a1bf6bb8d2482aba0870a4"
+                },
+              ], 
+              expenses: [
+                {
+                  source: "Garage rent",
+                  amount: 20,
+                  badgeColol: "#56fc1a",
+                  _id: "62a1bf6bb8d2482aba0870a5"
+                },
+                {
+                  source: "Taxes payment",
+                  amount: 150,
+                  badgeColor: "#4516c5",
+                  _id: "62a1bf6bb8d2482aba0870a6"
+                },
+                {
+                  source: "Pizza",
+                  amount: 20,
+                  badgeColor: "#25886a",
+                  _id: "62a1bf6bb8d2482aba0870a7"
+                },
+              ] 
+            },
             _id: '62a1cf94b8d2482aba0870f9',
             userId: '6295f2be26cf5e82fcc3b1ca',
             heading: 'Report 2',
@@ -225,7 +309,7 @@ export const handlers = [
                 amount: 700,
                 badgeColor: "#a72d76",
                 _id: "62a1bf6bb8d2482aba0870a4"
-              }
+              },
             ],
             expenses: [
               {
@@ -245,8 +329,8 @@ export const handlers = [
                 amount: 20,
                 badgeColor: "#25886a",
                 _id: "62a1bf6bb8d2482aba0870a7"
-              }
-            ]
+              },
+            ],
           },
           _id: "62a1bf6bb8d2482aba0870a1",
           userId: "6295f2be26cf5e82fcc3b1ca",
@@ -256,6 +340,52 @@ export const handlers = [
           __v:0
         }
       )
+    )
+  }),
+
+  rest.post('http://localhost:5000/reports', (req, res, ctx) => {
+    console.log('Create Report')
+    return res(
+      ctx.status(200),
+      ctx.json({
+        userId: '6295f2be26cf5e82fcc3b1ca',
+        heading: 'New Report',
+        period: { from: '2022-05-31T21:00:00.000Z', to: '2022-06-24T21:00:00.000Z' },
+        data: {
+          incomes: [
+            {
+              source: 'Salary',
+              amount: 2000,
+              badgeColor: '#1373cf',
+              _id: '62a1bf6bb8d2482aba0870a2'
+            },
+            {
+              source: 'Deposit revenue',
+              amount: 150,
+              badgeColor: '#c85750',
+              _id: '62a1bf6bb8d2482aba0870a3'
+            }
+          ],
+          expenses: [
+            {
+              source: 'Garage rent',
+              amount: 20,
+              badgeColor: '#56fc1a',
+              _id: '62a1bf6bb8d2482aba0870a5'
+            },
+            {
+              source: 'Taxes payment',
+              amount: 150,
+              badgeColor: '#4516c5',
+              _id: '62a1bf6bb8d2482aba0870a6'
+            }
+          ]
+        },
+        comment: 'sdkfkfsdkfjskdflskdnf',
+        createdAt: '2022-06-25T12:31:03.153Z',
+        _id: '62b700254d32abb20426af92',
+        __v: 0
+      })
     )
   }),
 
