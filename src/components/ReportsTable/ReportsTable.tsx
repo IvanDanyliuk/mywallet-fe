@@ -93,7 +93,7 @@ const ReportsTable: React.FC = () => {
   ];
 
   useEffect(() => {
-    dispatch(getReports(userId!));
+    dispatch(getReports(userId));
   }, [dispatch, navigate]);
 
   return (
@@ -125,7 +125,7 @@ const ReportsTable: React.FC = () => {
         <ReportsBody>
           {
             reports.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item: any) => (
-              <ContentRow key={uuid()}>
+              <ContentRow key={uuid()} data-testid='tableRow'>
                 <ContentCell datatype='createdAt'>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
                 <ContentCell datatype='heading'>{item.heading}</ContentCell>
                 <ContentCell datatype='period'>{`${moment(item.period.from).format('MMM DD, YYYY')} - ${moment(item.period.to).format('MMM DD, YYYY')}`}</ContentCell>
