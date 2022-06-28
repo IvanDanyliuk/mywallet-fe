@@ -44,15 +44,16 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
     e.preventDefault();
     dispatch(updateUser({ id: userData._id, userData }));
     localStorage.setItem('profile', JSON.stringify({ token, result: userData }));
+    onClose();
   };
 
   useEffect(() => {
     if(user) {
       setUserData({
         ...user,
-        firstName: user!.firstName,
-        lastName: user!.lastName,
-        email: user!.email,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        email: user?.email,
       });
     }
   }, [dispatch]);
@@ -65,6 +66,7 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
           <FormContainer container direction='column' spacing={2}>
             <FormItem item md={12}>
               <Input 
+                data-testid='formInput'
                 id='firstName' 
                 name='firstName' 
                 label='First Name' 
@@ -76,6 +78,7 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
             </FormItem>
             <FormItem item md={12}>
               <Input 
+                data-testid='formInput'
                 id='lastName' 
                 name='lastName' 
                 label='Last Name' 
@@ -87,6 +90,7 @@ const UserUpdationModal: React.FC<IUserUpdationModal> = ({ open, onClose }) => {
             </FormItem>
             <FormItem item md={12}>
               <Input 
+                data-testid='formInput'
                 id='email' 
                 name='email' 
                 label='Email' 
