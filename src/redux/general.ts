@@ -106,3 +106,9 @@ export interface IAuthInput {
   handleShowPassword?: (e: any) => void;
   handleChange: (e: any) => void;
 };
+
+export interface IAlert {
+  isOpen: boolean;
+  title: string;
+  handler: () => void;
+};

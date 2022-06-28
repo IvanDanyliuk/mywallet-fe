@@ -18,6 +18,7 @@ import {
   SubmitButton, 
   UpdationForm
 } from './styles';
+import Alert from '../Alert/Alert';
 
 
 const PasswordUpdationModal: React.FC = () => {
@@ -26,6 +27,7 @@ const PasswordUpdationModal: React.FC = () => {
   const user = useSelector(selectUser);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [passwordData, setPasswordData] = useState({
     curPassword: '',
     newPassword: '',
@@ -34,6 +36,10 @@ const PasswordUpdationModal: React.FC = () => {
 
   const handleModalOpen = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const handleAlertOpen = () => {
+    setIsAlertOpen(!isAlertOpen);
   };
 
   const handleChange = (e: any) => {
@@ -48,7 +54,7 @@ const PasswordUpdationModal: React.FC = () => {
     
     if(passwordData.newPassword === passwordData.confirmNewPassword) {
       dispatch(updatePassword({ 
-        id: user!._id, 
+        id: user?._id, 
         curPassword: passwordData.curPassword, 
         newPassword: passwordData.newPassword 
       }));
@@ -61,7 +67,8 @@ const PasswordUpdationModal: React.FC = () => {
 
       handleModalOpen();
     } else {
-      alert('Passwords don\'t match.');
+      // alert('Passwords don\'t match.');
+      handleAlertOpen();
     }
   };
 
@@ -69,11 +76,17 @@ const PasswordUpdationModal: React.FC = () => {
     <>
       <ModalBody open={isModalOpen} onClose={handleModalOpen}>
         <ModalFormTitle>{t('changePasswordBtn')}</ModalFormTitle>
+        <Alert 
+          isOpen={isAlertOpen} 
+          title={'Passwords don\'t match'} 
+          handler={handleAlertOpen} 
+        />
         <ModalContent>
           <UpdationForm onSubmit={handleSubmit}>
             <FormContainer container direction='column' spacing={2}>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='formInput'
                   id='curPassword' 
                   name='curPassword' 
                   label={t('curPassField')} 
@@ -86,6 +99,7 @@ const PasswordUpdationModal: React.FC = () => {
               </FormItem>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='formInput'
                   id='newPassword' 
                   name='newPassword' 
                   label={t('newPassField')} 
@@ -98,6 +112,7 @@ const PasswordUpdationModal: React.FC = () => {
               </FormItem>
               <FormItem item md={12}>
                 <Input 
+                  data-testid='formInput'
                   id='confirmNewPassword' 
                   name='confirmNewPassword' 
                   label={t('confirmNewPass')} 
