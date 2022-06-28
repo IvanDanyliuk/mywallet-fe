@@ -59,6 +59,7 @@ describe('UpdatePasswordModal tests', () => {
       fireEvent.click(submitBtn);
     });
 
-    screen.debug()
+    const errorMessage = screen.getByText('passwordError');
+    expect(errorMessage).toBeInTheDocument();
   })
 });

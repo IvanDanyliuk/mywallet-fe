@@ -67,7 +67,6 @@ const PasswordUpdationModal: React.FC = () => {
 
       handleModalOpen();
     } else {
-      // alert('Passwords don\'t match.');
       handleAlertOpen();
     }
   };
@@ -78,7 +77,7 @@ const PasswordUpdationModal: React.FC = () => {
         <ModalFormTitle>{t('changePasswordBtn')}</ModalFormTitle>
         <Alert 
           isOpen={isAlertOpen} 
-          title={'Passwords don\'t match'} 
+          title={t('passwordError')} 
           handler={handleAlertOpen} 
         />
         <ModalContent>

@@ -16,5 +16,6 @@
   "confirmNewPass": "Підтвердити новий пароль",
   "updateAvatar": "Оновити фото",
   "updateAvatarTitle": "Оновити фото",
-  "updateAvatarBtn": "Оновити"
+  "updateAvatarBtn": "Оновити",
+  "passwordError": "Паролі не співпадають"
 }

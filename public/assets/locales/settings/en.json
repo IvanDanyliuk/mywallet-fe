@@ -16,5 +16,6 @@
   "confirmNewPass": "Confirm new password",
   "updateAvatar": "Update photo",
   "updateAvatarTitle": "Update Avatar",
-  "updateAvatarBtn": "Update"
+  "updateAvatarBtn": "Update",
+  "passwordError": "Passwords don't match"
 }
