@@ -45,12 +45,3 @@ export const ContentCell = styled(TableCell)`
 export const ReportButton = styled(ButtonBase)`
   cursor: pointer;
 `;
-
-export const DeleteButton = styled(Button)`
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  background: transparent;
-  border: none;
-`;
