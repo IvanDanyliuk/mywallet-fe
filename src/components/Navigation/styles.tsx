@@ -57,7 +57,13 @@ export const Navbar = styled.ul`
   align-items: center;
 `;
 
-export const NavItem = styled(NavLink)`
+export const NavItem = styled.li`
+  padding: 0;
+  display: flex;
+  list-style: none;
+`;
+
+export const Link = styled(NavLink)`
   padding: 10px 0;
   font-weight: 700;
   text-decoration: none;

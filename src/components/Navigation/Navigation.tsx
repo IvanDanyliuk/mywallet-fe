@@ -7,6 +7,7 @@ import { selectUser } from '../../redux/user/selectors';
 import { 
   UserImage, 
   NavWrapper, 
+  Link,
   Logo, 
   Navbar, 
   NavItem, 
@@ -39,12 +40,24 @@ const Navigation: React.FC = () => {
           )}
         </ProfileData>
         <Navbar>
-          <NavItem to='/'>{t('navLinkDashboard')}</NavItem>
-          <NavItem to='/incomes'>{t('navLinkIncomes')}</NavItem>
-          <NavItem to='/expenses'>{t('navLinkExpenses')}</NavItem>
-          <NavItem to='/reports'>{t('navLinkReports')}</NavItem>
-          <NavItem to='/exchange'>{t('navLinkExchange')}</NavItem>
-          <NavItem to='/settings'>{t('navLinkSettings')}</NavItem>
+          <NavItem>
+            <Link to='/'>{t('navLinkDashboard')}</Link>
+          </NavItem>
+          <NavItem>
+            <Link to='/incomes'>{t('navLinkIncomes')}</Link>
+          </NavItem>
+          <NavItem>
+            <Link to='/expenses'>{t('navLinkExpenses')}</Link>
+          </NavItem>
+          <NavItem>
+            <Link to='/reports'>{t('navLinkReports')}</Link>
+          </NavItem>
+          <NavItem>
+            <Link to='/exchange'>{t('navLinkExchange')}</Link>
+          </NavItem>
+          <NavItem>
+            <Link to='/settings'>{t('navLinkSettings')}</Link>
+          </NavItem>
         </Navbar>
         {user && (
           <LogoutButton 
