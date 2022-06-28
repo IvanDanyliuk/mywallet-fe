@@ -5,6 +5,7 @@ import {
   DialogContent, 
   DialogTitle, 
   Grid, 
+  Input, 
   TextField 
 } from '@mui/material';
 
@@ -23,7 +24,7 @@ export const FormContainer = styled(Grid)``;
 
 export const FormItem = styled(Grid)``;
 
-export const Input = styled(TextField)`
+export const Uploader = styled(Input)`
   width: 100%;
 `;
 

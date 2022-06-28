@@ -9,13 +9,13 @@ import { selectUser } from '../../../redux/user/selectors';
 import { 
   FormContainer, 
   FormItem, 
-  Input, 
   ModalBody, 
   ModalContent, 
   ModalFormTitle, 
   SubmitButton, 
   UpdateButton, 
-  UpdationForm 
+  UpdationForm, 
+  Uploader
 } from './styles';
 
 
@@ -24,6 +24,7 @@ const UpdateAvatarModal: React.FC = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [file, setFile] = useState(null);
   const [progressPercent, setProgressPercent] = useState(0);
   const [avatarUrl, setAvatarUrl] = useState('');
 
@@ -34,12 +35,16 @@ const UpdateAvatarModal: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleUploaderChange = (e: any) => {
+    setFile(e.target.files[0]);
+  }
+
   const uploadAvatar = (file: any) => {
-    if(!file) return;
     const storageRef = ref(storage, `files/${file.name}`);
     const uploadData = uploadBytesResumable(storageRef, file);
 
-    uploadData.on('state_changed', 
+    uploadData.on(
+      'state_changed', 
       (snapshot) => {
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         setProgressPercent(progress);
@@ -56,9 +61,10 @@ const UpdateAvatarModal: React.FC = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const file = e.target[0]?.files[0];
-    uploadAvatar(file);
-    handleUpdateAvatarClose();
+    if(file) {
+      uploadAvatar(file);
+      handleUpdateAvatarClose();
+    }
   };
 
   useEffect(() => {
@@ -85,9 +91,11 @@ const UpdateAvatarModal: React.FC = () => {
           <UpdationForm onSubmit={handleSubmit}>
             <FormContainer container direction='column' spacing={2}>
               <FormItem item md={12}>
-                <Input 
+                <Uploader 
+                  data-testid='fileInput'
                   name='avatar' 
-                  type='file' 
+                  type='file'
+                  onChange={handleUploaderChange} 
                   fullWidth 
                 />
               </FormItem>

@@ -433,6 +433,14 @@ export const handlers = [
     )
   }),
 
+  rest.patch('http://localhost:5000/user', (req, res, ctx) => {
+    console.log('User update')
+    return res(
+      ctx.status(200),
+      ctx.json('User data has been updated successfully')
+    )
+  }),
+
   rest.patch('http://localhost:5000/user/currency', (req, res, ctx) => {
     return res(
       ctx.status(200),
