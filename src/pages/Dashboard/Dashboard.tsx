@@ -3,15 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import DynamicChart from '../../components/Charts/DynamicChart';
 import StructureChart from '../../components/Charts/StructureChart';
+import TextMessage from '../../components/TextMessage/TextMessage';
 import { getCurrencyIcon, setDiagramData } from '../../helpers/helpers';
 import { PageTitle } from '../../layouts/styles';
 import { getIncomes } from '../../redux/incomes/asyncActions';
 import { getExpenses } from '../../redux/expenses/asyncActions';
 import { selectIncomes } from '../../redux/incomes/selectors';
 import { selectExpenses } from '../../redux/expenses/selectors';
-import { selectCurrency, selectUser, selectUserId } from '../../redux/user/selectors';
+import { selectCurrency, selectUserId } from '../../redux/user/selectors';
 import { AppDispatchType } from '../../redux/store';
-import { ChartParams } from '../../redux/general';
+import { ChartParams, DataType } from '../../redux/general';
 import { 
   Amount,
   Currency,
@@ -50,50 +51,62 @@ const Dashboard: React.FC = () => {
       <PageTitle variant='inherit'>{t('pageHeading')}</PageTitle>
       <MainContainer container spacing={3} >
         <Section item xs={12} md={6}>
-          <SectionPaper>
-            <SectionTitle variant='inherit'>{t('incomesSection')}</SectionTitle>
-            <StructureChart 
-              data={incomesToRender} 
-              dataKey={ChartParams.Amount} 
-              nameKey={ChartParams.Category} 
-            />
-            <DynamicChart 
-              data={incomes} 
-              dataKey={ChartParams.Title} 
-              nameKey={ChartParams.Amount} 
-            />
-            <Result>
-              <Name variant='inherit'>
-                {t('totalIncome')}&nbsp;
-              </Name>
-              <Currency variant='inherit'>
-                {curIcon}
-              </Currency>
-              <Amount variant='inherit'>
-                {totalIncome}
-              </Amount>
-            </Result>
-          </SectionPaper>
+          {
+            incomes.length > 0 ? (
+              <SectionPaper>
+                <SectionTitle variant='inherit'>{t('incomesSection')}</SectionTitle>
+                <StructureChart 
+                  data={incomesToRender} 
+                  dataKey={ChartParams.Amount} 
+                  nameKey={ChartParams.Category} 
+                />
+                <DynamicChart 
+                  data={incomes} 
+                  dataKey={ChartParams.Title} 
+                  nameKey={ChartParams.Amount} 
+                />
+                <Result>
+                  <Name variant='inherit'>
+                    {t('totalIncome')}&nbsp;
+                  </Name>
+                  <Currency variant='inherit'>
+                    {curIcon}
+                  </Currency>
+                  <Amount variant='inherit'>
+                    {totalIncome}
+                  </Amount>
+                </Result>
+              </SectionPaper>
+            ) : (
+              <TextMessage type={DataType.Incomes} />
+            )
+          }
         </Section>
         <Section item  xs={12} md={6}>
-          <SectionPaper>
-            <SectionTitle variant='inherit'>{t('expensesSection')}</SectionTitle>
-            <StructureChart 
-              data={expensesToRender} 
-              dataKey={ChartParams.Amount} 
-              nameKey={ChartParams.Category} 
-            />
-            <DynamicChart 
-              data={expenses} 
-              dataKey={ChartParams.Title} 
-              nameKey={ChartParams.Amount} 
-            />
-            <Result>
-              <Name variant='inherit'>{t('totalExpenses')}&nbsp;</Name>
-              <Currency variant='inherit'>{curIcon}</Currency>
-              <Amount variant='inherit'>{totalExpenses}</Amount>
-            </Result>
-          </SectionPaper>
+          {
+            incomes.length > 0 ? (
+              <SectionPaper>
+                <SectionTitle variant='inherit'>{t('expensesSection')}</SectionTitle>
+                <StructureChart 
+                  data={expensesToRender} 
+                  dataKey={ChartParams.Amount} 
+                  nameKey={ChartParams.Category} 
+                />
+                <DynamicChart 
+                  data={expenses} 
+                  dataKey={ChartParams.Title} 
+                  nameKey={ChartParams.Amount} 
+                />
+                <Result>
+                  <Name variant='inherit'>{t('totalExpenses')}&nbsp;</Name>
+                  <Currency variant='inherit'>{curIcon}</Currency>
+                  <Amount variant='inherit'>{totalExpenses}</Amount>
+                </Result>
+              </SectionPaper>
+            ) : (
+              <TextMessage type={DataType.Expenses} />
+            )
+          }
         </Section>  
       </MainContainer>
     </>

@@ -112,3 +112,7 @@ export interface IAlert {
   title: string;
   handler: () => void;
 };
+
+export interface ITextMessage {
+  type: string;
+};

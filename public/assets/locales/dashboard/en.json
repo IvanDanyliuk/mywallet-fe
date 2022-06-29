@@ -3,5 +3,9 @@
   "incomesSection": "Incomes",
   "expensesSection": "Expenses",
   "totalIncome": "Total Income",
-  "totalExpenses": "Total Expenses"
+  "totalExpenses": "Total Expenses",
+  "topIncomesMessage": "It seems you don't have any income data...",
+  "topExpensesMessage": "It seems you don't have any expense data...",
+  "bottomIncomesMessage": "Add the inforamtion about your incomes",
+  "bottomExpensesMessage": "Add the inforamtion about your expenses"
 }

@@ -3,5 +3,9 @@
   "incomesSection": "Доходи",
   "expensesSection": "Витрати",
   "totalIncome": "Загальні доходи",
-  "totalExpenses": "Загальні витрати"
+  "totalExpenses": "Загальні витрати",
+  "topIncomesMessage": "Схоже у Вас немає даних про доходи...",
+  "topExpensesMessage": "Схоже у Вас немає даних про витрати...",
+  "bottomIncomesMessage": "Додайте інформацію про свої доходи",
+  "bottomExpensesMessage": "Додайте інформацію про свої витрати"
 }
