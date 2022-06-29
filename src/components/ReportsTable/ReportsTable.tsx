@@ -124,15 +124,23 @@ const ReportsTable: React.FC = () => {
         </ReportsHeader>
         <ReportsBody>
           {
-            reports.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item: any) => (
-              <ContentRow key={uuid()} data-testid='tableRow'>
-                <ContentCell datatype='createdAt'>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
-                <ContentCell datatype='heading'>{item.heading}</ContentCell>
-                <ContentCell datatype='period'>{`${moment(item.period.from).format('MMM DD, YYYY')} - ${moment(item.period.to).format('MMM DD, YYYY')}`}</ContentCell>
-                <ContentCell datatype='comment'>{item.comment}</ContentCell>
-                <OptionsMenu id={item._id} type={OptionsMenuType.Reports} onOpen={() => openReportHandler(item._id)} onDelete={() => deleteReportHandler(item._id)} />
+            reports.length > 0 ? (
+              reports.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item: any) => (
+                <ContentRow key={uuid()} data-testid='tableRow'>
+                  <ContentCell datatype='createdAt'>{moment(item.createdAt).format('MMM DD, YYYY')}</ContentCell>
+                  <ContentCell datatype='heading'>{item.heading}</ContentCell>
+                  <ContentCell datatype='period'>{`${moment(item.period.from).format('MMM DD, YYYY')} - ${moment(item.period.to).format('MMM DD, YYYY')}`}</ContentCell>
+                  <ContentCell datatype='comment'>{item.comment}</ContentCell>
+                  <OptionsMenu id={item._id} type={OptionsMenuType.Reports} onOpen={() => openReportHandler(item._id)} onDelete={() => deleteReportHandler(item._id)} />
+                </ContentRow>
+              ))
+            ) : (
+              <ContentRow style={{ height: 53 * 5 }}>
+                <ContentCell colSpan={12} style={{textAlign: 'center'}}>
+                  {t('noDataMessage')}
+                </ContentCell>
               </ContentRow>
-            ))
+            )
           }
           {emptyRows > 0 && (
             <ContentRow style={{ height: 53 * emptyRows }}>

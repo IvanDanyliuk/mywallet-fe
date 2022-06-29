@@ -16,5 +16,6 @@
   "sectionIncomes": "Доходи",
   "sectionExpenses": "Витрати",
   "totalIncome": "Загальний дохід",
-  "totalExpenses": "Загальні витрати"
+  "totalExpenses": "Загальні витрати",
+  "noDataMessage": "Створіть свій перший звіт..."
 }

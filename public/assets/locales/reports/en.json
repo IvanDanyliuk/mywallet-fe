@@ -16,5 +16,6 @@
   "sectionIncomes": "Incomes",
   "sectionExpenses": "Expenses",
   "totalIncome": "Total income",
-  "totalExpenses": "Total expenses"
+  "totalExpenses": "Total expenses",
+  "noDataMessage": "Add your first report..."
 }
